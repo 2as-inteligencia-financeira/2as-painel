@@ -7,9 +7,10 @@ import { buildOperationalReportHtml, downloadHtml, downloadPdf } from "../utils/
 import ReportActions from "../components/ReportActions";
 import ViewModeToggle from "../components/ViewModeToggle";
 import ExecutiveAlerts from "../components/ExecutiveAlerts";
-import { getActiveEmpresaId } from "../empresas/luniq-inteligencia-financeira/empresaAtiva";
+import { useActiveEmpresaId } from "../hooks/useActiveEmpresaId";
 
 function useGranatumLabs(modo) {
+  const empresaId = useActiveEmpresaId();
   const [refreshKey, setRefreshKey] = useState(0);
   const [state, setState] = useState({
     data: null,
@@ -24,7 +25,7 @@ function useGranatumLabs(modo) {
       try {
         setState(prev => ({ ...prev, loading: true, error: null }));
         const endpoint = modo === "vencidas" ? "/api/granatum/contas-vencidas-labs" : "/api/granatum/contas-pagar-labs";
-        const params = new URLSearchParams({ cb: String(Date.now()), empresa: getActiveEmpresaId() });
+        const params = new URLSearchParams({ cb: String(Date.now()), empresa: empresaId });
         const response = await fetch(`${endpoint}?${params.toString()}`, {
           cache: "no-store",
           headers: getAuthHeaders(),
@@ -50,7 +51,7 @@ function useGranatumLabs(modo) {
     };
     fetchData();
     return () => { active = false; };
-  }, [modo, refreshKey]);
+  }, [modo, refreshKey, empresaId]);
 
   return {
     ...state,

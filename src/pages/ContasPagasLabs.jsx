@@ -3,7 +3,7 @@ import { getAuthHeaders } from "../auth";
 import { fmt, parseDate, toNum, useSheets } from "../hooks/useSheets";
 import { T, MONO } from "../theme";
 import { resolveCategory } from "../utils/categoryResolver";
-import { getActiveEmpresaId } from "../empresas/luniq-inteligencia-financeira/empresaAtiva";
+import { useActiveEmpresaId } from "../hooks/useActiveEmpresaId";
 
 function Card({ children, style = {} }) {
   return <div style={{ background:T.card, border:`1px solid ${T.brd}`, borderRadius:8, ...style }}>{children}</div>;
@@ -75,6 +75,7 @@ function extractScriptRows(data, dataInicio, dataFim) {
 }
 
 function useGranatumContasPagasLabs(dataInicio, dataFim) {
+  const empresaId = useActiveEmpresaId();
   const [refreshKey, setRefreshKey] = useState(0);
   const [state, setState] = useState({
     data: null,
@@ -92,7 +93,7 @@ function useGranatumContasPagasLabs(dataInicio, dataFim) {
           cb: String(Date.now()),
           dataInicio,
           dataFim,
-          empresa: getActiveEmpresaId(),
+          empresa: empresaId,
         });
         const response = await fetch(`/api/granatum/contas-pagas-labs?${params.toString()}`, {
           cache: "no-store",
@@ -111,7 +112,7 @@ function useGranatumContasPagasLabs(dataInicio, dataFim) {
 
     fetchData();
     return () => { active = false; };
-  }, [dataFim, dataInicio, refreshKey]);
+  }, [dataFim, dataInicio, refreshKey, empresaId]);
 
   return {
     ...state,

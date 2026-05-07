@@ -8,13 +8,14 @@ import { T, CA, MONO } from "../theme";
 import { useSheets, getByLabel, toNum, fmtCurta, fmtLonga, parseDate, fmt } from "../hooks/useSheets";
 import { getAuthHeaders } from "../auth";
 import { resolveCategory } from "../utils/categoryResolver";
-import { getActiveEmpresaId } from "../empresas/luniq-inteligencia-financeira/empresaAtiva";
+import { useActiveEmpresaId } from "../hooks/useActiveEmpresaId";
 
 // --- HELPERS -----------------------------------------------------------------
 
 const corV = (v) => v >= 0 ? T.grn : T.red;
 
 function useGranatumContasPagarLabs() {
+  const empresaId = useActiveEmpresaId();
   const [refreshKey, setRefreshKey] = useState(0);
   const [state, setState] = useState({
     data: null,
@@ -28,7 +29,7 @@ function useGranatumContasPagarLabs() {
     const fetchData = async () => {
       try {
         setState(prev => ({ ...prev, loading: true, error: null }));
-        const params = new URLSearchParams({ cb: String(Date.now()), empresa: getActiveEmpresaId() });
+        const params = new URLSearchParams({ cb: String(Date.now()), empresa: empresaId });
         const response = await fetch(`/api/granatum/contas-pagar-labs?${params.toString()}`, {
           cache: "no-store",
           headers: getAuthHeaders(),
@@ -54,7 +55,7 @@ function useGranatumContasPagarLabs() {
     };
     fetchData();
     return () => { active = false; };
-  }, [refreshKey]);
+  }, [refreshKey, empresaId]);
 
   return {
     ...state,
