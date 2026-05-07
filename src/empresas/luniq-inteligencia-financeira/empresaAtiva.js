@@ -1,4 +1,10 @@
-import { DEFAULT_EMPRESA_ID, getEmpresaById } from "./empresas";
+import {
+  DEFAULT_EMPRESA_ID,
+  getEmpresaById,
+  getPerfilDemo,
+  isEmpresaDemo,
+  resolveEmpresaId,
+} from "./empresas";
 
 const STORAGE_KEY = "painel-empresa-ativa";
 const EVENT_NAME = "painel:empresa";
@@ -6,7 +12,11 @@ const EVENT_NAME = "painel:empresa";
 export function getActiveEmpresaId() {
   if (typeof window === "undefined") return DEFAULT_EMPRESA_ID;
   const stored = window.localStorage.getItem(STORAGE_KEY);
-  return getEmpresaById(stored).id;
+  return resolveEmpresaId(stored);
+}
+
+export function getActiveEmpresa() {
+  return getEmpresaById(getActiveEmpresaId());
 }
 
 export function hasSelectedEmpresa() {
@@ -29,3 +39,10 @@ export function onActiveEmpresaChange(callback) {
   return () => window.removeEventListener(EVENT_NAME, handler);
 }
 
+export function isActiveEmpresaDemo() {
+  return isEmpresaDemo(getActiveEmpresaId());
+}
+
+export function getActivePerfilDemo() {
+  return getPerfilDemo(getActiveEmpresaId());
+}

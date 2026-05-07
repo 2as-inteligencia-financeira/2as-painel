@@ -1,6 +1,6 @@
 /* global process */
 
-import { getDemoSheetCsv, isDemoCompany } from "./demoSheets.js";
+import { getDemoProfile, getDemoSheetCsv, isDemoCompany } from "./demoSheets.js";
 
 const FUSO = "America/Sao_Paulo";
 const TERMOS_DEDUCAO = ["ISS", "INSS", "IRRF", "IR ", "ASSISTENCIA MEDICA", "RESSARCIMENTO"];
@@ -68,25 +68,42 @@ const toDemoNumber = value => Number(String(value || "0").replace(/\./g, "").rep
 
 function demoContasPayload(kind, companyId) {
   const key = kind === "pagas" ? "despesas_historico" : kind === "vencidas" ? "contas_vencidas" : "contas_pagar";
+  const profile = getDemoProfile(companyId);
+  const contaLabel = profile?.label ? `Demo · ${profile.label}` : "Luniq Demo";
   const rows = parseDemoContasCsv(getDemoSheetCsv(key, companyId)).map((row, index) => ({
     ...row,
     VALOR_BRUTO: toDemoNumber(row.VALOR_BRUTO),
     VALOR_DEDUCOES: toDemoNumber(row.VALOR_DEDUCOES),
     VALOR_LIQUIDO: toDemoNumber(row.VALOR_LIQUIDO || row.VALOR_BRUTO),
     ID: row.ID || `DEMO-${kind}-${index + 1}`,
-    CONTA: "Luniq Demo",
+    CONTA: contaLabel,
     DEDUCOES: [],
   }));
   const total = rows.reduce((sum, row) => sum + Math.abs(row.VALOR_LIQUIDO), 0);
+  // Quando o perfil declara metas explícitas (TOTAL_7D/30D/60D ou TOTAL_VENCIDO),
+  // priorizamos esses valores para que cada cenário demo conte uma história coerente.
+  const metaPagar = profile?.contasPagar?.meta;
+  const total7d = kind === "pagar" && metaPagar?.total7d != null
+    ? metaPagar.total7d
+    : rows.slice(0, 3).reduce((sum, row) => sum + Math.abs(row.VALOR_LIQUIDO), 0);
+  const total30d = kind === "pagar" && metaPagar?.total30d != null
+    ? metaPagar.total30d
+    : rows.slice(0, 6).reduce((sum, row) => sum + Math.abs(row.VALOR_LIQUIDO), 0);
+  const total60d = kind === "pagar" && metaPagar?.total60d != null
+    ? metaPagar.total60d
+    : total;
+  const totalVencido = kind === "vencidas" && profile?.contasVencidas?.meta?.total != null
+    ? profile.contasVencidas.meta.total
+    : total;
   return {
     source: "demo_api",
-    profile: "LUNIQ_DEMO",
+    profile: profile?.label ? `LUNIQ_DEMO_${profile.label.toUpperCase()}` : "LUNIQ_DEMO",
     updatedAt: toBRDate(new Date()),
     interval: { inicio: rows[0]?.DATA_VENCIMENTO || rows[0]?.DATA_PAGAMENTO || "", fim: rows.at(-1)?.DATA_VENCIMENTO || rows.at(-1)?.DATA_PAGAMENTO || "" },
     meta: [
-      { label: kind === "pagas" ? "TOTAL_PAGO" : "TOTAL_60D", value: total },
-      { label: "TOTAL_7D", value: rows.slice(0, 3).reduce((sum, row) => sum + Math.abs(row.VALOR_LIQUIDO), 0) },
-      { label: "TOTAL_30D", value: rows.slice(0, 6).reduce((sum, row) => sum + Math.abs(row.VALOR_LIQUIDO), 0) },
+      { label: kind === "pagas" ? "TOTAL_PAGO" : kind === "vencidas" ? "TOTAL_VENCIDO" : "TOTAL_60D", value: kind === "pagar" ? total60d : kind === "vencidas" ? totalVencido : total },
+      { label: "TOTAL_7D", value: total7d },
+      { label: "TOTAL_30D", value: total30d },
       { label: "QTD_LANCAMENTOS", value: rows.length },
       { label: "ATUALIZADO_EM", value: toBRDate(new Date()) },
     ],
@@ -687,6 +704,7 @@ export async function fetchGranatumContasPagasLabs({
 export async function fetchGranatumFluxoProjetadoLabs(companyId = "") {
   if (isDemoCompany(companyId)) {
     const contasPagar = demoContasPayload("pagar", companyId);
+    const profile = getDemoProfile(companyId);
     const saldos = parseDemoCsv(getDemoSheetCsv("saldos", companyId)).map(row => ({
       CONTA_ID: row.label,
       CONTA: row.label,
@@ -696,7 +714,7 @@ export async function fetchGranatumFluxoProjetadoLabs(companyId = "") {
       ?? saldos.reduce((sum, row) => sum + row.SALDO, 0);
     return {
       source: "demo_api",
-      profile: "LUNIQ_DEMO",
+      profile: profile?.label ? `LUNIQ_DEMO_${profile.label.toUpperCase()}` : "LUNIQ_DEMO",
       updatedAt: toBRDate(new Date()),
       interval: contasPagar.interval,
       meta: [

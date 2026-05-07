@@ -265,9 +265,14 @@ function EmpresaSelector({ onSelect }) {
                   <div style={{ fontSize:11, color:T.muted, marginTop:2 }}>{empresa.descricao}</div>
                 </div>
               </div>
-              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", borderTop:`1px solid ${T.brd}`, paddingTop:10, fontSize:10, color:T.dim, textTransform:"uppercase", letterSpacing:"0.04em" }}>
+              {empresa.resumoPainel && (
+                <div style={{ fontSize:11, color:T.sub, lineHeight:1.5, marginBottom:12 }}>
+                  {empresa.resumoPainel}
+                </div>
+              )}
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", borderTop:`1px solid ${T.brd}`, paddingTop:10, fontSize:10, color:empresa.cor || T.dim, textTransform:"uppercase", letterSpacing:"0.04em", fontWeight:700 }}>
                 <span>{empresa.status}</span>
-                <span>Acessar</span>
+                <span style={{ color:T.dim, fontWeight:500 }}>Acessar →</span>
               </div>
             </button>
           ))}

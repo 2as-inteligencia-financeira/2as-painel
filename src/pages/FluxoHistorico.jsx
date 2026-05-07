@@ -8,7 +8,7 @@ import { useSheets, toNum, parseDate, fmt } from "../hooks/useSheets";
 import { resolveCategory } from "../utils/categoryResolver";
 import ViewModeToggle from "../components/ViewModeToggle";
 import ExecutiveAlerts from "../components/ExecutiveAlerts";
-import { getActiveEmpresaId } from "../empresas/luniq-inteligencia-financeira/empresaAtiva";
+import { isActiveEmpresaDemo } from "../empresas/luniq-inteligencia-financeira/empresaAtiva";
 
 // --- DADOS HISTORICOS ---------------------------------------------------------
 const TODOS_MESES = [
@@ -438,7 +438,7 @@ const ChartTip = ({ active, payload, label }) => {
 
 export default function FluxoHistorico() {
   const sheets = useSheets(["historico", "despesas_historico", "aportes_mario"]);
-  const isDemo = getActiveEmpresaId() === "luniq-demo";
+  const isDemo = isActiveEmpresaDemo();
   const aporteLabel = isDemo ? "Aportes Sócios" : "Aportes Mário";
   const despesaSociosLabel = isDemo ? "Despesas Sócios" : "Despesas Mário";
   const aportePendenteLabel = isDemo ? "Aporte Pendente Sócios" : "Aporte Pendente Mário";
