@@ -1,6 +1,6 @@
 /* global process, Buffer */
 
-import { createSign } from "node:crypto";
+import { createSign, createHash, timingSafeEqual } from "node:crypto";
 import { getDemoSheetCsv } from "./demoSheets.js";
 import { SHEET_KEYS, OPTIONAL_SHEET_KEYS } from "../config/sheets.js";
 
@@ -111,7 +111,14 @@ export function isAuthorized(headers = {}) {
 
   const suppliedUser = decoded.slice(0, separator);
   const suppliedPassword = decoded.slice(separator + 1);
-  return suppliedUser === user && suppliedPassword === password;
+
+  // ALTO-04: comparação resistente a timing attacks via hash SHA-256
+  // Hashes sempre têm 32 bytes, eliminando o vazamento de tamanho
+  const hashSupUser  = createHash("sha256").update(suppliedUser).digest();
+  const hashUser     = createHash("sha256").update(user).digest();
+  const hashSupPass  = createHash("sha256").update(suppliedPassword).digest();
+  const hashPass     = createHash("sha256").update(password).digest();
+  return timingSafeEqual(hashSupUser, hashUser) && timingSafeEqual(hashSupPass, hashPass);
 }
 
 export function securityHeaders(extra = {}) {
