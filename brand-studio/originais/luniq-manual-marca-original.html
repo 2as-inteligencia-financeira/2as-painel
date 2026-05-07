@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Luniq &mdash; Manual da Marca 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blk:#0a0a0a;--sur:#111111;--rai:#161616;--bor:#1e1e1e;
+  --amb:#f59e0b;--grn:#22c55e;--red:#ef4444;
+  --txt:#ffffff;--mut:#666;--dim:#2a2a2a;
+  --ff:'Plus Jakarta Sans',system-ui,sans-serif;
+  --mo:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--blk);color:var(--txt);font-family:var(--ff);line-height:1.6;overflow-x:hidden}
+.wrap{max-width:1100px;margin:0 auto;padding:88px 56px}
+.full{background:var(--sur)}.full .wrap{padding:88px 56px}
+.tag{font-family:var(--mo);font-size:9px;color:var(--amb);letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
+.h1{font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-.035em;margin-bottom:16px;line-height:1.05}
+.lead{font-size:15px;font-weight:300;color:var(--mut);max-width:580px;line-height:1.78;margin-bottom:56px}
+
+/* LOGO INLINE */
+.logo{display:flex;flex-direction:column;gap:9px}
+.logo-wm{display:flex;align-items:baseline;line-height:1}
+.logo-l{font-family:var(--ff);font-weight:800;color:var(--amb);letter-spacing:-.04em}
+.logo-u{font-family:var(--ff);font-weight:800;color:#fff;letter-spacing:-.04em}
+.logo-div{height:.75px;background:var(--bor)}
+.logo-desc{font-family:var(--mo);font-size:8px;letter-spacing:.22em;color:var(--dim);text-transform:uppercase}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:80px 40px;position:relative;
+  overflow:hidden;background:radial-gradient(ellipse 50% 50% at 30% 40%,rgba(245,158,11,.06) 0%,transparent 65%),#050505}
+.hero::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(30,30,30,.8) 1px,transparent 1px);
+  background-size:28px 28px;pointer-events:none}
+.hero-logo{position:relative;z-index:1;margin-bottom:64px}
+.hero-sub{position:relative;z-index:1;font-family:var(--mo);font-size:10px;
+  letter-spacing:.22em;color:#1a1a1a;text-transform:uppercase;margin-bottom:20px}
+.hero-tagline{position:relative;z-index:1;font-size:clamp(40px,7vw,88px);
+  font-weight:800;letter-spacing:-.045em;line-height:1}
+.hero-tagline em{font-style:normal;color:var(--amb)}
+.hero-doc{position:relative;z-index:1;margin-top:24px;font-family:var(--mo);
+  font-size:9px;letter-spacing:.18em;color:#141414;text-transform:uppercase}
+
+/* STORY */
+.story{font-size:clamp(15px,1.7vw,17px);font-weight:300;color:var(--mut);line-height:1.88;max-width:760px}
+.story p+p{margin-top:1.3em}
+.story strong{color:var(--txt);font-weight:700}
+
+/* TIMELINE */
+.tl{display:flex;flex-direction:column;gap:1px;margin:56px 0}
+.tli{display:grid;grid-template-columns:80px 1fr;background:var(--sur)}
+.tli.p{background:rgba(245,158,11,.04)}
+.tly{padding:22px 18px;font-family:var(--mo);font-size:11px;color:#333;
+  border-right:1px solid var(--bor);display:flex;align-items:flex-start;justify-content:flex-end}
+.tli.p .tly{color:var(--amb);border-color:var(--amb)}
+.tlc{padding:22px 28px}
+.tlt{font-size:13px;font-weight:700;margin-bottom:4px}
+.tli.p .tlt{color:var(--amb)}
+.tld{font-size:12px;font-weight:300;color:var(--mut);line-height:1.55}
+
+/* NOME */
+.nome{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:56px}
+.nb{background:var(--sur);padding:32px 28px}
+.nb-l{font-size:60px;font-weight:800;letter-spacing:-.05em;color:var(--amb);line-height:1;margin-bottom:12px}
+.nb-n{font-family:var(--mo);font-size:9px;letter-spacing:.2em;color:#333;text-transform:uppercase;margin-bottom:10px}
+.nb-d{font-size:13px;font-weight:300;color:var(--mut);line-height:1.6}
+.nb-d strong{color:var(--txt);font-weight:700}
+
+/* QUOTE */
+.qt{background:var(--rai);border-left:2px solid var(--amb);padding:28px 32px;
+  font-size:15px;font-style:italic;font-weight:300;color:var(--mut);line-height:1.75;margin-top:56px}
+.qt strong{font-style:normal;color:var(--txt);font-weight:700}
+.qt-src{font-style:normal;font-family:var(--mo);font-size:9px;color:#333;margin-top:12px;letter-spacing:.12em;text-transform:uppercase}
+
+/* VMV */
+.vmv{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-bottom:1px}
+.vmv-box{background:var(--sur);padding:40px 36px}
+.vmv-box.alt{background:var(--rai)}
+.vmv-lbl{font-family:var(--mo);font-size:9px;letter-spacing:.2em;color:var(--amb);text-transform:uppercase;margin-bottom:14px}
+.vmv-txt{font-size:clamp(14px,1.6vw,18px);font-weight:300;color:var(--mut);line-height:1.72}
+.vmv-txt strong{color:var(--txt);font-weight:700}
+.vals{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;margin-top:1px}
+.val{background:var(--rai);padding:28px 20px;border-top:2px solid var(--amb)}
+.val-n{font-family:var(--mo);font-size:9px;color:#222;margin-bottom:10px}
+.val-name{font-size:13px;font-weight:700;margin-bottom:8px}
+.val-desc{font-size:12px;font-weight:300;color:var(--mut);line-height:1.5}
+.tagline-row{background:var(--blk);border:1px solid var(--bor);padding:36px 44px;
+  margin-top:1px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.tl-big{font-size:clamp(18px,2.5vw,28px);font-weight:800;letter-spacing:-.03em}
+.tl-big em{font-style:normal;color:var(--amb)}
+.tl-note{font-family:var(--mo);font-size:10px;color:#222;max-width:240px;line-height:1.55}
+
+/* LOGO SECTION */
+.logo-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-bottom:1px}
+.lb{padding:56px 48px;display:flex;flex-direction:column;gap:18px}
+.lb-dark{background:#050505}
+.lb-light{background:#fafaf7}
+.lb-lbl{font-family:var(--mo);font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+.lb-dark .lb-lbl{color:#1a1a1a}
+.lb-light .lb-lbl{color:#bbb}
+
+/* ANATOMY */
+.anat{background:#050505;padding:36px 48px;margin-bottom:1px}
+.anat-title{font-family:var(--mo);font-size:9px;letter-spacing:.18em;color:#1a1a1a;text-transform:uppercase;margin-bottom:28px}
+.anat-notes{display:flex;flex-direction:column;gap:12px;max-width:640px}
+.anat-note{display:flex;gap:12px;align-items:flex-start}
+.anat-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.anat-txt{font-size:13px;font-weight:300;color:var(--mut);line-height:1.5}
+.anat-txt strong{color:var(--txt);font-weight:700}
+
+/* COLORS */
+.swatches{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr 1fr 1fr;gap:1px}
+.sw{height:160px;display:flex;flex-direction:column;justify-content:flex-end;padding:16px 14px;color:rgba(255,255,255,.88)}
+.sw-name{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.sw-hex{font-family:var(--mo);font-size:10px;opacity:.55}
+.sw-use{font-size:9px;opacity:.4;margin-top:6px;line-height:1.4}
+.sem{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:1px}
+.sem-box{background:var(--rai);padding:22px 18px}
+.sem-lbl{font-family:var(--mo);font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:7px}
+.sem-desc{font-size:13px;font-weight:300;color:var(--mut)}
+
+/* TYPE */
+.type-table{border-top:1px solid var(--bor);margin-bottom:56px}
+.t-row{display:grid;grid-template-columns:130px 1fr 100px 100px;align-items:center;border-bottom:1px solid var(--bor)}
+.t-row>*{padding:16px 0}
+.t-role{font-family:var(--mo);font-size:9px;letter-spacing:.1em;color:#333;text-transform:uppercase}
+.t-spec{font-family:var(--mo);font-size:9px;color:#2a2a2a}
+
+/* VOICE */
+.voice{display:grid;grid-template-columns:1fr 1fr;gap:1px}
+.vc{background:var(--sur);padding:32px 28px}
+.vc-attr{font-family:var(--mo);font-size:9px;font-weight:700;letter-spacing:.2em;color:var(--amb);text-transform:uppercase;margin-bottom:20px}
+.vc-ex{margin-bottom:14px}
+.vc-lbl{font-family:var(--mo);font-size:9px;font-weight:700;letter-spacing:.12em;margin-bottom:7px}
+.vc-yes .vc-lbl{color:var(--grn)}
+.vc-no .vc-lbl{color:var(--red)}
+.vc-txt{font-size:13px;font-weight:300;color:var(--mut);line-height:1.5;padding:10px 14px;border-left:2px solid}
+.vc-yes .vc-txt{border-color:var(--grn)}
+.vc-no .vc-txt{border-color:var(--red);text-decoration:line-through;opacity:.4}
+
+/* SERVICES */
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-bottom:1px}
+.mode{background:var(--sur);padding:28px 24px}
+.mode-tag{font-family:var(--mo);font-size:9px;letter-spacing:.18em;color:var(--amb);text-transform:uppercase;margin-bottom:10px}
+.mode-name{font-size:14px;font-weight:700;margin-bottom:8px}
+.mode-desc{font-size:12px;font-weight:300;color:var(--mut);line-height:1.55}
+.catalog{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:1px}
+.cat-group{background:var(--rai);padding:24px 20px}
+.cat-title{font-family:var(--mo);font-size:9px;letter-spacing:.18em;color:var(--amb);text-transform:uppercase;margin-bottom:14px;border-bottom:1px solid var(--bor);padding-bottom:9px}
+.cat-items{display:flex;flex-direction:column;gap:7px}
+.cat-item{font-size:12px;font-weight:300;color:var(--mut);display:flex;gap:8px}
+.cat-item::before{content:'--';color:#1e1e1e;flex-shrink:0;font-family:var(--mo)}
+
+/* PROHIB */
+.prohib{display:grid;grid-template-columns:repeat(3,1fr);gap:1px}
+.pb{background:var(--sur);padding:28px 22px;border-top:2px solid var(--red)}
+.pb-x{font-family:var(--mo);font-size:18px;color:var(--red);margin-bottom:10px;font-weight:700}
+.pb-title{font-size:13px;font-weight:700;margin-bottom:8px}
+.pb-desc{font-size:12px;font-weight:300;color:var(--mut);line-height:1.5}
+
+footer{background:#050505;padding:32px 56px;display:flex;justify-content:space-between;
+  align-items:center;border-top:1px solid var(--bor)}
+.ft-l{font-family:var(--mo);font-size:9px;letter-spacing:.14em;color:#141414;text-transform:uppercase}
+.ft-r{font-family:var(--mo);font-size:9px;color:#141414}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-logo">
+    <div class="logo" style="align-items:center">
+      <div class="logo-wm">
+        <span class="logo-l" style="font-size:56px">L</span>
+        <span class="logo-u" style="font-size:56px">UNIQ</span>
+      </div>
+      <div class="logo-div" style="width:320px"></div>
+      <span class="logo-desc">INTELIGENCIA FINANCEIRA</span>
+    </div>
+  </div>
+  <p class="hero-sub">Anderson Almeida &middot; Administrador de Empresas</p>
+  <h1 class="hero-tagline">Intelig&ecirc;ncia que<br><em>transforma gest&atilde;o.</em></h1>
+  <p class="hero-doc">Manual da Marca &middot; 2026</p>
+</section>
+
+<!-- 01 ORIGEM -->
+<div><div class="wrap">
+  <div class="tag">01 &middot; A Origem</div>
+  <h2 class="h1">Uma marca constru&iacute;da<br>antes de ter nome.</h2>
+  <div class="story">
+    <p><strong>Bras&iacute;lia, 2011.</strong> Anderson Almeida tinha ensino m&eacute;dio e um est&aacute;gio num shopping center. Na Ancar Ivanhoe, auditando vendas de loja em loja, elaborando planilhas, algo clicou silenciosamente: <em>eu gosto disso &mdash; de entender como as coisas funcionam por dentro.</em> Foi ali, como estagi&aacute;rio de n&iacute;vel m&eacute;dio, que Anderson decidiu fazer Administra&ccedil;&atilde;o. Uma colega que trabalhava com ele naquela &eacute;poca &mdash; hoje recrutadora s&ecirc;nior no Nubank &mdash; lembraria anos depois: <em>&ldquo;ele j&aacute; atuava como l&iacute;der mesmo sendo estagi&aacute;rio.&rdquo;</em></p>
+    <p>Em 2014, entrou como <strong>primeiro estagi&aacute;rio da Estrat&eacute;gia Concursos</strong> &mdash; uma EdTech que ainda estava encontrando seu caminho. Cresceu junto: de estagi&aacute;rio a auxiliar a subgerente financeiro. Em 2017, a empresa se muda para S&atilde;o Paulo. Anderson vai junto &mdash; sozinho. Fam&iacute;lia, namorada e amigos ficam em Bras&iacute;lia. Foi uma escolha consciente de crescimento. Quem deixa tudo que conhece para avan&ccedil;ar profissionalmente n&atilde;o est&aacute; construindo um emprego. Est&aacute; construindo algo maior.</p>
+    <p><strong>Outubro de 2018. Dire&ccedil;&atilde;o Concursos.</strong> Volta para Bras&iacute;lia como Coordenador Financeiro numa empresa com ambic&atilde;o de competir com os maiores antes de ter os recursos dos maiores. Estruturou do zero: DRE gerencial, budget, forecast, dashboards, processos, governan&ccedil;a financeira. Pr&oacute;ximo ao C-Level. Sete anos e quatro meses dentro de uma opera&ccedil;&atilde;o que cresceu, passou por M&amp;A, turnarounds e reestrutura&ccedil;&otilde;es.</p>
+    <p><strong>2021. Liz nasce.</strong> A empresa vivia um dos melhores momentos &mdash; a pandemia acelerou as vendas, Anderson entendia o neg&oacute;cio em profundidade e via claramente como evoluir. Liz chega num momento de clareza: o trabalho tem sentido. A constru&ccedil;&atilde;o tem prop&oacute;sito. E no peito, uma ideia come&ccedil;a a tomar forma. Ainda n&atilde;o tem nome.</p>
+    <p>Em 2024 comeou o <strong>MBA em Controladoria e Finan&ccedil;as</strong>. Porque quem domina um assunto de verdade n&atilde;o para de estudar &mdash; aprofunda.</p>
+    <p><strong>Fevereiro de 2026. Head of Operations &amp; Finance.</strong> A promo&ccedil;&atilde;o acontece. Passa a liderar Financeiro, Administrativo e Operacional de forma integrada, com suporte estrat&eacute;gico &agrave; diretoria.</p>
+    <p><strong>2026. Lara nasce. A Luniq &eacute; criada.</strong> No mesmo ano. N&atilde;o foi impulso &mdash; foi a execu&ccedil;&atilde;o de um plano constru&iacute;do h&aacute; anos. Quinze anos de opera&ccedil;&atilde;o real: auditoria, financeiro, gest&atilde;o, processos, BI, M&amp;A, turnaround, reestrutura&ccedil;&atilde;o, crescimento e reconstruc&ccedil;&atilde;o.</p>
+  </div>
+
+  <div class="tl">
+    <div class="tli"><div class="tly">2011</div><div class="tlc"><div class="tlt">Ancar Ivanhoe &mdash; O come&ccedil;o</div><div class="tld">Estagi&aacute;rio de n&iacute;vel m&eacute;dio. Auditoria, planilhas, financeiro. Decis&atilde;o de fazer Administra&ccedil;&atilde;o.</div></div></div>
+    <div class="tli"><div class="tly">2012</div><div class="tlc"><div class="tlt">Adolescente Aprendiz &mdash; Multidisciplinar</div><div class="tld">Financeiro, administrativo e marketing. In&iacute;cio da gradua&ccedil;&atilde;o em Administra&ccedil;&atilde;o.</div></div></div>
+    <div class="tli"><div class="tly">2014</div><div class="tlc"><div class="tlt">Estrat&eacute;gia Concursos &mdash; Primeiro estagi&aacute;rio</div><div class="tld">Nasce dentro de uma EdTech. De estagi&aacute;rio a subgerente financeiro em tr&ecirc;s anos.</div></div></div>
+    <div class="tli"><div class="tly">2016</div><div class="tlc"><div class="tlt">Formado em Administra&ccedil;&atilde;o &middot; MBA Marketing e Vendas</div><div class="tld">Teoria e pr&aacute;tica constru&iacute;das em paralelo. Sem parar a carreira.</div></div></div>
+    <div class="tli"><div class="tly">2017</div><div class="tlc"><div class="tlt">S&atilde;o Paulo &mdash; O sacrif&iacute;cio deliberado</div><div class="tld">Gerente de Contas a Pagar. Sozinho. Fam&iacute;lia e namorada em Bras&iacute;lia. Escolha consciente de crescimento.</div></div></div>
+    <div class="tli p"><div class="tly">2018</div><div class="tlc"><div class="tlt">Dire&ccedil;&atilde;o Concursos &mdash; Construir do zero</div><div class="tld">Coordenador Financeiro. DRE, budget, forecast, dashboards, governan&ccedil;a. C-Level. 7 anos e 4 meses.</div></div></div>
+    <div class="tli"><div class="tly">2020</div><div class="tlc"><div class="tlt">MBA Gest&atilde;o de Neg&oacute;cios Digitais &middot; Pandemia</div><div class="tld">EdTech cresce no pior momento do mundo. Anderson no centro, sustentando crescimento acelerado.</div></div></div>
+    <div class="tli p"><div class="tly">2021</div><div class="tlc"><div class="tlt">Liz nasce &mdash; O prop&oacute;sito ganha forma</div><div class="tld">Empresa no auge. A ideia da Luniq come&ccedil;a a ganhar contorno. O trabalho ganha endere&ccedil;o.</div></div></div>
+    <div class="tli"><div class="tly">2024</div><div class="tlc"><div class="tlt">MBA Controladoria e Finan&ccedil;as</div><div class="tld">Quatro forma&ccedil;&otilde;es acad&ecirc;micas. Quem domina n&atilde;o para &mdash; aprofunda.</div></div></div>
+    <div class="tli p"><div class="tly">2026</div><div class="tlc"><div class="tlt">Head of Operations &amp; Finance &middot; Lara nasce &middot; Luniq &eacute; criada</div><div class="tld">Tudo no mesmo ano. A promo&ccedil;&atilde;o. A segunda filha. A execu&ccedil;&atilde;o de um plano de quinze anos.</div></div></div>
+  </div>
+
+  <div class="nome">
+    <div class="nb"><div class="nb-l">L</div><div class="nb-n">Liz + Lara</div><div class="nb-d">A letra mais importante. Inicial de <strong>Liz</strong> (2021) e <strong>Lara</strong> (2026). O prop&oacute;sito que faz a Luniq existir para durar.</div></div>
+    <div class="nb"><div class="nb-l" style="color:#555">lu</div><div class="nb-n">Luz &middot; Clareza</div><div class="nb-d">O que Anderson sempre entregou: <strong>transformar dados dispersos em visibilidade real</strong>. O gestor que decide no escuro passa a decidir com clareza.</div></div>
+    <div class="nb"><div class="nb-l" style="color:#2a2a2a">niq</div><div class="nb-n">Unico</div><div class="nb-d">O m&eacute;todo n&atilde;o veio de livro. Veio de <strong>quinze anos constru&iacute;ndo por dentro</strong>, sob press&atilde;o real, com resultado mensur&aacute;vel.</div></div>
+  </div>
+
+  <div class="qt">&ldquo;Anderson participou ativamente da constru&ccedil;&atilde;o de v&aacute;rias empresas de educa&ccedil;&atilde;o desde os seus prim&oacute;rdios. <strong>Sua aten&ccedil;&atilde;o aos detalhes e foco em resultados &eacute; impressionante, e sua dedica&ccedil;&atilde;o ao sucesso dos projetos &eacute; ineg&aacute;vel.</strong>&rdquo;<div class="qt-src">Alex Rodrigues &middot; LinkedIn</div></div>
+</div></div>
+
+<!-- 02 IDENTIDADE -->
+<div class="full"><div class="wrap">
+  <div class="tag">02 &middot; Identidade Estrat&eacute;gica</div>
+  <h2 class="h1">Vis&atilde;o, miss&atilde;o e valores.</h2>
+  <div class="vmv">
+    <div class="vmv-box"><div class="vmv-lbl">Vis&atilde;o</div><div class="vmv-txt">Ser refer&ecirc;ncia em <strong>intelig&ecirc;ncia financeira e operacional</strong> para empresas que escolhem crescer com controle e clareza.</div></div>
+    <div class="vmv-box alt"><div class="vmv-lbl">Miss&atilde;o</div><div class="vmv-txt">Transformar a complexidade financeira e operacional de empresas em <strong>decis&otilde;es estrat&eacute;gicas claras</strong> &mdash; com o m&eacute;todo de quem construiu isso por dentro, sob press&atilde;o real, com resultado mensur&aacute;vel.</div></div>
+  </div>
+  <div class="vals">
+    <div class="val"><div class="val-n">01</div><div class="val-name">Constru&iacute;do por dentro</div><div class="val-desc">O m&eacute;todo veio de opera&ccedil;&otilde;es reais. N&atilde;o de livro.</div></div>
+    <div class="val"><div class="val-n">02</div><div class="val-name">Clareza antes de velocidade</div><div class="val-desc">Dado certo demora menos que dado errado.</div></div>
+    <div class="val"><div class="val-n">03</div><div class="val-name">Dados como argumento</div><div class="val-desc">Sem opini&atilde;o sem dado. Sem dado sem fonte.</div></div>
+    <div class="val"><div class="val-n">04</div><div class="val-name">Resultado rastrec&aacute;vel</div><div class="val-desc">M&eacute;trica definida antes de come&ccedil;ar. Sempre.</div></div>
+    <div class="val"><div class="val-n">05</div><div class="val-name">Prop&oacute;sito que ancora</div><div class="val-desc">Tem nome de fam&iacute;lia. N&atilde;o &eacute; trabalho &mdash; &eacute; legado.</div></div>
+  </div>
+  <div class="tagline-row">
+    <div class="tl-big">&ldquo;Intelig&ecirc;ncia que <em>transforma gest&atilde;o.</em>&rdquo;</div>
+    <div class="tl-note">Tagline principal. Todas as aplica&ccedil;&otilde;es da marca.</div>
+  </div>
+</div></div>
+
+<!-- 03 LOGOTIPO -->
+<div><div class="wrap">
+  <div class="tag">03 &middot; Logotipo</div>
+  <h2 class="h1">O L que carrega<br>duas hist&oacute;rias.</h2>
+  <p class="lead">O logotipo &eacute; um wordmark puro. O <strong>L</strong> em amber &eacute; o s&iacute;mbolo &mdash; a inicial de Liz e Lara, e a luz que d&aacute; nome &agrave; marca. <strong>UNIQ</strong> em branco ancora a identidade. O descritor posiciona o neg&oacute;cio. Nenhum elemento &eacute; decorativo.</p>
+
+  <div class="logo-grid">
+    <div class="lb lb-dark">
+      <span class="lb-lbl">Principal &mdash; fundo escuro</span>
+      <div class="logo" style="gap:9px">
+        <div class="logo-wm"><span class="logo-l" style="font-size:48px">L</span><span class="logo-u" style="font-size:48px">UNIQ</span></div>
+        <div class="logo-div" style="width:260px"></div>
+        <span class="logo-desc">INTELIGENCIA FINANCEIRA</span>
+      </div>
+    </div>
+    <div class="lb lb-light">
+      <span class="lb-lbl">Vers&atilde;o clara &mdash; fundo branco</span>
+      <div class="logo" style="gap:9px">
+        <div class="logo-wm">
+          <span class="logo-l" style="font-size:48px">L</span>
+          <span style="font-family:var(--ff);font-size:48px;font-weight:800;letter-spacing:-.04em;color:#0a0a0a">UNIQ</span>
+        </div>
+        <div style="height:.75px;background:#e4e4e0;width:260px"></div>
+        <span style="font-family:var(--mo);font-size:8px;letter-spacing:.22em;color:#c0c0bc;text-transform:uppercase">INTELIGENCIA FINANCEIRA</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="anat">
+    <div class="anat-title">Leitura do simbolo</div>
+    <div class="anat-notes">
+      <div class="anat-note"><div class="anat-dot" style="background:var(--amb)"></div><div class="anat-txt"><strong>L em amber</strong> &mdash; a inicial de Liz (2021) e Lara (2026). O "lu" de luz. O ponto de partida de tudo. &Eacute; o elemento que diferencia e ancora o significado da marca.</div></div>
+      <div class="anat-note"><div class="anat-dot" style="background:#fff"></div><div class="anat-txt"><strong>UNIQ em branco</strong> &mdash; limpo, direto, sem ruido. Completa a palavra e ancora a identidade. O contraste de cor entre L e UNIQ cria hierarquia visual instant&acirc;nea.</div></div>
+      <div class="anat-note"><div class="anat-dot" style="background:var(--bor)"></div><div class="anat-txt"><strong>Linha divisora + descritor</strong> &mdash; posiciona o neg&oacute;cio sem poluir o wordmark. "INTELIGENCIA FINANCEIRA" em DM Mono, discreto, l&eacute; como especialidade &mdash; n&atilde;o como slogan.</div></div>
+      <div class="anat-note"><div class="anat-dot" style="background:var(--amb);opacity:.3"></div><div class="anat-txt"><strong>Vers&atilde;o m&iacute;nima</strong> &mdash; em aplica&ccedil;&otilde;es pequenas (favicon, avatar), apenas LUNIQ sem o descritor. O L em amber j&aacute; &eacute; suficiente para identificar a marca.</div></div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:1px;margin-top:1px">
+    <div style="background:var(--sur);padding:22px 26px;flex:1"><div class="t-role" style="margin-bottom:6px">Minimo digital</div><div style="font-size:18px;font-weight:700;color:var(--amb)">120px</div><div style="font-size:11px;font-weight:300;color:var(--mut);margin-top:3px">Logo horizontal</div></div>
+    <div style="background:var(--sur);padding:22px 26px;flex:1"><div class="t-role" style="margin-bottom:6px">Minimo impresso</div><div style="font-size:18px;font-weight:700;color:var(--amb)">40mm</div><div style="font-size:11px;font-weight:300;color:var(--mut);margin-top:3px">Logo horizontal</div></div>
+    <div style="background:var(--sur);padding:22px 26px;flex:1"><div class="t-role" style="margin-bottom:6px">Solo (sem descritor)</div><div style="font-size:18px;font-weight:700;color:var(--amb)">18px+</div><div style="font-size:11px;font-weight:300;color:var(--mut);margin-top:3px">Favicon, avatar, rodape</div></div>
+    <div style="background:var(--sur);padding:22px 26px;flex:1"><div class="t-role" style="margin-bottom:6px">Formatos</div><div style="font-size:18px;font-weight:700;color:var(--amb)">SVG</div><div style="font-size:11px;font-weight:300;color:var(--mut);margin-top:3px">4 versoes disponiveis</div></div>
+  </div>
+</div></div>
+
+<!-- 04 CORES -->
+<div class="full"><div class="wrap">
+  <div class="tag">04 &middot; Paleta de Cores</div>
+  <h2 class="h1">Cor com significado.</h2>
+  <div class="swatches">
+    <div class="sw" style="background:#f59e0b;color:#0a0a0a"><div class="sw-name">Amber</div><div class="sw-hex">#f59e0b</div><div class="sw-use">Brand &middot; L da logo &middot; Destaques</div></div>
+    <div class="sw" style="background:#0a0a0a"><div class="sw-name">Black</div><div class="sw-hex">#0a0a0a</div><div class="sw-use">Base &middot; Fundo</div></div>
+    <div class="sw" style="background:#111111"><div class="sw-name">Surface</div><div class="sw-hex">#111111</div><div class="sw-use">Cards &middot; Secoes</div></div>
+    <div class="sw" style="background:#161616"><div class="sw-name">Raised</div><div class="sw-hex">#161616</div><div class="sw-use">Elevado &middot; Hover</div></div>
+    <div class="sw" style="background:#1e1e1e"><div class="sw-name">Border</div><div class="sw-hex">#1e1e1e</div><div class="sw-use">Linhas &middot; Dividers</div></div>
+    <div class="sw" style="background:#22c55e"><div class="sw-name">Green</div><div class="sw-hex">#22c55e</div><div class="sw-use">Positivo</div></div>
+    <div class="sw" style="background:#ef4444"><div class="sw-name">Red</div><div class="sw-hex">#ef4444</div><div class="sw-use">Alerta</div></div>
+  </div>
+  <div class="sem">
+    <div class="sem-box" style="border-top:2px solid var(--grn)"><div class="sem-lbl" style="color:var(--grn)">Positivo / Crescimento</div><div class="sem-desc">Verde. Sempre. Sem excecoes.</div></div>
+    <div class="sem-box" style="border-top:2px solid var(--red)"><div class="sem-lbl" style="color:var(--red)">Alerta / Negativo</div><div class="sem-desc">Vermelho. Sempre. Sem excecoes.</div></div>
+    <div class="sem-box" style="border-top:2px solid #333"><div class="sem-lbl" style="color:#555">Referencia / Orcado</div><div class="sem-desc">Cinza neutro. Contraste com realizado.</div></div>
+  </div>
+</div></div>
+
+<!-- 05 TIPOGRAFIA -->
+<div><div class="wrap">
+  <div class="tag">05 &middot; Tipografia</div>
+  <h2 class="h1">A voz visual.</h2>
+  <div style="font-size:clamp(40px,7vw,80px);font-weight:800;letter-spacing:-.045em;line-height:1;margin-bottom:48px">
+    Constru&iacute;do <em style="font-style:normal;color:var(--amb)">por dentro.</em>
+  </div>
+  <div class="type-table">
+    <div class="t-row"><div class="t-role">Display</div><div style="font-size:28px;font-weight:800;letter-spacing:-.04em">Intelig&ecirc;ncia que transforma gest&atilde;o.</div><div class="t-spec">Plus Jakarta 800</div><div class="t-spec">32&ndash;96px</div></div>
+    <div class="t-row"><div class="t-role">H1</div><div style="font-size:20px;font-weight:800;letter-spacing:-.03em">Consultoria Financeira e Operacional</div><div class="t-spec">Plus Jakarta 800</div><div class="t-spec">20&ndash;28px</div></div>
+    <div class="t-row"><div class="t-role">H2</div><div style="font-size:15px;font-weight:700">FP&amp;A &middot; Budget &amp; Forecast &middot; BI Financeiro</div><div class="t-spec">Plus Jakarta 700</div><div class="t-spec">14&ndash;18px</div></div>
+    <div class="t-row"><div class="t-role">Body</div><div style="font-size:14px;font-weight:300;color:var(--mut)">Resultados financeiros claros, sem ambiguidade.</div><div class="t-spec">Plus Jakarta 300</div><div class="t-spec">13&ndash;15px</div></div>
+    <div class="t-row"><div class="t-role">Label / UI</div><div style="font-family:var(--mo);font-size:10px;letter-spacing:.18em;color:#333;text-transform:uppercase">RECEITA BRUTA &middot; YTD</div><div class="t-spec">DM Mono 400</div><div class="t-spec">8&ndash;10px</div></div>
+    <div class="t-row"><div class="t-role">Dados / KPIs</div><div style="font-family:var(--mo);font-size:18px;color:var(--grn)">R$ 1.499.758,35</div><div class="t-spec">DM Mono 500</div><div class="t-spec">Todos os valores</div></div>
+  </div>
+</div></div>
+
+<!-- 06 TOM DE VOZ -->
+<div class="full"><div class="wrap">
+  <div class="tag">06 &middot; Tom de Voz</div>
+  <h2 class="h1">Como a Luniq fala.</h2>
+  <div class="voice">
+    <div class="vc"><div class="vc-attr">Executivo, nao academico</div><div class="vc-ex vc-yes"><div class="vc-lbl">SIM</div><div class="vc-txt">Voce nao tem problema de receita. Tem problema de estrutura de custo. Aqui estao os numeros.</div></div><div class="vc-ex vc-no"><div class="vc-lbl">NAO</div><div class="vc-txt">De acordo com as melhores praticas financeiras, seria interessante considerar...</div></div></div>
+    <div class="vc"><div class="vc-attr">Baseado em dados</div><div class="vc-ex vc-yes"><div class="vc-lbl">SIM</div><div class="vc-txt">Margem bruta: 52,3%. Despesas cresceram 38% enquanto receita cresceu 12%.</div></div><div class="vc-ex vc-no"><div class="vc-lbl">NAO</div><div class="vc-txt">Acho que as despesas estao um pouco elevadas para o setor.</div></div></div>
+    <div class="vc"><div class="vc-attr">Confiante, sem arrogancia</div><div class="vc-ex vc-yes"><div class="vc-lbl">SIM</div><div class="vc-txt">Ja estruturei operacoes semelhantes. Diagnostico: 2 semanas. Mudanca: 90 dias.</div></div><div class="vc-ex vc-no"><div class="vc-lbl">NAO</div><div class="vc-txt">Talvez eu possa tentar ajudar com algumas ideias que podem ser uteis...</div></div></div>
+    <div class="vc"><div class="vc-attr">Direto ao problema</div><div class="vc-ex vc-yes"><div class="vc-lbl">SIM</div><div class="vc-txt">Seu fluxo fica negativo em 45 dias se o ciclo nao mudar. Aqui esta o que muda.</div></div><div class="vc-ex vc-no"><div class="vc-lbl">NAO</div><div class="vc-txt">Ha varias perspectivas possiveis para analisar a situacao financeira da empresa.</div></div></div>
+  </div>
+</div></div>
+
+<!-- 07 SERVICOS -->
+<div><div class="wrap">
+  <div class="tag">07 &middot; Arquitetura de Servi&ccedil;os</div>
+  <h2 class="h1">Tr&ecirc;s formatos.<br>Uma prateleira.</h2>
+  <div class="modes">
+    <div class="mode"><div class="mode-tag">Formato 01</div><div class="mode-name">Contrato PJ</div><div class="mode-desc">Anderson atua como bra&ccedil;o financeiro e operacional dedicado. Modelo j&aacute; validado na pr&aacute;tica. Recorr&ecirc;ncia mensal com escopo definido.</div></div>
+    <div class="mode"><div class="mode-tag">Formato 02</div><div class="mode-name">Projeto Pontual</div><div class="mode-desc">Escopo definido, fee fixo, entrega com come&ccedil;o, meio e fim. Diagn&oacute;stico, reestrutura&ccedil;&atilde;o, BI, processos.</div></div>
+    <div class="mode"><div class="mode-tag">Formato 03</div><div class="mode-name">Prateleira de Servi&ccedil;os</div><div class="mode-desc">Servi&ccedil;os individuais precificados. O cliente contrata o que precisa, quando precisa &mdash; avulsos ou combinados.</div></div>
+  </div>
+  <div class="catalog">
+    <div class="cat-group"><div class="cat-title">Diagnostico e Estrategia</div><div class="cat-items"><div class="cat-item">Diagnostico financeiro e operacional</div><div class="cat-item">Modelagem financeira e cenarios</div><div class="cat-item">Estruturacao de Budget &amp; Forecast</div><div class="cat-item">Suporte a decisao executiva</div></div></div>
+    <div class="cat-group"><div class="cat-title">Gestao Financeira</div><div class="cat-items"><div class="cat-item">Implantacao de DRE gerencial</div><div class="cat-item">Gestao e projecao de fluxo de caixa</div><div class="cat-item">FP&amp;A (Financial Planning &amp; Analysis)</div><div class="cat-item">Controle de custos e margens</div><div class="cat-item">Burn rate, runway e equilibrio operacional</div></div></div>
+    <div class="cat-group"><div class="cat-title">Gestao Operacional</div><div class="cat-items"><div class="cat-item">Mapeamento e redesenho de processos</div><div class="cat-item">Estruturacao de times</div><div class="cat-item">Indicadores e OKRs</div><div class="cat-item">Rotinas de gestao e fechamento</div><div class="cat-item">Treinamento de equipes</div></div></div>
+    <div class="cat-group"><div class="cat-title">BI e Inteligencia de Dados</div><div class="cat-items"><div class="cat-item">Paineis financeiros integrados</div><div class="cat-item">Automacao de relatorios</div><div class="cat-item">Visualizacao em tempo real</div><div class="cat-item">Fonte unica de verdade</div></div></div>
+    <div class="cat-group"><div class="cat-title">BPO Financeiro</div><div class="cat-items"><div class="cat-item">Gestao financeira continuada</div><div class="cat-item">Fechamentos e relatorios periodicos</div><div class="cat-item">BI ativo e monitoramento de KPIs</div><div class="cat-item">Advisory financeiro estrategico</div></div></div>
+    <div class="cat-group"><div class="cat-title">Cenarios Especiais</div><div class="cat-items"><div class="cat-item">Suporte a processos de M&amp;A</div><div class="cat-item">Reestruturacao financeira (turnaround)</div><div class="cat-item">Preparacao para captacao</div><div class="cat-item">Implantacao de governanca financeira</div></div></div>
+  </div>
+</div></div>
+
+<!-- 08 PROIBICOES -->
+<div class="full"><div class="wrap">
+  <div class="tag">08 &middot; Proibi&ccedil;&otilde;es</div>
+  <h2 class="h1">O que nunca fazer.</h2>
+  <div class="prohib">
+    <div class="pb"><div class="pb-x">X</div><div class="pb-title">Nao posicionar como software</div><div class="pb-desc">A Luniq e uma marca de consultoria. Qualquer ferramenta e prova de capacidade, nao o produto.</div></div>
+    <div class="pb"><div class="pb-x">X</div><div class="pb-title">Nao separar Anderson da Luniq</div><div class="pb-desc">A marca e pessoal. O diferencial e a trajetoria real de Anderson. Nao diluir o nome por tras da marca.</div></div>
+    <div class="pb"><div class="pb-x">X</div><div class="pb-title">Nao usar linguagem vaga</div><div class="pb-desc">A Luniq fala com dados e conviccao. Sem "talvez", "seria interessante", "pode ajudar".</div></div>
+    <div class="pb"><div class="pb-x">X</div><div class="pb-title">Nao trocar o amber por outra cor</div><div class="pb-desc">O L e sempre amber #f59e0b. Nao laranja, nao dourado, nao amarelo. Sem excecoes.</div></div>
+    <div class="pb"><div class="pb-x">X</div><div class="pb-title">Nao usar verde/vermelho fora da semantica</div><div class="pb-desc">Verde = positivo. Vermelho = alerta. Nunca como elementos decorativos.</div></div>
+    <div class="pb"><div class="pb-x">X</div><div class="pb-title">Nao recriar o wordmark em outra fonte</div><div class="pb-desc">Sempre Plus Jakarta Sans 800. Nunca recriar manualmente. Usar arquivos oficiais SVG/PNG.</div></div>
+  </div>
+</div></div>
+
+<footer>
+  <div class="ft-l">Luniq Inteligencia Financeira &middot; Anderson Almeida &middot; 2026</div>
+  <div class="ft-r">Manual da Marca v4.0</div>
+</footer>
+</body>
+</html>

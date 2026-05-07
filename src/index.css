@@ -1,0 +1,94 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:    #0a0a0a;
+  --surf:  #111111;
+  --card:  #161616;
+  --brd:   #1e1e1e;
+  --brd2:  #2a2a2a;
+  --txt:   #ffffff;
+  --sub:   #aaaaaa;
+  --muted: #666666;
+  --dim:   #555555;
+  --blue:  #f59e0b;
+  --blue2: #fbbf24;
+  --grn:   #22c55e;
+  --red:   #ef4444;
+  --amb:   #f59e0b;
+  --purp:  #2fb7c6;
+  --chart-grid: #1e1e1e;
+  --chart-tick: #666666;
+  --chart-zero: #333333;
+}
+
+html { font-size: 13px; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  line-height: 1.55;
+  transition: background-color .18s ease, color .18s ease;
+}
+
+button { font-family: inherit; cursor: pointer; }
+
+.ui-table-row { transition: background-color .1s ease; }
+.ui-table-row:hover { background: rgba(255,255,255,0.025); }
+
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--surf); }
+::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+::selection { background: rgba(245,158,11,.25); color: var(--txt); }
+
+.product-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.intel-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.intel-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.intel-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.intel-grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+}
+
+.benchmark-row {
+  grid-template-columns: 140px 1fr 1fr 96px;
+}
+
+@media (max-width: 980px) {
+  .product-hero,
+  .intel-grid-2,
+  .intel-grid-3,
+  .intel-grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .benchmark-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}

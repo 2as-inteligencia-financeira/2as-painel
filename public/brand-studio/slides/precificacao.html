@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luniq — Precificação</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/brand-studio/assets/theme.css" />
+  <style>
+    body { background: var(--bg); font-family: var(--sans); color: var(--text); }
+
+    /* ── NAV ── */
+    .top-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 56px; background: #050505; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 99;
+    }
+    .top-nav-logo { display: flex; align-items: baseline; }
+    .top-nav-logo .l { font-size: 20px; font-weight: 800; color: var(--amber); letter-spacing: -.04em; }
+    .top-nav-logo .u { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -.04em; }
+    .top-nav a { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; color: #666; text-transform: uppercase; text-decoration: none; transition: color .2s; }
+    .top-nav a:hover { color: var(--amber); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 72px 56px 64px; border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(ellipse 40% 60% at 90% 50%, rgba(245,158,11,.06) 0%, transparent 65%),
+        #050505;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(30,30,30,.6) 1px, transparent 1px);
+      background-size: 28px 28px; pointer-events: none;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero-tag { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; color: var(--amber); text-transform: uppercase; margin-bottom: 16px; }
+    .hero h1 { font-size: clamp(36px,5.5vw,64px); font-weight: 800; letter-spacing: -.04em; line-height: 1.05; margin-bottom: 18px; }
+    .hero h1 em { font-style: normal; color: var(--amber); }
+    .hero-desc { font-size: 15px; font-weight: 300; color: #888; max-width: 560px; line-height: 1.75; }
+
+    /* ── SECTION ── */
+    .wrap { padding: 0 56px 80px; }
+    .section-block { padding-top: 64px; }
+    .section-tag { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; color: var(--amber); text-transform: uppercase; margin-bottom: 8px; }
+    .section-title { font-size: 22px; font-weight: 800; letter-spacing: -.025em; color: var(--text); margin-bottom: 6px; }
+    .section-sub { font-size: 13px; font-weight: 300; color: #777; margin-bottom: 28px; line-height: 1.6; }
+
+    /* ── PLAN CARDS ── */
+    .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; }
+    .plan {
+      background: var(--surface); padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 10px;
+      position: relative; overflow: hidden;
+    }
+    .plan.highlight { background: var(--surface-2); }
+    .plan.highlight::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--amber);
+    }
+    .plan-label { font-family: var(--mono); font-size: 9px; letter-spacing: .2em; color: #555; text-transform: uppercase; }
+    .plan-name { font-size: 16px; font-weight: 800; letter-spacing: -.02em; color: var(--text); }
+    .plan-range { font-size: clamp(22px,3vw,30px); font-weight: 800; letter-spacing: -.03em; color: var(--amber); line-height: 1; margin: 6px 0; }
+    .plan-period { font-family: var(--mono); font-size: 9px; color: #555; }
+    .plan-div { height: 1px; background: var(--border); margin: 10px 0; }
+    .plan-profile { font-size: 13px; font-weight: 300; color: #888; line-height: 1.6; }
+    .plan-items { display: flex; flex-direction: column; gap: 7px; margin-top: 6px; }
+    .plan-item { font-size: 12px; font-weight: 300; color: #777; display: flex; gap: 8px; line-height: 1.4; }
+    .plan-item::before { content: '—'; color: var(--border); flex-shrink: 0; font-family: var(--mono); }
+
+    /* ── SETUP BLOCK ── */
+    .setup-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; }
+    .setup-card { background: var(--surface); padding: 28px 24px; }
+    .setup-tier { font-family: var(--mono); font-size: 9px; letter-spacing: .18em; color: #555; text-transform: uppercase; margin-bottom: 8px; }
+    .setup-val { font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -.025em; margin-bottom: 8px; }
+    .setup-desc { font-size: 12px; font-weight: 300; color: #777; line-height: 1.55; }
+
+    /* ── EXTRAS ── */
+    .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; }
+    .extra { background: var(--surface); padding: 24px 28px; display: grid; grid-template-columns: 160px 1fr; gap: 24px; align-items: center; }
+    .extra-label { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; color: #555; text-transform: uppercase; }
+    .extra-desc { font-size: 13px; font-weight: 300; color: #aaa; line-height: 1.55; }
+    .extra-desc strong { color: var(--text); font-weight: 700; }
+
+    /* ── CRITERIA ── */
+    .criteria-list { display: flex; flex-direction: column; gap: 1px; }
+    .crit { background: var(--surface); padding: 22px 28px; display: grid; grid-template-columns: 24px 1fr; gap: 16px; align-items: start; }
+    .crit-n { font-family: var(--mono); font-size: 11px; color: #444; }
+    .crit-text { font-size: 13px; font-weight: 300; color: #aaa; line-height: 1.6; }
+    .crit-text strong { color: var(--text); font-weight: 700; }
+
+    /* ── FOOTER ── */
+    .foot { border-top: 1px solid var(--border); padding: 24px 56px; display: flex; align-items: center; justify-content: space-between; margin-top: 32px; }
+    .foot a { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; color: #555; text-transform: uppercase; text-decoration: none; transition: color .2s; }
+    .foot a:hover { color: var(--amber); }
+    .foot-note { font-family: var(--mono); font-size: 9px; color: #333; letter-spacing: .1em; }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-logo"><span class="l">L</span><span class="u">UNIQ</span></div>
+  <a href="../index.html">← Voltar ao Hub</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Proposta comercial · Luniq Inteligência Financeira</div>
+  <h1>Investimento baseado<br>em <em>valor gerado.</em></h1>
+  <p class="hero-desc">Preços não são fixos por pacote — são compostos com base na complexidade do projeto, intensidade do acompanhamento e resultado esperado.</p>
+</div>
+
+<div class="wrap">
+
+  <!-- MENSALIDADE -->
+  <div class="section-block">
+    <div class="section-tag">01 · Mensalidade</div>
+    <div class="section-title">Uso assistido mensal</div>
+    <p class="section-sub">Após o setup, o cliente entra em uma das três faixas de acompanhamento contínuo.</p>
+    <div class="plan-grid">
+
+      <div class="plan">
+        <div class="plan-label">Plano Essencial</div>
+        <div class="plan-name">Acompanhamento mensal</div>
+        <div class="plan-range">R$ 2.500<br>a R$ 4.500</div>
+        <div class="plan-period">por mês</div>
+        <div class="plan-div"></div>
+        <div class="plan-profile">Empresas que precisam de visibilidade financeira e suporte pontual para decisões.</div>
+        <div class="plan-items">
+          <div class="plan-item">Reunião mensal de análise</div>
+          <div class="plan-item">Painel atualizado e monitorado</div>
+          <div class="plan-item">Suporte assíncrono</div>
+          <div class="plan-item">Relatório executivo mensal</div>
+        </div>
+      </div>
+
+      <div class="plan highlight">
+        <div class="plan-label">Gestão Ativa</div>
+        <div class="plan-name">Acompanhamento quinzenal</div>
+        <div class="plan-range">R$ 5.000<br>a R$ 9.000</div>
+        <div class="plan-period">por mês</div>
+        <div class="plan-div"></div>
+        <div class="plan-profile">Empresas em crescimento que precisam de gestão contínua e plano de ação recorrente.</div>
+        <div class="plan-items">
+          <div class="plan-item">2 reuniões por mês</div>
+          <div class="plan-item">Plano de ação mensal</div>
+          <div class="plan-item">Budget e forecast revisados</div>
+          <div class="plan-item">Prioridades financeiras definidas</div>
+          <div class="plan-item">Suporte prioritário</div>
+        </div>
+      </div>
+
+      <div class="plan">
+        <div class="plan-label">CFO as a Service</div>
+        <div class="plan-name">Gestão estratégica semanal</div>
+        <div class="plan-range">R$ 10.000<br>a R$ 18.000+</div>
+        <div class="plan-period">por mês</div>
+        <div class="plan-div"></div>
+        <div class="plan-profile">Diretoria que precisa de um CFO experiente sem a estrutura de CLT — com presença e decisão real.</div>
+        <div class="plan-items">
+          <div class="plan-item">Ritual semanal com diretoria</div>
+          <div class="plan-item">Decisões críticas acompanhadas</div>
+          <div class="plan-item">Cenários e simulações contínuas</div>
+          <div class="plan-item">Governança financeira ativa</div>
+          <div class="plan-item">Disponibilidade executiva</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SETUP -->
+  <div class="section-block">
+    <div class="section-tag">02 · Setup / Implantação</div>
+    <div class="section-title">Investimento inicial</div>
+    <p class="section-sub">Cobrado uma única vez no início do projeto. Inclui diagnóstico, estruturação e entrega do painel configurado.</p>
+    <div class="setup-grid">
+      <div class="setup-card">
+        <div class="setup-tier">Faixa Base</div>
+        <div class="setup-val">R$ 6.000 – 9.000</div>
+        <div class="setup-desc">Diagnóstico completo, estrutura inicial e painel financeiro núcleo com módulos essenciais.</div>
+      </div>
+      <div class="setup-card">
+        <div class="setup-tier">Faixa Intermediária</div>
+        <div class="setup-val">R$ 10.000 – 14.000</div>
+        <div class="setup-desc">Integrações prioritárias configuradas, rotina executiva definida e treinamento do time interno.</div>
+      </div>
+      <div class="setup-card">
+        <div class="setup-tier">Faixa Avançada</div>
+        <div class="setup-val">R$ 15.000 – 18.000+</div>
+        <div class="setup-desc">Multiárea, maior complexidade operacional, governança completa e múltiplos módulos integrados.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXTRAS -->
+  <div class="section-block">
+    <div class="section-tag">03 · Projetos e extras</div>
+    <div class="section-title">Demandas pontuais</div>
+    <p class="section-sub">Escopo fechado por projeto, fora da mensalidade.</p>
+    <div class="extras-grid">
+      <div class="extra">
+        <div class="extra-label">Nova integração ERP / API</div>
+        <div class="extra-desc"><strong>R$ 2.000 a R$ 8.000</strong> por conector — depende do volume de dados, disponibilidade de API e complexidade da transformação.</div>
+      </div>
+      <div class="extra">
+        <div class="extra-label">Projeto especial</div>
+        <div class="extra-desc"><strong>Turnaround, M&A readiness, pricing, reestruturação</strong> — escopo e valor definidos após levantamento inicial.</div>
+      </div>
+      <div class="extra">
+        <div class="extra-label">Contrato trimestral</div>
+        <div class="extra-desc"><strong>Desconto de até 10%</strong> no valor mensal para clientes com contrato fechado por 3 meses ou mais.</div>
+      </div>
+      <div class="extra">
+        <div class="extra-label">Contrato semestral</div>
+        <div class="extra-desc"><strong>Desconto de até 15%</strong> no valor mensal para clientes com contrato fechado por 6 meses ou mais.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRITÉRIOS -->
+  <div class="section-block">
+    <div class="section-tag">04 · Como compor a proposta</div>
+    <div class="section-title">Critérios de precificação</div>
+    <p class="section-sub">Não existe preço de tabela. Cada proposta é montada a partir dos critérios abaixo.</p>
+    <div class="criteria-list">
+      <div class="crit"><span class="crit-n">01</span><div class="crit-text"><strong>Complexidade da operação.</strong> Quantos módulos financeiros, integração de dados, tamanho do time e volume de transações.</div></div>
+      <div class="crit"><span class="crit-n">02</span><div class="crit-text"><strong>Intensidade do acompanhamento.</strong> Frequência de reuniões, tempo de resposta e profundidade de análise esperada.</div></div>
+      <div class="crit"><span class="crit-n">03</span><div class="crit-text"><strong>Maturidade financeira atual.</strong> Se a empresa já tem estrutura, o setup é menor. Se parte do zero, o investimento inicial é maior.</div></div>
+      <div class="crit"><span class="crit-n">04</span><div class="crit-text"><strong>Valor entregue esperado.</strong> O preço reflete o impacto — decisão mais rápida, menos perda de margem, crescimento sustentável.</div></div>
+      <div class="crit"><span class="crit-n">05</span><div class="crit-text"><strong>Entregáveis mensais formalizados.</strong> Sempre especificar o que está incluído em cada plano para facilitar renovação e clareza mútua.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="foot">
+  <a href="./solucoes.html">Ver soluções →</a>
+  <span class="foot-note">Luniq Inteligência Financeira · Anderson Almeida · 2026</span>
+  <a href="../index.html">← Hub</a>
+</footer>
+
+</body>
+</html>

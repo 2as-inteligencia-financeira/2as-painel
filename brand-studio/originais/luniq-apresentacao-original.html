@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Luniq &mdash; Apresentacao Comercial 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--blk:#0a0a0a;--sur:#111;--rai:#161616;--bor:#1e1e1e;
+  --amb:#f59e0b;--grn:#22c55e;--red:#ef4444;
+  --txt:#fff;--mut:#555;--dim:#2a2a2a;
+  --ff:'Plus Jakarta Sans',system-ui,sans-serif;--mo:'DM Mono',monospace}
+html,body{height:100%;overflow:hidden;background:var(--blk);font-family:var(--ff);color:var(--txt)}
+.deck{width:100vw;height:100vh;position:relative}
+.slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .45s ease;overflow:hidden}
+.slide.on{opacity:1;pointer-events:all}
+.dg::before{content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(30,30,30,.7) 1px,transparent 1px);
+  background-size:28px 28px;pointer-events:none}
+.nav{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:14px;z-index:999;
+  background:rgba(17,17,17,.95);border:1px solid var(--bor);
+  border-radius:100px;padding:9px 22px;backdrop-filter:blur(12px)}
+.nb{background:none;border:none;color:var(--dim);cursor:pointer;font-size:18px;padding:3px 8px;transition:color .2s;font-family:var(--ff)}
+.nb:hover{color:var(--amb)}
+.dots{display:flex;gap:5px;align-items:center}
+.d{width:4px;height:4px;border-radius:50%;background:var(--bor);cursor:pointer;transition:all .2s}
+.d.on{background:var(--amb);width:16px;border-radius:2px}
+.nc{font-family:var(--mo);font-size:10px;color:var(--dim);min-width:36px;text-align:center}
+.sn{font-family:var(--mo);font-size:9px;letter-spacing:.2em;color:var(--amb);text-transform:uppercase}
+.logo-wm{display:flex;align-items:baseline;line-height:1}
+
+/* S1 COVER */
+#s1{flex-direction:column;align-items:flex-start;justify-content:center;
+  padding:80px 96px;
+  background:radial-gradient(ellipse 45% 60% at 78% 45%,rgba(245,158,11,.08) 0%,transparent 65%),
+  #050505;position:relative}
+#s1 .over{position:relative;z-index:1;font-family:var(--mo);font-size:9px;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;margin-bottom:40px}
+#s1 .logo{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;margin-bottom:48px}
+#s1 .logo .d2{height:.75px;background:var(--bor);width:240px}
+#s1 h1{position:relative;z-index:1;font-size:clamp(48px,7vw,88px);font-weight:800;letter-spacing:-.045em;line-height:1;margin-bottom:24px}
+#s1 h1 em{font-style:normal;color:var(--amb)}
+#s1 .sub{position:relative;z-index:1;font-size:15px;font-weight:300;color:var(--mut);max-width:480px;line-height:1.7;border-left:2px solid var(--bor);padding-left:20px}
+#s1 .corner{position:absolute;bottom:56px;right:96px;z-index:1;text-align:right}
+#s1 .cn{font-family:var(--mo);font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+
+/* S2 SOBRE */
+#s2{align-items:center;justify-content:center;padding:80px;background:var(--sur)}
+.s2i{max-width:960px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.s2-bio h2{font-size:clamp(26px,3.5vw,40px);font-weight:800;letter-spacing:-.035em;margin-bottom:24px}
+.s2-bio h2 em{font-style:normal;color:var(--amb)}
+.s2-bio p{font-size:14px;font-weight:300;color:var(--mut);line-height:1.75;margin-bottom:14px}
+.s2-bio p strong{color:var(--txt);font-weight:700}
+.creds{display:flex;flex-direction:column;gap:1px}
+.cred{background:var(--blk);padding:18px 22px}
+.cred.hl{border-left:2px solid var(--amb)}
+.cred-lbl{font-family:var(--mo);font-size:9px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;margin-bottom:5px}
+.cred-val{font-size:14px;font-weight:700}
+.cred-sub{font-size:12px;font-weight:300;color:var(--mut);margin-top:2px}
+
+/* S3 PROBLEMA */
+#s3{flex-direction:column;align-items:center;justify-content:center;padding:80px;background:var(--blk)}
+.s3i{max-width:840px;width:100%}
+#s3 h2{font-size:clamp(26px,4vw,44px);font-weight:800;letter-spacing:-.035em;margin-bottom:48px}
+#s3 h2 em{font-style:normal;color:var(--red)}
+.pains{display:flex;flex-direction:column;gap:1px}
+.pain{background:var(--sur);padding:24px 32px;display:grid;grid-template-columns:56px 1fr;align-items:start}
+.pain-n{font-family:var(--mo);font-size:28px;font-weight:500;color:var(--bor);line-height:1;margin-top:4px}
+.pain-title{font-size:15px;font-weight:700;margin-bottom:5px}
+.pain-desc{font-size:13px;font-weight:300;color:var(--mut);line-height:1.55}
+
+/* S4 LUNIQ */
+#s4{align-items:center;justify-content:center;padding:80px;background:var(--sur)}
+.s4i{max-width:980px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.s4-left h2{font-size:clamp(26px,3.8vw,44px);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:20px}
+.s4-left h2 em{font-style:normal;color:var(--amb)}
+.s4-left p{font-size:14px;font-weight:300;color:var(--mut);line-height:1.75;margin-bottom:20px}
+.diffs{display:flex;flex-direction:column;gap:1px}
+.df{background:var(--blk);padding:18px 22px;display:flex;gap:14px}
+.df-icon{color:var(--amb);font-size:16px;flex-shrink:0;margin-top:2px}
+.df-txt{font-size:13px;font-weight:300;color:var(--mut);line-height:1.5}
+.df-txt strong{color:var(--txt);font-weight:700}
+
+/* S5 PILARES */
+#s5{flex-direction:column;align-items:center;justify-content:center;padding:80px;background:var(--blk)}
+.s5i{max-width:980px;width:100%}
+#s5 h2{font-size:clamp(24px,3.5vw,38px);font-weight:800;letter-spacing:-.035em;margin-bottom:44px}
+.pilars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px}
+.pil{background:var(--sur);padding:32px 26px;position:relative;overflow:hidden}
+.pil::after{content:attr(data-n);position:absolute;top:18px;right:22px;font-family:var(--mo);font-size:36px;font-weight:500;color:var(--rai);line-height:1}
+.pil-tag{font-family:var(--mo);font-size:9px;letter-spacing:.2em;color:var(--amb);text-transform:uppercase;margin-bottom:10px}
+.pil-name{font-size:16px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.pil-desc{font-size:12px;font-weight:300;color:var(--mut);line-height:1.6}
+.pil-items{margin-top:16px;border-top:1px solid var(--bor);padding-top:14px;display:flex;flex-direction:column;gap:6px}
+.pil-it{font-size:11px;color:var(--dim);display:flex;gap:7px}
+.pil-it::before{content:'--';color:var(--bor);flex-shrink:0;font-family:var(--mo)}
+
+/* S6 METODO */
+#s6{align-items:center;justify-content:center;padding:80px;background:var(--sur)}
+.s6i{max-width:860px;width:100%}
+#s6 h2{font-size:clamp(24px,3.5vw,38px);font-weight:800;letter-spacing:-.035em;margin-bottom:12px}
+.s6-sub{font-size:14px;font-weight:300;color:var(--mut);margin-bottom:40px}
+.steps{display:flex;flex-direction:column;gap:1px}
+.step{background:var(--blk);padding:24px 32px;display:grid;grid-template-columns:72px 1fr;align-items:start}
+.step-n{font-family:var(--mo);font-size:32px;font-weight:500;color:var(--bor);line-height:1}
+.step-title{font-size:15px;font-weight:700;margin-bottom:5px}
+.step-desc{font-size:13px;font-weight:300;color:var(--mut);line-height:1.55}
+.step-dur{font-family:var(--mo);font-size:9px;color:var(--amb);margin-top:8px}
+
+/* S7 PROVA */
+#s7{flex-direction:column;align-items:center;justify-content:center;padding:80px;
+  background:radial-gradient(ellipse 55% 50% at 50% 50%,rgba(245,158,11,.04) 0%,transparent 65%),var(--blk)}
+.s7i{max-width:940px;width:100%}
+#s7 h2{font-size:clamp(24px,3.5vw,38px);font-weight:800;letter-spacing:-.035em;margin-bottom:10px}
+.s7-sub{font-size:14px;font-weight:300;color:var(--mut);margin-bottom:36px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-bottom:20px}
+.kpi{background:var(--sur);padding:26px 22px}
+.kpi-lbl{font-family:var(--mo);font-size:9px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;margin-bottom:9px}
+.kpi-val{font-family:var(--mo);font-size:26px;font-weight:500;line-height:1;margin-bottom:5px}
+.kpi-note{font-size:11px;font-weight:300;color:var(--dim)}
+.kpi-src{font-family:var(--mo);font-size:9px;color:var(--dim);border-top:1px solid var(--bor);padding-top:12px}
+
+/* S8 CTA */
+#s8{flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px;
+  background:radial-gradient(ellipse 55% 60% at 50% 50%,rgba(245,158,11,.09) 0%,transparent 65%),#050505;position:relative}
+#s8 h2{position:relative;z-index:1;font-size:clamp(36px,5.5vw,64px);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:20px}
+#s8 h2 em{font-style:normal;color:var(--amb)}
+#s8 .cta-desc{position:relative;z-index:1;font-size:16px;font-weight:300;color:var(--mut);max-width:480px;margin:0 auto 44px;line-height:1.72}
+.cta-cards{position:relative;z-index:1;display:flex;gap:1px;max-width:760px;width:100%;margin-bottom:40px}
+.cc{background:var(--sur);padding:22px 26px;flex:1;text-align:left}
+.cc-lbl{font-family:var(--mo);font-size:9px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;margin-bottom:7px}
+.cc-val{font-size:13px;font-weight:700}
+.cc-sub{font-size:12px;font-weight:300;color:var(--mut);margin-top:3px}
+.cta-btn{position:relative;z-index:1;background:var(--amb);border:none;color:#0a0a0a;
+  font-family:var(--ff);font-size:14px;font-weight:800;padding:14px 36px;cursor:pointer;letter-spacing:.03em}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- S1 COVER -->
+<section class="slide dg on" id="s1">
+  <div class="over">Luniq Inteligencia Financeira &middot; Apresentacao Comercial &middot; 2026</div>
+  <div class="logo">
+    <div class="logo-wm">
+      <span style="font-size:52px;font-weight:800;color:#f59e0b;letter-spacing:-.04em">L</span>
+      <span style="font-size:52px;font-weight:800;color:#fff;letter-spacing:-.04em">UNIQ</span>
+    </div>
+    <div class="d2"></div>
+    <span style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.22em;color:#1e1e1e;text-transform:uppercase">INTELIGENCIA FINANCEIRA</span>
+  </div>
+  <h1>Gest&atilde;o com<br><em>intelig&ecirc;ncia.</em><br>Resultado com<br><em>clareza.</em></h1>
+  <div class="sub">Consultoria financeira, gest&atilde;o operacional e intelig&ecirc;ncia de dados &mdash; no formato que faz sentido para o seu neg&oacute;cio.</div>
+  <div class="corner">
+    <div class="cn">Anderson Almeida</div>
+    <div class="cn" style="margin-top:3px">Adm. Empresas &middot; MBA x3 &middot; FP&amp;A</div>
+    <div class="cn" style="margin-top:3px">Head of Operations &amp; Finance</div>
+  </div>
+</section>
+
+<!-- S2 SOBRE -->
+<section class="slide" id="s2">
+  <div class="s2i">
+    <div class="s2-bio">
+      <div class="sn" style="margin-bottom:20px">02 / 08 &middot; Sobre</div>
+      <h2>Quem est&aacute;<br><em>por tr&aacute;s.</em></h2>
+      <p><strong>Anderson Almeida</strong> &eacute; administrador de empresas com MBAs em Gest&atilde;o de Neg&oacute;cios, Marketing e Vendas &mdash; e mais de uma d&eacute;cada no centro de opera&ccedil;&otilde;es financeiras em empresas que sa&iacute;ram do zero para refer&ecirc;ncia nacional.</p>
+      <p>N&atilde;o &eacute; um consultor que aprendeu em livro. &Eacute; um gestor que aprendeu <strong>construindo</strong> &mdash; estruturando DRE, budget, forecast, processos e BI em opera&ccedil;&otilde;es reais, sob press&atilde;o real, pr&oacute;ximo ao C-Level. A Luniq traduz esse ac&uacute;mulo em m&eacute;todo.</p>
+    </div>
+    <div class="creds">
+      <div class="cred hl"><div class="cred-lbl">Especialidade</div><div class="cred-val">FP&amp;A &middot; Budget &amp; Forecast &middot; BI</div><div class="cred-sub">Gestao Financeira &middot; Inteligencia de Dados</div></div>
+      <div class="cred"><div class="cred-lbl">Formacao</div><div class="cred-val">Administracao de Empresas</div><div class="cred-sub">MBA Gestao &middot; MBA Marketing &middot; MBA Vendas &middot; MBA Controladoria</div></div>
+      <div class="cred"><div class="cred-lbl">Experiencia setorial</div><div class="cred-val">EdTech &middot; Educacao Digital</div><div class="cred-sub">Operacoes do zero ate escala nacional</div></div>
+      <div class="cred"><div class="cred-lbl">Cargo atual</div><div class="cred-val">Head of Operations &amp; Finance</div><div class="cred-sub">Brasilia, DF &middot; Atendimento presencial e remoto</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- S3 PROBLEMA -->
+<section class="slide" id="s3">
+  <div class="s3i">
+    <div class="sn" style="margin-bottom:20px">03 / 08 &middot; O Problema</div>
+    <h2>Empresas crescem.<br>Estrutura financeira, <em>nao.</em></h2>
+    <div class="pains">
+      <div class="pain"><div class="pain-n">01</div><div><div class="pain-title">Crescimento sem controle financeiro</div><div class="pain-desc">A empresa cresce em receita, mas o gestor nao sabe onde esta perdendo margem. DRE, fluxo e orcamento vivem separados &mdash; quando existem.</div></div></div>
+      <div class="pain"><div class="pain-n">02</div><div><div class="pain-title">Operacao que escala sem processo</div><div class="pain-desc">Times crescem, responsabilidades se diluem. O que funcionava com 5 pessoas trava com 20. Sem indicadores, sem rotina, sem visibilidade.</div></div></div>
+      <div class="pain"><div class="pain-n">03</div><div><div class="pain-title">Dados existem. Clareza, nao.</div><div class="pain-desc">As informacoes estao la &mdash; dispersas em planilhas, sem integracao, sem painel. Decisoes sao tomadas na intuicao, nao em dados.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- S4 LUNIQ -->
+<section class="slide" id="s4">
+  <div class="s4i">
+    <div class="s4-left">
+      <div class="sn" style="margin-bottom:20px">04 / 08 &middot; A Luniq</div>
+      <h2>O metodo de<br>quem esteve<br><em>dentro.</em></h2>
+      <p>A Luniq nao e uma consultoria generica. E a aplicacao pratica de mais de uma decada no centro de operacoes financeiras &mdash; de quem ja viveu M&amp;A, turnarounds, reestruturacao e crescimento acelerado.</p>
+    </div>
+    <div class="diffs">
+      <div class="df"><span class="df-icon">&#9670;</span><div class="df-txt"><strong>Experiencia vivida, nao teorica</strong> &mdash; Anderson construiu o que consulta. Sabe o que funciona quando a pressao e real e o resultado nao pode esperar.</div></div>
+      <div class="df"><span class="df-icon">&#9670;</span><div class="df-txt"><strong>Metodo antes de ferramenta</strong> &mdash; O problema de gestao vem antes da escolha de software. A Luniq estrutura o processo antes de automatizar qualquer coisa.</div></div>
+      <div class="df"><span class="df-icon">&#9670;</span><div class="df-txt"><strong>Dados como argumento</strong> &mdash; Toda recomendacao e ancorada em numero verificado. Sem opiniao sem dado. Sem dado sem fonte.</div></div>
+      <div class="df"><span class="df-icon">&#9670;</span><div class="df-txt"><strong>Transferencia de metodo</strong> &mdash; O objetivo nao e dependencia. E capacitar o time interno para operar com inteligencia depois que a Luniq sai.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- S5 PILARES -->
+<section class="slide" id="s5">
+  <div class="s5i">
+    <div class="sn" style="margin-bottom:20px">05 / 08 &middot; Servicos</div>
+    <h2>Tres pilares. Um metodo.</h2>
+    <div class="pilars">
+      <div class="pil" data-n="01"><div class="pil-tag">Pilar 01</div><div class="pil-name">Consultoria Financeira</div><div class="pil-desc">Diagnostico, modelagem e estruturacao financeira. FP&amp;A, Budget, DRE e fluxo com visibilidade real.</div><div class="pil-items"><div class="pil-it">FP&amp;A e Budget &amp; Forecast</div><div class="pil-it">DRE, Caixa e Margens</div><div class="pil-it">Diagnostico e reestruturacao</div><div class="pil-it">Suporte a decisao executiva</div></div></div>
+      <div class="pil" data-n="02"><div class="pil-tag">Pilar 02</div><div class="pil-name">Gestao Operacional</div><div class="pil-desc">Estrutura para empresas que cresceram rapido e precisam de processo para sustentar o crescimento.</div><div class="pil-items"><div class="pil-it">Mapeamento de processos</div><div class="pil-it">Indicadores e OKRs</div><div class="pil-it">Estruturacao de times</div><div class="pil-it">Rotinas de gestao</div></div></div>
+      <div class="pil" data-n="03"><div class="pil-tag">Pilar 03</div><div class="pil-name">BI Financeiro</div><div class="pil-desc">Da planilha ao painel. Dados financeiros que gestores conseguem usar para decidir, sem defasagem.</div><div class="pil-items"><div class="pil-it">Paineis financeiros integrados</div><div class="pil-it">Automacao de relatorios</div><div class="pil-it">Fonte unica de verdade</div><div class="pil-it">Visualizacao em tempo real</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- S6 METODO -->
+<section class="slide" id="s6">
+  <div class="s6i">
+    <div class="sn" style="margin-bottom:20px">06 / 08 &middot; Como funciona</div>
+    <h2>Do diagnostico ao resultado.</h2>
+    <p class="s6-sub">Todo projeto Luniq segue 4 etapas &mdash; com metricas definidas antes de comecar.</p>
+    <div class="steps">
+      <div class="step"><div class="step-n">01</div><div><div class="step-title">Diagnostico financeiro e operacional</div><div class="step-desc">Levantamento completo: DRE, fluxo, processos-chave, gaps de dados e de gestao. Sem pular etapas.</div><div class="step-dur">2 semanas</div></div></div>
+      <div class="step"><div class="step-n">02</div><div><div class="step-title">Modelagem e plano de acao</div><div class="step-desc">Modelo financeiro, indicadores prioritarios e plano de intervencao com metricas de sucesso definidas.</div><div class="step-dur">2 semanas</div></div></div>
+      <div class="step"><div class="step-n">03</div><div><div class="step-title">Implementacao e estruturacao</div><div class="step-desc">Execucao do plano: processos, rotinas, paineis de BI e treinamento do time.</div><div class="step-dur">60&ndash;90 dias</div></div></div>
+      <div class="step"><div class="step-n">04</div><div><div class="step-title">Acompanhamento e transferencia</div><div class="step-desc">Monitoramento, ajustes e transferencia do metodo para o time interno. O cliente opera sozinho no final.</div><div class="step-dur">30&ndash;60 dias</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- S7 PROVA -->
+<section class="slide" id="s7">
+  <div class="s7i">
+    <div class="sn" style="margin-bottom:20px">07 / 08 &middot; Prova de Capacidade</div>
+    <h2>O que a Luniq constroi para si,<br>constroi para voce.</h2>
+    <p class="s7-sub">O painel Luniq e um exemplo concreto &mdash; 6 modulos integrados constru&iacute;dos por Anderson para uso real, com dados reais, decisoes reais.</p>
+    <div class="kpis">
+      <div class="kpi"><div class="kpi-lbl">Receita rastreada</div><div class="kpi-val" style="color:var(--grn)">R$ 1,5M</div><div class="kpi-note">YTD JAN&ndash;ABR 2026</div></div>
+      <div class="kpi"><div class="kpi-lbl">Margem Bruta</div><div class="kpi-val" style="color:var(--grn)">52,3%</div><div class="kpi-note">Lucro bruto: R$ 784k</div></div>
+      <div class="kpi"><div class="kpi-lbl">Modulos ativos</div><div class="kpi-val" style="color:var(--amb)">6</div><div class="kpi-note">Home, Fluxo, Orcamento, DRE +</div></div>
+      <div class="kpi"><div class="kpi-lbl">Defasagem</div><div class="kpi-val" style="color:var(--grn)">0 min</div><div class="kpi-note">Dados ao vivo</div></div>
+      <div class="kpi"><div class="kpi-lbl">Exportacoes manuais</div><div class="kpi-val" style="color:var(--grn)">Zero</div><div class="kpi-note">100% automatizado</div></div>
+      <div class="kpi"><div class="kpi-lbl">Construido por</div><div class="kpi-val" style="color:var(--mut);font-size:18px">Anderson</div><div class="kpi-note">Do zero, para uso real</div></div>
+    </div>
+    <div class="kpi-src">Dados verificados &middot; Painel em operacao &middot; Stack: React + Vite + Recharts</div>
+  </div>
+</section>
+
+<!-- S8 CTA -->
+<section class="slide dg" id="s8">
+  <div class="sn" style="position:relative;z-index:1;margin-bottom:24px">08 / 08</div>
+  <h2 style="position:relative;z-index:1">Pronto para<br>gest&atilde;o com<br><em>intelig&ecirc;ncia?</em></h2>
+  <p class="cta-desc">A Luniq atende empresas que precisam transformar complexidade financeira e operacional em decisoes estrategicas claras. O primeiro passo e o diagnostico.</p>
+  <div class="cta-cards">
+    <div class="cc"><div class="cc-lbl">Consultor</div><div class="cc-val">Anderson Almeida</div><div class="cc-sub">Adm. Empresas &middot; MBA x3 &middot; FP&amp;A &middot; Head Ops &amp; Finance</div></div>
+    <div class="cc"><div class="cc-lbl">Primeiro passo</div><div class="cc-val">Diagnostico gratuito</div><div class="cc-sub">2 semanas &middot; sem compromisso</div></div>
+    <div class="cc"><div class="cc-lbl">LinkedIn</div><div class="cc-val">adm-andersonalmeida</div><div class="cc-sub">Brasilia, DF &middot; Todo o Brasil</div></div>
+  </div>
+  <button class="cta-btn">Entrar em contato</button>
+</section>
+
+</div>
+<nav class="nav">
+  <button class="nb" id="prev">&larr;</button>
+  <div class="dots" id="dots"></div>
+  <span class="nc" id="nc">1 / 8</span>
+  <button class="nb" id="next">&rarr;</button>
+</nav>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var n=slides.length,cur=0;
+  var dotsEl=document.getElementById('dots'),nc=document.getElementById('nc');
+  for(var i=0;i<n;i++){var d=document.createElement('div');d.className='d'+(i===0?' on':'');d.dataset.i=i;d.addEventListener('click',function(){go(+this.dataset.i)});dotsEl.appendChild(d);}
+  function go(i){slides[cur].classList.remove('on');document.querySelectorAll('.d')[cur].classList.remove('on');cur=(i+n)%n;slides[cur].classList.add('on');document.querySelectorAll('.d')[cur].classList.add('on');nc.textContent=(cur+1)+' / '+n;}
+  document.getElementById('prev').addEventListener('click',function(){go(cur-1)});
+  document.getElementById('next').addEventListener('click',function(){go(cur+1)});
+  document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);});
+  document.querySelector('.deck').addEventListener('click',function(e){if(e.target.closest('.nav'))return;go(cur+1);});
+})();
+</script>
+</body>
+</html>

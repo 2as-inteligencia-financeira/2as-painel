@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luniq — Logo Showcase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/brand-studio/assets/theme.css" />
+  <style>
+    body { background: var(--bg); font-family: var(--sans); }
+
+    /* ── NAV ── */
+    .top-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 56px; background: #050505; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 99;
+    }
+    .top-nav-logo { display: flex; align-items: baseline; }
+    .top-nav-logo .l { font-size: 20px; font-weight: 800; color: var(--amber); letter-spacing: -.04em; }
+    .top-nav-logo .u { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -.04em; }
+    .top-nav a { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; color: #666; text-transform: uppercase; text-decoration: none; transition: color .2s; }
+    .top-nav a:hover { color: var(--amber); }
+
+    /* ── HERO ── */
+    .hero-strip {
+      padding: 56px 56px 48px; border-bottom: 1px solid var(--border);
+      background: #050505;
+    }
+    .hero-tag { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; color: var(--amber); text-transform: uppercase; margin-bottom: 12px; }
+    .hero-h { font-size: clamp(28px,4vw,48px); font-weight: 800; letter-spacing: -.04em; margin-bottom: 10px; color: var(--text); }
+    .hero-desc { font-size: 14px; font-weight: 300; color: #888; max-width: 560px; line-height: 1.7; }
+
+    /* ── GRADE LOGOS ── */
+    .logos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+
+    .logo-cell { display: flex; flex-direction: column; }
+    .logo-face {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 72px 56px; min-height: 260px;
+    }
+    .logo-meta {
+      padding: 20px 32px; display: flex; flex-direction: column; gap: 4px;
+      border-top: 1px solid var(--border);
+    }
+    .logo-meta-name { font-size: 12px; font-weight: 700; color: var(--text); }
+    .logo-meta-use { font-family: var(--mono); font-size: 10px; color: #666; letter-spacing: .06em; margin-top: 2px; }
+
+    /* ── WORDMARK INLINE ── */
+    .wm { display: flex; flex-direction: column; gap: 9px; }
+    .wm-line { display: flex; align-items: baseline; line-height: 1; }
+    .wm-l { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 56px; font-weight: 800; letter-spacing: -.04em; }
+    .wm-u { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 56px; font-weight: 800; letter-spacing: -.04em; }
+    .wm-div { height: .75px; min-width: 240px; }
+    .wm-desc { font-family: var(--mono); font-size: 8.5px; letter-spacing: .24em; text-transform: uppercase; }
+
+    /* ── SIZES SECTION ── */
+    .sizes-section {
+      padding: 56px 56px; border-top: 2px solid var(--border);
+      background: #050505;
+    }
+    .sec-tag { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; color: var(--amber); text-transform: uppercase; margin-bottom: 10px; }
+    .sec-title { font-size: 20px; font-weight: 800; letter-spacing: -.025em; color: var(--text); margin-bottom: 36px; }
+    .sizes-list { display: flex; flex-direction: column; gap: 32px; }
+    .size-row { display: flex; align-items: center; gap: 20px; }
+    .size-info { margin-left: 16px; display: flex; flex-direction: column; gap: 2px; }
+    .size-tag { font-family: var(--mono); font-size: 10px; color: #888; letter-spacing: .08em; }
+    .size-use { font-family: var(--mono); font-size: 9px; color: #555; letter-spacing: .06em; }
+
+    /* ── SPECS SECTION ── */
+    .specs-section {
+      padding: 40px 56px 56px; border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .specs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 32px; }
+    .spec-label { font-family: var(--mono); font-size: 9px; letter-spacing: .2em; color: #555; text-transform: uppercase; margin-bottom: 8px; }
+    .spec-val { font-size: 13px; font-weight: 700; color: var(--text); }
+    .spec-sub { font-size: 12px; font-weight: 300; color: #777; margin-top: 3px; }
+
+    /* ── RULES SECTION ── */
+    .rules-section { padding: 48px 56px 64px; border-top: 1px solid var(--border); background: var(--bg); }
+    .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 32px; }
+    .rule { background: var(--surface); padding: 22px 26px; display: grid; grid-template-columns: 20px 1fr; gap: 14px; align-items: start; }
+    .rule-ico { font-size: 12px; margin-top: 1px; }
+    .rule-ok { color: var(--green); }
+    .rule-no { color: var(--red); }
+    .rule-text { font-size: 13px; font-weight: 300; color: #aaa; line-height: 1.55; }
+    .rule-text strong { color: var(--text); font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-logo"><span class="l">L</span><span class="u">UNIQ</span></div>
+  <a href="../index.html">← Voltar ao Hub</a>
+</nav>
+
+<div class="hero-strip">
+  <div class="hero-tag">Referência visual</div>
+  <h1 class="hero-h">Logo Showcase</h1>
+  <p class="hero-desc">Quatro versões da marca, sistema de tamanhos e especificações técnicas para uso correto em qualquer contexto.</p>
+</div>
+
+<!-- Grade das 4 versões -->
+<div class="logos-grid">
+
+  <!-- 01 Escuro -->
+  <div class="logo-cell">
+    <div class="logo-face" style="background:#0a0a0a">
+      <div class="wm">
+        <div class="wm-line">
+          <span class="wm-l" style="color:#f59e0b">L</span>
+          <span class="wm-u" style="color:#ffffff">UNIQ</span>
+        </div>
+        <div class="wm-div" style="background:#1c1c1c"></div>
+        <span class="wm-desc" style="color:#3a3a3a">INTELIGENCIA FINANCEIRA</span>
+      </div>
+    </div>
+    <div class="logo-meta" style="background:#050505">
+      <span class="logo-meta-name">Versão principal — fundo escuro</span>
+      <span class="logo-meta-use">Site · Apresentações · Painel · LinkedIn</span>
+    </div>
+  </div>
+
+  <!-- 02 Claro -->
+  <div class="logo-cell">
+    <div class="logo-face" style="background:#f5f5f2">
+      <div class="wm">
+        <div class="wm-line">
+          <span class="wm-l" style="color:#f59e0b">L</span>
+          <span class="wm-u" style="color:#0a0a0a">UNIQ</span>
+        </div>
+        <div class="wm-div" style="background:#ddddd8"></div>
+        <span class="wm-desc" style="color:#aaaaaa">INTELIGENCIA FINANCEIRA</span>
+      </div>
+    </div>
+    <div class="logo-meta" style="background:#eaeae6; border-top-color:#ddddd8">
+      <span class="logo-meta-name" style="color:#1a1a1a">Versão clara — fundo branco</span>
+      <span class="logo-meta-use" style="color:#666">Cartão de visita · Proposta · Papel timbrado</span>
+    </div>
+  </div>
+
+  <!-- 03 Transparente escuro -->
+  <div class="logo-cell">
+    <div class="logo-face" style="background:linear-gradient(135deg,#111,#0d0d0d)">
+      <div class="wm">
+        <div class="wm-line">
+          <span class="wm-l" style="color:#f59e0b">L</span>
+          <span class="wm-u" style="color:#ffffff">UNIQ</span>
+        </div>
+        <div class="wm-div" style="background:#1e1e1e"></div>
+        <span class="wm-desc" style="color:#383838">INTELIGENCIA FINANCEIRA</span>
+      </div>
+    </div>
+    <div class="logo-meta" style="background:#050505">
+      <span class="logo-meta-name">Transparente — texto claro</span>
+      <span class="logo-meta-use">Qualquer fundo escuro ou neutro</span>
+    </div>
+  </div>
+
+  <!-- 04 Transparente claro -->
+  <div class="logo-cell">
+    <div class="logo-face" style="background:linear-gradient(135deg,#ede9e4,#e4e0da)">
+      <div class="wm">
+        <div class="wm-line">
+          <span class="wm-l" style="color:#f59e0b">L</span>
+          <span class="wm-u" style="color:#0a0a0a">UNIQ</span>
+        </div>
+        <div class="wm-div" style="background:#ccc8c2"></div>
+        <span class="wm-desc" style="color:#999590">INTELIGENCIA FINANCEIRA</span>
+      </div>
+    </div>
+    <div class="logo-meta" style="background:#eaeae6; border-top-color:#ddddd8">
+      <span class="logo-meta-name" style="color:#1a1a1a">Transparente — texto escuro</span>
+      <span class="logo-meta-use" style="color:#666">Qualquer fundo claro ou neutro</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Sistema de tamanhos -->
+<div class="sizes-section">
+  <div class="sec-tag">Sistema de tamanhos</div>
+  <div class="sec-title">Escala de uso por contexto</div>
+  <div class="sizes-list">
+
+    <div class="size-row">
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:40px;font-weight:800;color:#f59e0b;letter-spacing:-.04em;line-height:1">L</span>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:40px;font-weight:800;color:#fff;letter-spacing:-.04em;line-height:1">UNIQ</span>
+      <span style="width:.75px;height:32px;background:#222;display:inline-block;margin:0 6px"></span>
+      <span style="font-family:var(--mono);font-size:8px;letter-spacing:.2em;color:#333;text-transform:uppercase">INTELIGENCIA FINANCEIRA</span>
+      <div class="size-info">
+        <span class="size-tag">40px — site hero</span>
+        <span class="size-use">Capas, banners, topo de página</span>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#f59e0b;letter-spacing:-.04em;line-height:1">L</span>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#fff;letter-spacing:-.04em;line-height:1">UNIQ</span>
+      <span style="width:.75px;height:22px;background:#222;display:inline-block;margin:0 5px"></span>
+      <span style="font-family:var(--mono);font-size:7px;letter-spacing:.18em;color:#333;text-transform:uppercase">INTELIGENCIA FINANCEIRA</span>
+      <div class="size-info">
+        <span class="size-tag">28px — navbar / header</span>
+        <span class="size-use">Painel, apresentações, e-mail</span>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;color:#f59e0b;letter-spacing:-.03em;line-height:1">L</span>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1">UNIQ</span>
+      <div class="size-info" style="margin-left:10px">
+        <span class="size-tag">18px — rodapé / assinatura</span>
+        <span class="size-use">Documentos, propostas, materiais impressos</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Especificações técnicas -->
+<div class="specs-section">
+  <div class="sec-tag">Especificações técnicas</div>
+  <div class="specs-grid">
+    <div>
+      <div class="spec-label">Tipografia</div>
+      <div class="spec-val">Plus Jakarta Sans</div>
+      <div class="spec-sub">Weight 800 · ExtraBold</div>
+    </div>
+    <div>
+      <div class="spec-label">L — acento âmbar</div>
+      <div class="spec-val" style="color:var(--amber)">#F59E0B</div>
+      <div class="spec-sub">Amber 500 (Tailwind)</div>
+    </div>
+    <div>
+      <div class="spec-label">Descritor</div>
+      <div class="spec-val">DM Mono 400</div>
+      <div class="spec-sub">8.5px · letter-spacing .24em</div>
+    </div>
+    <div>
+      <div class="spec-label">Estrutura</div>
+      <div class="spec-val">Wordmark + divider</div>
+      <div class="spec-sub">Linha hairline .75px + descritor abaixo</div>
+    </div>
+  </div>
+</div>
+
+<!-- Regras de uso -->
+<div class="rules-section">
+  <div class="sec-tag">Regras de uso</div>
+  <div class="sec-title">O que fazer — e o que não fazer</div>
+  <div class="rules-grid">
+    <div class="rule"><span class="rule-ico rule-ok">✓</span><div class="rule-text"><strong>Use a versão correta para o fundo.</strong> Escuro em fundos escuros, claro em fundos claros. Nunca força a versão errada.</div></div>
+    <div class="rule"><span class="rule-ico rule-no">✕</span><div class="rule-text"><strong>Não altere as cores da marca.</strong> O L é sempre âmbar (#F59E0B). O UNIQ é sempre branco ou preto — nunca outra cor.</div></div>
+    <div class="rule"><span class="rule-ico rule-ok">✓</span><div class="rule-text"><strong>Respeite o espaço mínimo.</strong> Margem mínima ao redor da logo equivale à altura da letra L.</div></div>
+    <div class="rule"><span class="rule-ico rule-no">✕</span><div class="rule-text"><strong>Não distorça ou redimensione de forma desproporcional.</strong> Sempre escale mantendo a proporção original.</div></div>
+    <div class="rule"><span class="rule-ico rule-ok">✓</span><div class="rule-text"><strong>Use o descritor quando houver espaço.</strong> "INTELIGENCIA FINANCEIRA" reforça o posicionamento em qualquer contexto formal.</div></div>
+    <div class="rule"><span class="rule-ico rule-no">✕</span><div class="rule-text"><strong>Não coloque efeitos na marca.</strong> Sem sombra, gradiente, contorno ou transparência sobre a logo principal.</div></div>
+  </div>
+</div>
+
+</body>
+</html>

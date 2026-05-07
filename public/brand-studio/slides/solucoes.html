@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luniq — Soluções</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/brand-studio/assets/theme.css" />
+  <style>
+    body { background: var(--bg); font-family: var(--sans); color: var(--text); }
+
+    /* ── NAV ── */
+    .top-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 56px; background: #050505; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 99;
+    }
+    .top-nav-logo { display: flex; align-items: baseline; }
+    .top-nav-logo .l { font-size: 20px; font-weight: 800; color: var(--amber); letter-spacing: -.04em; }
+    .top-nav-logo .u { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -.04em; }
+    .top-nav a { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; color: #666; text-transform: uppercase; text-decoration: none; transition: color .2s; }
+    .top-nav a:hover { color: var(--amber); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 72px 56px 64px; border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(ellipse 45% 65% at 85% 45%, rgba(245,158,11,.07) 0%, transparent 65%),
+        #050505;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(30,30,30,.6) 1px, transparent 1px);
+      background-size: 28px 28px; pointer-events: none;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero-tag { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; color: var(--amber); text-transform: uppercase; margin-bottom: 16px; }
+    .hero h1 { font-size: clamp(36px,5.5vw,64px); font-weight: 800; letter-spacing: -.04em; line-height: 1.05; margin-bottom: 18px; }
+    .hero h1 em { font-style: normal; color: var(--amber); }
+    .hero-desc { font-size: 15px; font-weight: 300; color: #888; max-width: 580px; line-height: 1.75; }
+
+    /* ── SECTIONS ── */
+    .wrap { padding: 0 56px 80px; }
+    .section-block { padding-top: 64px; }
+    .section-tag { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; color: var(--amber); text-transform: uppercase; margin-bottom: 8px; }
+    .section-title { font-size: 22px; font-weight: 800; letter-spacing: -.025em; color: var(--text); margin-bottom: 6px; }
+    .section-sub { font-size: 13px; font-weight: 300; color: #777; margin-bottom: 28px; line-height: 1.6; max-width: 680px; }
+
+    /* ── PILLAR CARDS ── */
+    .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; }
+    .pillar {
+      background: var(--surface); padding: 36px 28px;
+      display: flex; flex-direction: column; gap: 12px;
+      position: relative; overflow: hidden;
+    }
+    .pillar::after {
+      content: attr(data-n);
+      position: absolute; top: 20px; right: 24px;
+      font-family: var(--mono); font-size: 40px; font-weight: 500;
+      color: var(--surface-2); line-height: 1;
+    }
+    .pillar-badge {
+      display: inline-flex; background: rgba(245,158,11,.1);
+      border: 1px solid rgba(245,158,11,.2);
+      padding: 4px 10px; border-radius: 2px;
+      font-family: var(--mono); font-size: 9px; letter-spacing: .16em;
+      color: var(--amber); text-transform: uppercase;
+      width: fit-content;
+    }
+    .pillar-name { font-size: 18px; font-weight: 800; letter-spacing: -.02em; color: var(--text); }
+    .pillar-desc { font-size: 13px; font-weight: 300; color: #888; line-height: 1.65; }
+    .pillar-div { height: 1px; background: var(--border); }
+    .pillar-when { font-size: 12px; font-weight: 300; color: #777; line-height: 1.55; }
+    .pillar-when strong { color: #aaa; font-weight: 700; }
+    .pillar-items { display: flex; flex-direction: column; gap: 7px; }
+    .pillar-item { font-size: 12px; color: #666; display: flex; gap: 8px; line-height: 1.4; }
+    .pillar-item::before { content: '—'; color: var(--border); flex-shrink: 0; font-family: var(--mono); }
+
+    /* ── COMBOS ── */
+    .combo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; }
+    .combo { background: var(--surface); padding: 28px 24px; position: relative; }
+    .combo-name { font-size: 15px; font-weight: 800; letter-spacing: -.02em; color: var(--text); margin-bottom: 10px; }
+    .combo-comp { font-family: var(--mono); font-size: 10px; color: var(--amber); letter-spacing: .1em; margin-bottom: 14px; }
+    .combo-goal { font-size: 13px; font-weight: 300; color: #888; line-height: 1.6; }
+    .combo-tag { display: inline-flex; background: var(--surface-2); padding: 3px 9px; border-radius: 2px; font-family: var(--mono); font-size: 9px; color: #555; letter-spacing: .1em; margin-top: 12px; }
+
+    /* ── CRITERION TABLE ── */
+    .crit-rows { display: flex; flex-direction: column; gap: 1px; }
+    .crit-row {
+      background: var(--surface); padding: 22px 28px;
+      display: grid; grid-template-columns: 160px 1fr 1fr;
+      gap: 24px; align-items: start;
+    }
+    .crit-type { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; color: var(--amber); text-transform: uppercase; padding-top: 2px; }
+    .crit-when { font-size: 13px; font-weight: 300; color: #888; line-height: 1.55; }
+    .crit-when strong { color: var(--text); font-weight: 700; }
+    .crit-result { font-size: 12px; font-weight: 300; color: #666; line-height: 1.55; border-left: 1px solid var(--border); padding-left: 24px; }
+
+    /* ── FOOTER ── */
+    .foot { border-top: 1px solid var(--border); padding: 24px 56px; display: flex; align-items: center; justify-content: space-between; margin-top: 32px; }
+    .foot a { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; color: #555; text-transform: uppercase; text-decoration: none; transition: color .2s; }
+    .foot a:hover { color: var(--amber); }
+    .foot-note { font-family: var(--mono); font-size: 9px; color: #333; letter-spacing: .1em; }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-logo"><span class="l">L</span><span class="u">UNIQ</span></div>
+  <a href="../index.html">← Voltar ao Hub</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Portfólio · Luniq Inteligência Financeira</div>
+  <h1>Três formatos.<br><em>Um método.</em></h1>
+  <p class="hero-desc">A Luniq entrega inteligência financeira em três formatos complementares — que podem ser contratados isoladamente ou combinados conforme a maturidade e necessidade de cada empresa.</p>
+</div>
+
+<div class="wrap">
+
+  <!-- OS TRÊS PILARES -->
+  <div class="section-block">
+    <div class="section-tag">01 · Formatos de entrega</div>
+    <div class="section-title">SaaS · CFO as a Service · BPO Financeiro</div>
+    <p class="section-sub">Cada formato responde a um tipo diferente de necessidade — de visibilidade a execução, de dados a decisão.</p>
+    <div class="pillar-grid">
+
+      <div class="pillar" data-n="01">
+        <div class="pillar-badge">SaaS</div>
+        <div class="pillar-name">Painel + Inteligência</div>
+        <p class="pillar-desc">O Painel Luniq entrega visibilidade financeira e operacional em tempo real — integrado, automatizado e pronto para uso sem exportação manual.</p>
+        <div class="pillar-div"></div>
+        <p class="pillar-when"><strong>Para quem:</strong> empresa que já tem time, precisa de clareza sobre os números e quer substituir planilhas por inteligência de dados.</p>
+        <div class="pillar-items">
+          <div class="pillar-item">9 módulos integrados</div>
+          <div class="pillar-item">39 fontes de dados conectadas</div>
+          <div class="pillar-item">DRE, caixa, margem e governança</div>
+          <div class="pillar-item">Relatórios em PDF automatizados</div>
+          <div class="pillar-item">Stack: React 19 + Google Sheets API</div>
+        </div>
+      </div>
+
+      <div class="pillar" data-n="02">
+        <div class="pillar-badge">CFO as a Service</div>
+        <div class="pillar-name">Gestão Estratégica</div>
+        <p class="pillar-desc">Anderson atua como CFO da empresa — sem a estrutura de CLT. Presença semanal, decisões estratégicas acompanhadas, prioridades financeiras definidas.</p>
+        <div class="pillar-div"></div>
+        <p class="pillar-when"><strong>Para quem:</strong> diretoria que precisa de apoio frequente e experiente para decidir com segurança — sem contratar um CFO sênior full-time.</p>
+        <div class="pillar-items">
+          <div class="pillar-item">Ritual semanal com diretoria</div>
+          <div class="pillar-item">Cenários e simulações contínuas</div>
+          <div class="pillar-item">Plano trimestral de performance</div>
+          <div class="pillar-item">Decisões críticas acompanhadas</div>
+          <div class="pillar-item">Disponibilidade executiva</div>
+        </div>
+      </div>
+
+      <div class="pillar" data-n="03">
+        <div class="pillar-badge">BPO Financeiro</div>
+        <div class="pillar-name">Operação Assistida</div>
+        <p class="pillar-desc">A Luniq assume e estrutura a rotina operacional financeira da empresa — fechamento, governança, processos e controles que o time interno não consegue manter sozinho.</p>
+        <div class="pillar-div"></div>
+        <p class="pillar-when"><strong>Para quem:</strong> empresa que cresceu rápido e não tem processos financeiros estruturados — precisa de execução, não só de consultoria.</p>
+        <div class="pillar-items">
+          <div class="pillar-item">Fechamento e rotina financeira</div>
+          <div class="pillar-item">Governança e controles internos</div>
+          <div class="pillar-item">Padronização de processos</div>
+          <div class="pillar-item">Evolução do time interno</div>
+          <div class="pillar-item">Relatórios e indicadores recorrentes</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMBOS -->
+  <div class="section-block">
+    <div class="section-tag">02 · Combinações de oferta</div>
+    <div class="section-title">Formatos que se complementam</div>
+    <p class="section-sub">Os três pilares funcionam juntos. A composição certa depende do momento e do objetivo da empresa.</p>
+    <div class="combo-grid">
+      <div class="combo">
+        <div class="combo-name">Growth Control</div>
+        <div class="combo-comp">SaaS + BPO</div>
+        <p class="combo-goal">Para empresas que precisam organizar a base rapidamente e ganhar controle financeiro real — com visibilidade e execução operando juntas.</p>
+        <span class="combo-tag">Controle + visibilidade</span>
+      </div>
+      <div class="combo">
+        <div class="combo-name">Executive Control</div>
+        <div class="combo-comp">SaaS + CFOaaS</div>
+        <p class="combo-goal">Para empresas que já têm operação razoável e precisam elevar a qualidade da decisão estratégica — dados acionáveis com leitura executiva semanal.</p>
+        <span class="combo-tag">Dados + decisão</span>
+      </div>
+      <div class="combo">
+        <div class="combo-name">Full Intelligence</div>
+        <div class="combo-comp">SaaS + BPO + CFOaaS</div>
+        <p class="combo-goal">Estrutura completa de inteligência financeira: dados integrados, operação estruturada e presença estratégica — para empresas que querem gestão de classe A.</p>
+        <span class="combo-tag">Estrutura completa</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRITÉRIO DE ESCOLHA -->
+  <div class="section-block">
+    <div class="section-tag">03 · Como escolher</div>
+    <div class="section-title">Critério por formato</div>
+    <p class="section-sub">A escolha do formato certo começa com o diagnóstico da maturidade financeira atual da empresa.</p>
+    <div class="crit-rows">
+      <div class="crit-row">
+        <div class="crit-type">SaaS · Painel</div>
+        <div class="crit-when"><strong>Quando a empresa tem time e precisa de visibilidade e método.</strong> Já existe quem executa — falta inteligência sobre os dados.</div>
+        <div class="crit-result">Entrega: painel integrado, dashboards executivos e relatórios automatizados. Time interno opera com clareza.</div>
+      </div>
+      <div class="crit-row">
+        <div class="crit-type">CFO as a Service</div>
+        <div class="crit-when"><strong>Quando a diretoria precisa de apoio frequente de decisão.</strong> As decisões financeiras são estratégicas e demandam alguém de confiança ao lado.</div>
+        <div class="crit-result">Entrega: Anderson como CFO da empresa — presença semanal, prioridades definidas, decisões acompanhadas.</div>
+      </div>
+      <div class="crit-row">
+        <div class="crit-type">BPO Financeiro</div>
+        <div class="crit-when"><strong>Quando falta execução e rotina financeira estruturada.</strong> O problema não é estratégia — é processo, fechamento e governança que não acontecem.</div>
+        <div class="crit-result">Entrega: operação financeira estruturada, rotinas implantadas e time capacitado para manter sem dependência.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="foot">
+  <a href="./precificacao.html">Ver precificação →</a>
+  <span class="foot-note">Luniq Inteligência Financeira · Anderson Almeida · 2026</span>
+  <a href="../index.html">← Hub</a>
+</footer>
+
+</body>
+</html>

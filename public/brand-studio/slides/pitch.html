@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luniq — Pitch 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/brand-studio/assets/theme.css" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    body { background: var(--bg); font-family: var(--sans); color: var(--text); }
+    .deck { width: 100vw; height: 100vh; position: relative; }
+    .slide { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity .5s ease; overflow: hidden; display: flex; }
+    .slide.on { opacity: 1; pointer-events: all; }
+    .prog { position: fixed; top: 0; left: 0; height: 2px; background: var(--amber); transition: width .4s; z-index: 999; }
+    .dg::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(30,30,30,.7) 1px, transparent 1px); background-size: 28px 28px; }
+    .sn { font-family: var(--mono); font-size: 9px; letter-spacing: .2em; color: var(--amber); text-transform: uppercase; }
+
+    /* nav */
+    .nav { position: fixed; bottom: 28px; right: 36px; z-index: 999; display: flex; align-items: center; gap: 10px; }
+    .nb { background: none; border: 1px solid var(--border); border-radius: 100px; color: #777; cursor: pointer; font-size: 12px; padding: 8px 20px; transition: all .2s; font-family: var(--sans); }
+    .nb:hover { background: var(--amber); border-color: var(--amber); color: #0a0a0a; }
+    .nc { font-family: var(--mono); font-size: 10px; color: #666; }
+
+    /* hub link */
+    .hub-link { position: fixed; top: 24px; left: 32px; z-index: 999; font-family: var(--mono); font-size: 9px; letter-spacing: .14em; color: #666; text-transform: uppercase; text-decoration: none; transition: color .2s; }
+    .hub-link:hover { color: var(--amber); }
+
+    /* P1 COVER */
+    #p1 { display: flex; flex-direction: column; justify-content: center; padding: 80px 96px;
+      background: radial-gradient(ellipse 40% 65% at 82% 50%, rgba(245,158,11,.1) 0%, transparent 65%), #050505; position: relative; }
+    .p1-over { position: relative; z-index: 1; font-family: var(--mono); font-size: 9px; letter-spacing: .22em; color: #555; text-transform: uppercase; margin-bottom: 36px; }
+    .p1-name { position: relative; z-index: 1; font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: .02em; margin-bottom: 10px; }
+    .p1-brand { position: relative; z-index: 1; display: flex; align-items: baseline; line-height: .9; margin-bottom: 16px; }
+    .p1-sub { position: relative; z-index: 1; font-size: clamp(18px,2.8vw,30px); font-weight: 300; color: var(--text); letter-spacing: -.01em; margin-bottom: 44px; }
+    .p1-tag { position: relative; z-index: 1; font-size: clamp(13px,1.6vw,18px); font-weight: 300; color: var(--muted); border-left: 2px solid var(--border); padding-left: 18px; max-width: 440px; line-height: 1.65; }
+    .p1-corner { position: absolute; bottom: 56px; right: 96px; z-index: 1; text-align: right; }
+    .p1-cn { font-family: var(--mono); font-size: 9px; letter-spacing: .12em; color: #666; text-transform: uppercase; }
+
+    /* P2 MERCADO */
+    #p2 { display: flex; flex-direction: column; justify-content: center; padding: 80px 96px; background: var(--surface); }
+    .big { font-size: clamp(72px,14vw,160px); font-weight: 800; letter-spacing: -.07em; line-height: .9; color: var(--surface-2); margin-bottom: 10px; }
+    .big em { color: var(--red); font-style: normal; }
+    .big-ctx { font-size: clamp(16px,2.2vw,24px); font-weight: 300; color: var(--muted); max-width: 520px; line-height: 1.5; margin-bottom: 44px; border-bottom: 1px solid var(--border); padding-bottom: 36px; }
+    .big-ctx strong { color: var(--text); font-weight: 700; }
+    .ps { display: flex; gap: 1px; }
+    .ps-item { background: var(--bg); padding: 22px 24px; flex: 1; border-top: 2px solid var(--red); }
+    .ps-title { font-size: 13px; font-weight: 700; margin-bottom: 5px; color: var(--text); }
+    .ps-desc { font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.5; }
+
+    /* P3 ANDERSON */
+    #p3 { display: flex; background: var(--bg); }
+    #p3 .left { flex: 1; padding: 80px 60px; display: flex; flex-direction: column; justify-content: center;
+      background: radial-gradient(ellipse 60% 60% at 25% 50%, rgba(245,158,11,.06) 0%, transparent 70%); }
+    #p3 .right { flex: 1; padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; gap: 1px; background: var(--surface); }
+    #p3 h2 { font-size: clamp(26px,4vw,44px); font-weight: 800; letter-spacing: -.04em; line-height: 1.1; margin-bottom: 24px; color: var(--text); }
+    #p3 h2 em { font-style: normal; color: var(--amber); }
+    #p3 p { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+    #p3 p strong { color: var(--text); font-weight: 700; }
+    .cr { background: var(--surface-2); padding: 18px 22px; }
+    .cr.hl { border-left: 2px solid var(--amber); }
+    .cr-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; color: #666; text-transform: uppercase; margin-bottom: 5px; }
+    .cr-val { font-size: 14px; font-weight: 700; color: var(--text); }
+    .cr-sub { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 2px; }
+
+    /* P4 PILARES */
+    #p4 { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 80px; background: var(--surface); }
+    .p4i { max-width: 980px; width: 100%; }
+    #p4 h2 { font-size: clamp(24px,3.5vw,40px); font-weight: 800; letter-spacing: -.04em; margin-bottom: 44px; color: var(--text); }
+    #p4 h2 em { font-style: normal; color: var(--amber); }
+    .pl3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; }
+    .pll { background: var(--bg); padding: 32px 26px; position: relative; overflow: hidden; }
+    .pll::after { content: attr(data-n); position: absolute; top: 18px; right: 20px; font-family: var(--mono); font-size: 38px; font-weight: 500; color: var(--surface-2); line-height: 1; }
+    .pll-tag { font-family: var(--mono); font-size: 9px; letter-spacing: .2em; color: var(--amber); text-transform: uppercase; margin-bottom: 10px; }
+    .pll-name { font-size: 16px; font-weight: 800; margin-bottom: 10px; color: var(--text); }
+    .pll-desc { font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.6; }
+    .pll-items { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+    .pll-it { font-size: 11px; color: #666; display: flex; gap: 7px; }
+    .pll-it::before { content: '--'; color: var(--border); flex-shrink: 0; font-family: var(--mono); }
+
+    /* P5 DIFERENCIAIS */
+    #p5 { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 80px; background: var(--bg); }
+    .p5i { max-width: 900px; width: 100%; }
+    #p5 h2 { font-size: clamp(24px,3.5vw,40px); font-weight: 800; letter-spacing: -.04em; margin-bottom: 10px; color: var(--text); }
+    #p5 h2 em { font-style: normal; color: var(--amber); }
+    .p5-sub { font-size: 14px; font-weight: 300; color: var(--muted); margin-bottom: 44px; }
+    .difs { display: flex; flex-direction: column; gap: 1px; }
+    .dif { background: var(--surface); padding: 24px 32px; display: grid; grid-template-columns: 180px 1fr; gap: 32px; align-items: center; }
+    .dif-label { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; color: var(--amber); text-transform: uppercase; }
+    .dif-desc { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.55; }
+    .dif-desc strong { color: var(--text); font-weight: 700; }
+
+    /* P6 CTA */
+    #p6 { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px; position: relative;
+      background: radial-gradient(ellipse 55% 65% at 50% 45%, rgba(245,158,11,.11) 0%, transparent 65%), #050505; }
+    .p6-over { position: relative; z-index: 1; font-family: var(--mono); font-size: 9px; letter-spacing: .22em; color: #555; text-transform: uppercase; margin-bottom: 28px; }
+    #p6 h2 { position: relative; z-index: 1; font-size: clamp(44px,7vw,84px); font-weight: 800; letter-spacing: -.05em; line-height: 1; margin-bottom: 24px; color: var(--text); }
+    #p6 h2 em { font-style: normal; color: var(--amber); }
+    .p6-desc { position: relative; z-index: 1; font-size: 17px; font-weight: 300; color: var(--muted); max-width: 460px; line-height: 1.7; margin-bottom: 48px; }
+    .p6-cards { position: relative; z-index: 1; display: flex; gap: 1px; max-width: 740px; width: 100%; margin-bottom: 40px; }
+    .p6c { background: var(--surface); padding: 22px 24px; flex: 1; text-align: left; }
+    .p6c-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; color: #666; text-transform: uppercase; margin-bottom: 7px; }
+    .p6c-val { font-size: 13px; font-weight: 700; color: var(--text); }
+    .p6c-sub { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 3px; }
+    .p6-btn { position: relative; z-index: 1; background: var(--amber); border: none; color: #0a0a0a; font-family: var(--sans); font-size: 14px; font-weight: 800; padding: 14px 36px; cursor: pointer; letter-spacing: .03em; }
+    .p6-note { position: absolute; bottom: 40px; left: 0; right: 0; text-align: center; font-family: var(--mono); font-size: 9px; color: #555; letter-spacing: .1em; z-index: 1; }
+  </style>
+</head>
+<body>
+<div class="prog" id="prog" style="width:16.67%"></div>
+<a class="hub-link" href="../index.html">← Hub</a>
+<div class="deck">
+
+<!-- P1 COVER -->
+<section class="slide dg on" id="p1">
+  <div class="p1-over">Luniq Inteligência Financeira · 2026</div>
+  <div class="p1-name">Anderson Almeida</div>
+  <div class="p1-brand">
+    <span style="font-size:clamp(80px,13vw,150px);font-weight:800;color:var(--amber);letter-spacing:-.06em;line-height:.9">L</span>
+    <span style="font-size:clamp(80px,13vw,150px);font-weight:800;color:#fff;letter-spacing:-.06em;line-height:.9">UNIQ</span>
+  </div>
+  <div class="p1-sub">Inteligência Financeira</div>
+  <div class="p1-tag">Consultoria. Gestão. Inteligência de dados.<br>Para empresas que crescem com controle.</div>
+  <div class="p1-corner">
+    <div class="p1-cn">Administrador de Empresas</div>
+    <div class="p1-cn" style="margin-top:3px">MBA Gestão · Marketing · Vendas · Controladoria</div>
+    <div class="p1-cn" style="margin-top:3px">FP&A · Budget &amp; Forecast · BI Financeiro</div>
+  </div>
+</section>
+
+<!-- P2 MERCADO -->
+<section class="slide" id="p2">
+  <div class="sn" style="margin-bottom:20px">02 / 06 · O Problema</div>
+  <div class="big"><em>7</em> em 10</div>
+  <p class="big-ctx">empresas crescem sem estrutura financeira e operacional adequada. <strong>Resultado: decisões erradas no momento certo, ou certas tarde demais.</strong></p>
+  <div class="ps">
+    <div class="ps-item"><div class="ps-title">Sem visão financeira integrada</div><div class="ps-desc">DRE, fluxo e orçamento vivem separados. O gestor nunca sabe onde está perdendo margem.</div></div>
+    <div class="ps-item"><div class="ps-title">Operação sem processo</div><div class="ps-desc">Times crescem, responsabilidades se diluem. O que funcionava com 5 trava com 20.</div></div>
+    <div class="ps-item"><div class="ps-title">Dados sem inteligência</div><div class="ps-desc">As informações existem, dispersas. Não há painel, não há rotina, não há decisão em dados.</div></div>
+  </div>
+</section>
+
+<!-- P3 ANDERSON -->
+<section class="slide" id="p3">
+  <div class="left">
+    <div class="sn" style="margin-bottom:20px">03 / 06 · Quem é</div>
+    <h2>A experiência que<br>nenhum livro<br><em>ensina.</em></h2>
+    <p><strong>Anderson Almeida</strong> construiu e liderou estruturas financeiras e operacionais em empresas de EdTech que saíram do zero para referências nacionais no Brasil.</p>
+    <p>Coordenou times, implantou FP&A, estruturou orçamentos e transformou dados dispersos em inteligência acionável — com resultados mensuráveis em cada etapa. <strong>A Luniq não é teoria. É o método forjado na prática.</strong></p>
+  </div>
+  <div class="right">
+    <div class="cr hl"><div class="cr-lbl">Especialidade</div><div class="cr-val">FP&A · Budget &amp; Forecast · BI</div><div class="cr-sub">Gestão Financeira · Inteligência de Dados</div></div>
+    <div class="cr"><div class="cr-lbl">Formação</div><div class="cr-val">Administração · 4 MBAs</div><div class="cr-sub">Gestão · Marketing · Vendas · Controladoria e Finanças</div></div>
+    <div class="cr"><div class="cr-lbl">Experiência</div><div class="cr-val">15 anos de operação real</div><div class="cr-sub">M&A · Turnaround · Reestruturação · Crescimento acelerado</div></div>
+    <div class="cr"><div class="cr-lbl">Cargo atual</div><div class="cr-val">Head of Operations &amp; Finance</div><div class="cr-sub">Brasília, DF · Atendimento em todo o Brasil</div></div>
+  </div>
+</section>
+
+<!-- P4 PILARES -->
+<section class="slide" id="p4">
+  <div class="p4i">
+    <div class="sn" style="margin-bottom:20px">04 / 06 · Serviços</div>
+    <h2>Três pilares. <em>Um método.</em></h2>
+    <div class="pl3">
+      <div class="pll" data-n="01"><div class="pll-tag">Pilar 01</div><div class="pll-name">Consultoria Financeira</div><div class="pll-desc">Diagnóstico, modelagem e estruturação. FP&A, Budget, DRE e fluxo com visibilidade real sobre saúde e margens.</div><div class="pll-items"><div class="pll-it">FP&A e Budget &amp; Forecast</div><div class="pll-it">DRE, Caixa e Margens</div><div class="pll-it">Diagnóstico e reestruturação</div></div></div>
+      <div class="pll" data-n="02"><div class="pll-tag">Pilar 02</div><div class="pll-name">Gestão Operacional</div><div class="pll-desc">Estrutura para empresas que cresceram rápido e precisam de processo para sustentar o crescimento.</div><div class="pll-items"><div class="pll-it">Processos e indicadores</div><div class="pll-it">Estruturação de times</div><div class="pll-it">Rotinas de gestão</div></div></div>
+      <div class="pll" data-n="03"><div class="pll-tag">Pilar 03</div><div class="pll-name">BI Financeiro</div><div class="pll-desc">Da planilha ao painel. Dados financeiros que gestores usam para decidir, sem defasagem, sem esforço manual.</div><div class="pll-items"><div class="pll-it">Painéis integrados</div><div class="pll-it">Automação de fechamentos</div><div class="pll-it">Fonte única de verdade</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- P5 DIFERENCIAIS -->
+<section class="slide" id="p5">
+  <div class="p5i">
+    <div class="sn" style="margin-bottom:16px">05 / 06 · Por que a Luniq</div>
+    <h2>O que nenhuma consultoria<br>genérica <em>entrega.</em></h2>
+    <p class="p5-sub">Quatro diferenciais que só vêm de quem esteve dentro da operação.</p>
+    <div class="difs">
+      <div class="dif"><div class="dif-label">Experiência real</div><div class="dif-desc"><strong>Anderson construiu o que consulta.</strong> Não é teoria. É método testado em operações reais, sob pressão real, com resultado mensurável.</div></div>
+      <div class="dif"><div class="dif-label">Método antes de ferramenta</div><div class="dif-desc">O problema de gestão vem antes da escolha de software. <strong>A Luniq estrutura o processo antes de automatizar qualquer coisa.</strong></div></div>
+      <div class="dif"><div class="dif-label">Dados como argumento</div><div class="dif-desc">Toda recomendação é ancorada em número auditado. <strong>Sem opinião sem dado. Sem dado sem fonte verificada.</strong></div></div>
+      <div class="dif"><div class="dif-label">Transferência de método</div><div class="dif-desc">O objetivo não é dependência. É <strong>capacitar o time interno</strong> para operar com inteligência depois que a Luniq sai.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- P6 CTA -->
+<section class="slide dg" id="p6">
+  <div class="p6-over">Luniq Inteligência Financeira · Anderson Almeida · 2026</div>
+  <h2>Vamos começar<br>pelo <em>diagnóstico.</em></h2>
+  <p class="p6-desc">O primeiro passo é entender a situação real da sua empresa — financeira e operacionalmente. Gratuito. Sem compromisso. Com resultado claro.</p>
+  <div class="p6-cards">
+    <div class="p6c"><div class="p6c-lbl">Consultor</div><div class="p6c-val">Anderson Almeida</div><div class="p6c-sub">Adm. Empresas · 4 MBAs · FP&A · Head Ops &amp; Finance</div></div>
+    <div class="p6c"><div class="p6c-lbl">Primeiro passo</div><div class="p6c-val">Diagnóstico gratuito</div><div class="p6c-sub">2 semanas · sem compromisso</div></div>
+    <div class="p6c"><div class="p6c-lbl">LinkedIn</div><div class="p6c-val">adm-andersonalmeida</div><div class="p6c-sub">Brasília, DF · Todo o Brasil</div></div>
+  </div>
+  <button class="p6-btn">Entrar em contato</button>
+  <div class="p6-note">Inteligência que transforma gestão. · Luniq Inteligência Financeira · 2026</div>
+</section>
+
+</div>
+<nav class="nav">
+  <button class="nb" id="prev">&larr; Anterior</button>
+  <span class="nc" id="nc">1 / 6</span>
+  <button class="nb" id="next">Próximo &rarr;</button>
+</nav>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var n=slides.length,cur=0;
+  var prog=document.getElementById('prog'),nc=document.getElementById('nc');
+  function go(i){slides[cur].classList.remove('on');cur=(i+n)%n;slides[cur].classList.add('on');nc.textContent=(cur+1)+' / '+n;prog.style.width=((cur+1)/n*100)+'%';}
+  document.getElementById('prev').addEventListener('click',function(){go(cur-1)});
+  document.getElementById('next').addEventListener('click',function(){go(cur+1)});
+  document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);});
+  document.querySelector('.deck').addEventListener('click',function(e){if(e.target.closest('.nav')||e.target.closest('.hub-link'))return;go(cur+1);});
+})();
+</script>
+</body>
+</html>
