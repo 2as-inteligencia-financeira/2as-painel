@@ -7,11 +7,13 @@
 export async function verifySupabaseToken(token) {
   if (!token) return null
 
-  const supabaseUrl = process.env.SUPABASE_URL
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+    || process.env.SUPABASE_ANON_KEY
+    || process.env.VITE_SUPABASE_ANON_KEY
 
   if (!supabaseUrl || !supabaseKey) {
-    console.warn('[supabaseAuth] SUPABASE_URL ou SUPABASE_SERVICE_ROLE_KEY não configurados')
+    console.warn('[supabaseAuth] SUPABASE_URL/VITE_SUPABASE_URL ou chave Supabase não configurados')
     return null
   }
 
@@ -44,7 +46,7 @@ export function extractBearerToken(headers = {}) {
  */
 export async function isAuthorized(headers = {}) {
   // Em dev sem Supabase configurado, libera
-  if (!process.env.SUPABASE_URL) {
+  if (!process.env.SUPABASE_URL && !process.env.VITE_SUPABASE_URL) {
     return process.env.VERCEL_ENV !== 'production'
   }
 
