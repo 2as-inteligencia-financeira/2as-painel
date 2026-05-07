@@ -1,15 +1,15 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:    #0a0a0a;
-  --surf:  #111111;
+  --bg:    #050505;
+  --surf:  #0f0f0f;
   --card:  #161616;
   --brd:   #1e1e1e;
   --brd2:  #2a2a2a;
   --txt:   #ffffff;
   --sub:   #aaaaaa;
   --muted: #666666;
-  --dim:   #555555;
+  --dim:   #444444;
   --blue:  #f59e0b;
   --blue2: #fbbf24;
   --grn:   #22c55e;
@@ -17,8 +17,8 @@
   --amb:   #f59e0b;
   --purp:  #2fb7c6;
   --chart-grid: #1e1e1e;
-  --chart-tick: #666666;
-  --chart-zero: #333333;
+  --chart-tick: #555555;
+  --chart-zero: #2a2a2a;
 }
 
 html { font-size: 13px; -webkit-font-smoothing: antialiased; }
