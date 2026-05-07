@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   if (req.method !== "GET" && req.method !== "HEAD") {
     return send(res, 405, "Method not allowed", { Allow: "GET, HEAD" });
   }
-  if (!isAuthorized(req.headers)) {
+  if (!await isAuthorized(req.headers)) {
     return send(res, 401, "Authentication required", { "Cache-Control": "no-store" });
   }
 
