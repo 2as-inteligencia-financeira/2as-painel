@@ -10,13 +10,9 @@ const CACHE_SECONDS = Number(process.env.SHEETS_CACHE_SECONDS || 60);
 const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
 const GOOGLE_SHEETS_SCOPE = "https://www.googleapis.com/auth/spreadsheets.readonly";
 let googleAccessToken = null;
-const DEFAULT_PRIVATE_SOURCES = {
-  // Fallback operacional: histórico 2024 (aba Lancamentos)
-  academico_video_2024: {
-    spreadsheetId: "1eBSaNca4dD7Sjbd6D53nY5TS8OB72KENlGxjTUjWx28",
-    gid: "1062937555",
-  },
-};
+// BAIXO-03: IDs de planilha devem ser configurados via variáveis de ambiente.
+// Use SHEET_ID_<KEY> / SHEET_GID_<KEY> ou SHEETS_PRIVATE_SOURCES_JSON na Vercel.
+const DEFAULT_PRIVATE_SOURCES = {};
 
 export function envNameForSheetKey(key) {
   return `SHEET_URL_${key.toUpperCase()}`;
