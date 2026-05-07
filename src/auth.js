@@ -1,10 +1,25 @@
 /**
- * auth.js — Substituição do Basic Auth por Supabase JWT.
- * As funções mantêm a mesma assinatura para compatibilidade com o código existente.
+ * auth.js — Supabase JWT + handshake seguro via postMessage com o hub.
+ *
+ * Fluxo de abertura a partir do hub:
+ *   1. Hub abre o painel via window.open() — sem token na URL
+ *   2. Painel carrega → initSessionFromUrl() detecta window.opener e envia { type: 'painel:ready' }
+ *   3. Hub verifica a origem, responde com { type: 'painel:token', access_token, refresh_token }
+ *   4. Painel valida a origem do hub, chama supabase.auth.setSession()
+ *   5. Token nunca aparece em URL, histórico ou logs de servidor
  */
 import { supabase } from './lib/supabase'
 
 const AUTH_EVENT = 'painel:auth-changed'
+
+// Origens autorizadas a enviar o token para este painel
+const TRUSTED_HUB_ORIGINS = [
+  'https://hub.luniqfinancas.com',
+  // Dev local
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:3000',
+]
 
 /** Retorna o header Authorization com o Bearer token da sessão atual */
 export async function getAuthHeader() {
@@ -19,7 +34,7 @@ export async function getAuthHeaders() {
   return authorization ? { Authorization: authorization } : {}
 }
 
-/** Dispara evento de mudança de auth (mantém compatibilidade) */
+/** Dispara evento de mudança de auth */
 export function notifyAuthChange() {
   if (typeof window === 'undefined') return
   window.dispatchEvent(new CustomEvent(AUTH_EVENT))
@@ -28,15 +43,8 @@ export function notifyAuthChange() {
 /** Registra listener de mudança de auth */
 export function onAuthChange(handler) {
   if (typeof window === 'undefined') return () => {}
-
-  // Escuta mudanças do Supabase
-  const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
-    handler()
-  })
-
-  // Mantém compatibilidade com evento legado
+  const { data: { subscription } } = supabase.auth.onAuthStateChange(() => handler())
   window.addEventListener(AUTH_EVENT, handler)
-
   return () => {
     subscription.unsubscribe()
     window.removeEventListener(AUTH_EVENT, handler)
@@ -51,30 +59,78 @@ export async function getSession() {
 
 /** Retorna true se há sessão válida */
 export async function isAuthenticated() {
-  const session = await getSession()
-  return session !== null
+  return (await getSession()) !== null
 }
 
 /**
- * Verifica se há tokens na URL (passados pelo hub) e inicia a sessão.
- * Chamar uma vez no carregamento do app.
+ * Inicializa sessão de forma segura:
+ *  - Se veio do hub (window.opener existe): handshake postMessage
+ *  - Fallback: sessão já existente no Supabase (refresh automático)
+ *  - Compatibilidade: ainda aceita token na URL, mas remove imediatamente
+ *
+ * Retorna uma Promise que resolve quando a sessão está pronta.
  */
 export async function initSessionFromUrl() {
-  const params = new URLSearchParams(window.location.search)
-  const accessToken = params.get('sb_access_token')
-  const refreshToken = params.get('sb_refresh_token')
+  if (typeof window === 'undefined') return
 
-  if (accessToken && refreshToken) {
-    await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken })
-    // Remove tokens da URL sem recarregar a página
+  // ── Compatibilidade legada: token na URL (remover após migração completa) ──
+  const params = new URLSearchParams(window.location.search)
+  const legacyAccess  = params.get('sb_access_token')
+  const legacyRefresh = params.get('sb_refresh_token')
+
+  if (legacyAccess && legacyRefresh) {
+    // Aceita mas remove da URL imediatamente
+    await supabase.auth.setSession({
+      access_token:  legacyAccess,
+      refresh_token: legacyRefresh,
+    })
     params.delete('sb_access_token')
     params.delete('sb_refresh_token')
-    const newUrl = [window.location.pathname, params.toString()].filter(Boolean).join('?')
-    window.history.replaceState({}, '', newUrl)
+    const clean = [window.location.pathname, params.toString()].filter(Boolean).join('?')
+    window.history.replaceState({}, '', clean)
+    return
   }
+
+  // ── Fluxo seguro via postMessage ──────────────────────────────────────────
+  if (window.opener && !window.opener.closed) {
+    await new Promise((resolve) => {
+      const timeout = setTimeout(resolve, 10_000) // resolve em 10s mesmo sem resposta
+
+      const handler = async (event) => {
+        // Valida origem — só aceita do hub
+        if (!TRUSTED_HUB_ORIGINS.includes(event.origin)) return
+        if (event.data?.type !== 'painel:token') return
+
+        clearTimeout(timeout)
+        window.removeEventListener('message', handler)
+
+        const { access_token, refresh_token } = event.data
+        if (access_token && refresh_token) {
+          await supabase.auth.setSession({ access_token, refresh_token })
+        }
+        resolve()
+      }
+
+      window.addEventListener('message', handler)
+
+      // Notifica o hub que o painel está pronto
+      // Enviamos para '*' pois ainda não sabemos a origem do hub —
+      // o segredo (token) nunca viaja nesta direção, apenas a sinalização
+      try {
+        window.opener.postMessage({ type: 'painel:ready' }, '*')
+      } catch {
+        // opener pode ter sido fechado entre window.open e o postMessage
+        clearTimeout(timeout)
+        window.removeEventListener('message', handler)
+        resolve()
+      }
+    })
+  }
+
+  // Se chegou aqui sem sessão, o Supabase tentará usar a sessão salva localmente (refresh token)
 }
 
-// Aliases de compatibilidade (funções que o código legado pode chamar)
-export const saveAuth = () => {}
-export const clearAuth = () => supabase.auth.signOut()
+// Aliases de compatibilidade
+export const saveAuth      = () => {}
+export const clearAuth     = () => supabase.auth.signOut()
 export const getStoredAuth = () => null
