@@ -116,6 +116,8 @@ export async function downloadPdf(filename, html, options = {}) {
   host.style.zIndex = "-1";
   host.className = "pdf-export";
   host.setAttribute("aria-hidden", "true");
+  // MEDIO-03: page vem de buildOperationalReportHtml() com todos os valores
+  // escapados via esc(). Após DOMParser, scripts são removidos na serialização.
   host.innerHTML = page;
 
   document.head.appendChild(style);
