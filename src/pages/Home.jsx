@@ -2,13 +2,14 @@ import {
   Area, AreaChart, Bar, CartesianGrid, ComposedChart, Line,
   ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
+import { useMemo } from "react";
 import { T, CA, MONO } from "../theme";
 import { Card, TipBRL } from "../Ui";
 import { fmt } from "../hooks/useSheets";
+import { useActiveEmpresaId } from "../hooks/useActiveEmpresaId";
 import { buildFinancialIntelligence } from "../data/financialIntelligenceDemo";
 import { DataBadge, InsightCard, MetricTile, ProductHero, SectionHeader } from "../components/IntelligenceProduct";
 
-const model = buildFinancialIntelligence();
 const go = rota => window.dispatchEvent(new CustomEvent("painel:navigate", { detail: rota }));
 const pct = value => `${Number(value || 0).toFixed(1)}%`;
 const moneyColor = value => value >= 0 ? T.grn : T.red;
@@ -34,7 +35,7 @@ function MixedTooltip({ active, payload, label }) {
   );
 }
 
-function HealthScore() {
+function HealthScore({ model }) {
   const { score } = model.scoreData;
   return (
     <Card style={{ padding:13, display:"flex", flexDirection:"column", gap:11 }}>
@@ -52,7 +53,7 @@ function HealthScore() {
           </div>
         </div>
         <div>
-          <div style={{ color:T.txt, fontSize:13, fontWeight:800 }}>Saúde financeira: operação estável.</div>
+          <div style={{ color:T.txt, fontSize:13, fontWeight:800 }}>Saúde financeira: {model.meta.healthText}.</div>
           <div style={{ color:T.sub, fontSize:11, lineHeight:1.4, marginTop:5 }}>Atenção principal em caixa semanal, ciclo financeiro e riscos de receita.</div>
         </div>
       </div>
@@ -64,6 +65,8 @@ function HealthScore() {
 }
 
 export default function Home() {
+  const empresaId = useActiveEmpresaId();
+  const model = useMemo(() => buildFinancialIntelligence(empresaId), [empresaId]);
   const { kpis, meses, fluxo, prioridades, planoAcao, behaviorInsights } = model;
   const latest = meses.at(-1);
 
@@ -72,14 +75,14 @@ export default function Home() {
       <ProductHero
         eyebrow="Resumo Executivo"
         title="Painel de controle financeiro"
-        right={<HealthScore />}
+        right={<HealthScore model={model} />}
       >
         Visão operacional para acompanhar liquidez, DRE, orçamento, ciclo financeiro, governança e riscos. Os cards abaixo priorizam o que precisa de decisão, sem tirar o usuário do fluxo de análise.
       </ProductHero>
 
       <div className="intel-grid-4">
         <MetricTile label="Saldo atual" value={fmt.brlk(kpis.saldoAtual)} sub={`Menor saldo projetado ${fmt.brlk(kpis.menorSaldo)}`} color={moneyColor(kpis.saldoAtual)} accent={T.blue2} />
-        <MetricTile label="Runway" value={`${kpis.runwayDias} dias`} sub="Sem ruptura no cenário base" color={kpis.runwayDias < 30 ? T.amb : T.grn} accent={T.grn} />
+        <MetricTile label="Runway" value={`${kpis.runwayDias} dias`} sub={kpis.menorSaldo < 0 ? `Ruptura projetada: ${fmt.brlk(kpis.menorSaldo)}` : "Sem ruptura no cenário base"} color={kpis.runwayDias < 30 ? T.red : kpis.runwayDias < 60 ? T.amb : T.grn} accent={T.grn} />
         <MetricTile label="EBITDA YTD" value={fmt.brlk(kpis.ebitda)} sub={`${pct(kpis.margemEbitdaPct)} da receita líquida`} color={moneyColor(kpis.ebitda)} accent={T.amb} />
         <MetricTile label="Resultado líquido" value={fmt.brlk(kpis.resultado)} sub={`${pct(kpis.margemLiquidaPct)} de margem final`} color={moneyColor(kpis.resultado)} accent={T.purp} />
       </div>

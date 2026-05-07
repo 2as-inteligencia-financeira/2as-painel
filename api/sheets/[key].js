@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     return send(res, 405, "Method not allowed", { Allow: "GET, HEAD" });
   }
 
-  if (!isAuthorized(req.headers)) return unauthorized(res);
+  if (!(await isAuthorized(req.headers))) return unauthorized(res);
 
   const key = String(req.query.key || "").trim();
   const empresa = String(req.query.empresa || "").trim();

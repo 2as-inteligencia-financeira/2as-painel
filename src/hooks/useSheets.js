@@ -250,10 +250,11 @@ function sheetCacheKey(empresaId, key) {
 function fetchSheetCached(key, url, empresaId = getActiveEmpresaId()) {
   const cacheKey = sheetCacheKey(empresaId, key);
   if (SHEET_INFLIGHT.has(cacheKey)) return SHEET_INFLIGHT.get(cacheKey);
-  const req = fetch(withEmpresaParams(url, empresaId), {
-    cache: "no-store",
-    headers: getAuthHeaders(),
-  })
+  const req = Promise.resolve()
+    .then(async () => fetch(withEmpresaParams(url, empresaId), {
+      cache: "no-store",
+      headers: await getAuthHeaders(),
+    }))
     .then(r => {
       if (r.status === 401) {
         clearAuth();

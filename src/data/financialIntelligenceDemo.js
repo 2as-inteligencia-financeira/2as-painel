@@ -25,14 +25,122 @@ export const demoMeta = {
   source:"Base demo Luniq",
 };
 
-export function getMonthly() {
+const DEMO_PROFILE_ALIASES = Object.freeze({
+  "demo-saudavel": "saudavel",
+  "demo-atencao": "atencao",
+  "demo-crise": "crise",
+  "luniq-demo": "saudavel",
+  "luniq-inteligencia-financeira": "saudavel",
+  "cliente-growth": "atencao",
+  saudavel: "saudavel",
+  atencao: "atencao",
+  crise: "crise",
+});
+
+const PROFILE_TUNING = Object.freeze({
+  saudavel: {
+    label: "Saudável",
+    healthText: "operação estável",
+    source: "Base demo Luniq · Saudável",
+    receita: 1,
+    deducoes: 1,
+    custos: 1,
+    despesas: 1,
+    investimentos: 1,
+    financeiro: 1,
+    tributos: 1,
+    caixa: 1,
+    entradas: 1,
+    saidas: 1,
+    pmrDelta: 0,
+    pmpDelta: 0,
+    cancelamentos: 1,
+    chargebacks: 1,
+  },
+  atencao: {
+    label: "Atenção",
+    healthText: "ponto de atenção",
+    source: "Base demo Luniq · Atenção",
+    receita: 0.78,
+    deducoes: 0.86,
+    custos: 0.92,
+    despesas: 0.96,
+    investimentos: 0.82,
+    financeiro: 1.28,
+    tributos: 0.84,
+    caixa: 0.45,
+    entradas: 0.85,
+    saidas: 1.05,
+    pmrDelta: 9,
+    pmpDelta: -3,
+    cancelamentos: 2.1,
+    chargebacks: 2.4,
+  },
+  crise: {
+    label: "Crise",
+    healthText: "risco crítico",
+    source: "Base demo Luniq · Crise",
+    receita: 0.56,
+    deducoes: 0.66,
+    custos: 0.78,
+    despesas: 0.92,
+    investimentos: 0.58,
+    financeiro: 2.2,
+    tributos: 0.68,
+    caixa: 0.15,
+    entradas: 0.45,
+    saidas: 1.1,
+    pmrDelta: 18,
+    pmpDelta: -8,
+    cancelamentos: 4.6,
+    chargebacks: 5.3,
+  },
+});
+
+function resolveDemoProfile(profileOrCompanyId = "saudavel") {
+  return DEMO_PROFILE_ALIASES[String(profileOrCompanyId || "").trim()] || "saudavel";
+}
+
+const money = value => Math.round(value);
+
+export function getMonthly(profileOrCompanyId = "saudavel") {
+  const profileName = resolveDemoProfile(profileOrCompanyId);
+  const tuning = PROFILE_TUNING[profileName] || PROFILE_TUNING.saudavel;
   return monthly.map(row => {
-    const receitaLiquida = row.receita - row.deducoes;
-    const margemContribuicao = receitaLiquida - row.custos;
-    const ebitda = margemContribuicao - row.despesas;
-    const resultado = ebitda - row.investimentos - row.financeiro - row.tributos;
+    const receita = money(row.receita * tuning.receita);
+    const deducoes = money(row.deducoes * tuning.deducoes);
+    const custos = money(row.custos * tuning.custos);
+    const despesas = money(row.despesas * tuning.despesas);
+    const investimentos = money(row.investimentos * tuning.investimentos);
+    const financeiro = money(row.financeiro * tuning.financeiro);
+    const tributos = money(row.tributos * tuning.tributos);
+    const caixa = money(row.caixa * tuning.caixa);
+    const entradas = money(row.entradas * tuning.entradas);
+    const saidas = money(row.saidas * tuning.saidas);
+    const cancelamentos = money(row.cancelamentos * tuning.cancelamentos);
+    const chargebacks = money(row.chargebacks * tuning.chargebacks);
+    const pmr = row.pmr + tuning.pmrDelta;
+    const pmp = Math.max(1, row.pmp + tuning.pmpDelta);
+    const receitaLiquida = receita - deducoes;
+    const margemContribuicao = receitaLiquida - custos;
+    const ebitda = margemContribuicao - despesas;
+    const resultado = ebitda - investimentos - financeiro - tributos;
     return {
       ...row,
+      receita,
+      deducoes,
+      custos,
+      despesas,
+      investimentos,
+      financeiro,
+      tributos,
+      caixa,
+      entradas,
+      saidas,
+      pmr,
+      pmp,
+      cancelamentos,
+      chargebacks,
       receitaLiquida,
       margemContribuicao,
       ebitda,
@@ -110,8 +218,10 @@ export function calcHealthScore(kpis) {
   return { score, dims };
 }
 
-export function buildFinancialIntelligence() {
-  const meses = getMonthly();
+export function buildFinancialIntelligence(profileOrCompanyId = "saudavel") {
+  const profileName = resolveDemoProfile(profileOrCompanyId);
+  const tuning = PROFILE_TUNING[profileName] || PROFILE_TUNING.saudavel;
+  const meses = getMonthly(profileName);
   const receita = sum(meses, "receita");
   const receitaLiquida = sum(meses, "receitaLiquida");
   const custos = sum(meses, "custos");
@@ -122,8 +232,10 @@ export function buildFinancialIntelligence() {
   const saldoAtual = meses.at(-1).caixa;
   let saldo = saldoAtual;
   const fluxo = cashFlow.map(row => {
-    saldo += row.entradas - row.saidas;
-    return { ...row, saldo };
+    const entradas = money(row.entradas * tuning.entradas);
+    const saidas = money(row.saidas * tuning.saidas);
+    saldo += entradas - saidas;
+    return { ...row, entradas, saidas, saldo };
   });
   const menorSaldo = Math.min(...fluxo.map(row => row.saldo));
   const runway = fluxo.findIndex(row => row.saldo < 0);
@@ -137,7 +249,13 @@ export function buildFinancialIntelligence() {
   const chargebacks = sum(meses, "chargebacks");
 
   return {
-    meta: demoMeta,
+    meta: {
+      ...demoMeta,
+      company: `Empresa Demo · ${tuning.label}`,
+      source: tuning.source,
+      profile: profileName,
+      healthText: tuning.healthText,
+    },
     meses,
     kpis: {
       receita,
@@ -150,7 +268,7 @@ export function buildFinancialIntelligence() {
       margemLiquidaPct: receitaLiquida ? (resultado / receitaLiquida) * 100 : 0,
       saldoAtual,
       menorSaldo,
-      runwayDias: runway >= 0 ? runway * 7 : 56,
+      runwayDias: runway >= 0 ? (runway + 1) * 7 : 56,
       pmr,
       pmp,
       cicloCaixa,
@@ -266,7 +384,7 @@ export function buildFinancialIntelligence() {
       { dono:"Diretoria", decisao:"Validar orçamento revisado do trimestre", impacto:"Alinha crescimento e margem", prazo:"Próxima reunião" },
     ],
     scoreData: calcHealthScore({
-      saldoAtual, menorSaldo, runwayDias: runway >= 0 ? runway * 7 : 56,
+      saldoAtual, menorSaldo, runwayDias: runway >= 0 ? (runway + 1) * 7 : 56,
       margemEbitdaPct: receitaLiquida ? (ebitda / receitaLiquida) * 100 : 0,
       margemLiquidaPct: receitaLiquida ? (resultado / receitaLiquida) * 100 : 0,
       variacaoReceita: orcadoReceita ? ((receita - orcadoReceita) / orcadoReceita) * 100 : 0,

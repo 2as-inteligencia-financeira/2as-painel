@@ -6,10 +6,10 @@ import { useMemo, useState } from "react";
 import { T, CA, MONO } from "../theme";
 import { Card, TipBRL, TipPct } from "../Ui";
 import { fmt } from "../hooks/useSheets";
+import { useActiveEmpresaId } from "../hooks/useActiveEmpresaId";
 import { buildFinancialIntelligence } from "../data/financialIntelligenceDemo";
 import { DataBadge, MetricTile, ProductHero, SectionHeader } from "../components/IntelligenceProduct";
 
-const model = buildFinancialIntelligence();
 const pct = value => `${Number(value || 0).toFixed(1)}%`;
 const valueColor = value => value >= 0 ? T.grn : T.red;
 const levelColor = level => level === "Atenção" ? T.amb : level === "Investigação" ? T.purp : level === "Monitorar" ? T.blue2 : T.grn;
@@ -19,7 +19,7 @@ const dimColor = (pontos, max) => {
   return r >= 0.9 ? T.grn : r >= 0.6 ? T.blue2 : r >= 0.3 ? T.amb : T.red;
 };
 
-function CriterioScore() {
+function CriterioScore({ model }) {
   const { score, dims } = model.scoreData;
   const scoreColor = score >= 85 ? T.grn : score >= 65 ? T.blue2 : score >= 45 ? T.amb : T.red;
   const scoreLabel = score >= 85 ? "Saudável" : score >= 65 ? "Estável" : score >= 45 ? "Atenção" : "Crítico";
@@ -73,7 +73,7 @@ function CriterioScore() {
   );
 }
 
-function DreCascade() {
+function DreCascade({ model }) {
   return (
     <Card style={{ padding:15 }}>
       <SectionHeader title="Menu em Cascata da DRE" badge={model.meta.period} />
@@ -94,7 +94,7 @@ function DreCascade() {
   );
 }
 
-function ScenarioCards() {
+function ScenarioCards({ model }) {
   return (
     <div className="intel-grid-3">
       {model.cenarios.map(cenario => (
@@ -246,6 +246,8 @@ function MethodologySummary({ kpis }) {
 }
 
 export default function SistemaLuniq() {
+  const empresaId = useActiveEmpresaId();
+  const model = useMemo(() => buildFinancialIntelligence(empresaId), [empresaId]);
   const { kpis, meses, dreRows, fluxo, financialExplainer, benchmarkInsights, behaviorInsights } = model;
   const [modoTela, setModoTela] = useState("operacional");
   const prioridades = useMemo(() => behaviorInsights.slice(0, 3), [behaviorInsights]);
@@ -354,7 +356,7 @@ export default function SistemaLuniq() {
         <>
           <MethodologyGuide />
           <MethodologySummary kpis={kpis} />
-          <CriterioScore />
+          <CriterioScore model={model} />
 
           <FinancialExplainer explainer={financialExplainer} />
 
@@ -382,7 +384,7 @@ export default function SistemaLuniq() {
 
           <section>
             <SectionHeader title="Simulação aplicada" badge="cenários de caixa" />
-            <ScenarioCards />
+            <ScenarioCards model={model} />
           </section>
 
           <section>
@@ -396,7 +398,7 @@ export default function SistemaLuniq() {
           </section>
 
           <div className="intel-grid-2">
-            <DreCascade />
+            <DreCascade model={model} />
             <Card style={{ padding:15 }}>
               <SectionHeader title="DRE em Cascata" badge="YTD" />
               <div style={{ height:300 }}>

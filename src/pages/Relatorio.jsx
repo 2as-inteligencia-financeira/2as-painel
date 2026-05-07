@@ -1,14 +1,28 @@
+import { useMemo } from "react";
 import { T, MONO } from "../theme";
 import { Card } from "../Ui";
 import { fmt } from "../hooks/useSheets";
+import { useActiveEmpresaId } from "../hooks/useActiveEmpresaId";
 import { buildFinancialIntelligence } from "../data/financialIntelligenceDemo";
 import { DataBadge, MetricTile, ProductHero, SectionHeader } from "../components/IntelligenceProduct";
 
-const model = buildFinancialIntelligence();
 const pct = value => `${Number(value || 0).toFixed(1)}%`;
 const statusColor = status => status === "Concluído" ? T.grn : status === "Em andamento" ? T.amb : T.blue2;
+const runwayColor = dias => dias < 30 ? T.red : dias < 60 ? T.amb : T.grn;
+
+function executiveReading(kpis) {
+  if (kpis.menorSaldo < 0 || kpis.ebitda < 0) {
+    return "A empresa exige plano de contenção imediato: o caixa projetado entra em ruptura, o resultado operacional está pressionado e a rotina deve priorizar renegociação, cobrança e preservação de margem.";
+  }
+  if (kpis.runwayDias < 60 || kpis.margemEbitdaPct < 10) {
+    return "A empresa ainda opera com resultado positivo, mas a liquidez está sensível. O acompanhamento deve priorizar calendário de pagamentos, aceleração de recebíveis e controle dos desvios de margem.";
+  }
+  return "A empresa apresenta receita acima do orçamento e EBITDA positivo, com runway confortável. A rotina deve preservar disciplina de caixa, margem e governança para sustentar o crescimento.";
+}
 
 export default function Relatorio() {
+  const empresaId = useActiveEmpresaId();
+  const model = useMemo(() => buildFinancialIntelligence(empresaId), [empresaId]);
   const { kpis, prioridades, planoAcao } = model;
   const blocosRelatorio = [
     { nome:"Resumo Executivo", status:"Concluído", desc:"Leitura do caixa, resultado, riscos e decisões prioritárias." },
@@ -27,7 +41,7 @@ export default function Relatorio() {
           <Card style={{ padding:16 }}>
             <SectionHeader title="Status do Relatório" badge="rotina" />
             <div style={{ display:"flex", flexDirection:"column", gap:8 }}>
-              <DataBadge label="Base demo" />
+              <DataBadge label={model.meta.source} />
               <div style={{ color:T.sub, fontSize:12, lineHeight:1.5 }}>
                 Consolidação para reunião de gestão, fechamento mensal e acompanhamento de ações.
               </div>
@@ -41,7 +55,7 @@ export default function Relatorio() {
       <div className="intel-grid-4">
         <MetricTile label="Receita líquida" value={fmt.brlk(kpis.receitaLiquida)} sub={model.meta.period} />
         <MetricTile label="EBITDA" value={fmt.brlk(kpis.ebitda)} sub={pct(kpis.margemEbitdaPct)} color={kpis.ebitda >= 0 ? T.grn : T.red} />
-        <MetricTile label="Runway" value={`${kpis.runwayDias} dias`} sub={`Saldo ${fmt.brlk(kpis.saldoAtual)}`} color={T.grn} />
+        <MetricTile label="Runway" value={`${kpis.runwayDias} dias`} sub={`Menor saldo ${fmt.brlk(kpis.menorSaldo)}`} color={runwayColor(kpis.runwayDias)} />
         <MetricTile label="Risco operacional" value={fmt.brlk(kpis.riscoOperacional)} sub="Cancelamentos + chargebacks" color={T.amb} />
       </div>
 
@@ -49,7 +63,7 @@ export default function Relatorio() {
         <Card style={{ padding:16 }}>
           <SectionHeader title="Leitura Executiva" badge="para reunião" />
           <div style={{ color:T.sub, fontSize:13, lineHeight:1.65 }}>
-            A empresa apresenta receita acima do orçamento e EBITDA positivo, mas ainda precisa reduzir pressão de capital de giro e proteger receita líquida contra cancelamentos e chargebacks. O acompanhamento deve priorizar liquidez, performance e governança em uma rotina única de decisão.
+            {executiveReading(kpis)}
           </div>
           <div style={{ display:"grid", gap:8, marginTop:14 }}>
             {prioridades.map(item => (

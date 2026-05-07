@@ -1,11 +1,12 @@
 import { Area, AreaChart, CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { useMemo } from "react";
 import { T, CA } from "../theme";
 import { Card, TipBRL } from "../Ui";
 import { fmt } from "../hooks/useSheets";
+import { useActiveEmpresaId } from "../hooks/useActiveEmpresaId";
 import { buildFinancialIntelligence } from "../data/financialIntelligenceDemo";
 import { MetricTile, ProductHero, SectionHeader } from "../components/IntelligenceProduct";
 
-const model = buildFinancialIntelligence();
 const pct = value => `${Number(value || 0).toFixed(1)}%`;
 
 function DayTooltip({ active, payload, label }) {
@@ -24,6 +25,8 @@ function DayTooltip({ active, payload, label }) {
 }
 
 export default function CicloFinanceiro() {
+  const empresaId = useActiveEmpresaId();
+  const model = useMemo(() => buildFinancialIntelligence(empresaId), [empresaId]);
   const { kpis, meses, fluxo } = model;
   return (
     <div style={{ display:"flex", flexDirection:"column", gap:20, paddingBottom:42 }}>
