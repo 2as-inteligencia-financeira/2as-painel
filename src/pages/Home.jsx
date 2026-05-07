@@ -37,6 +37,8 @@ function MixedTooltip({ active, payload, label }) {
 
 function HealthScore({ model }) {
   const { score } = model.scoreData;
+  const scoreColor = score >= 85 ? T.grn : score >= 65 ? T.blue2 : score >= 45 ? T.amb : T.red;
+  const scoreLabel = score >= 85 ? "Saudável" : score >= 65 ? "Estável" : score >= 45 ? "Atenção" : "Crítico";
   return (
     <Card style={{ padding:13, display:"flex", flexDirection:"column", gap:11 }}>
       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", gap:12 }}>
@@ -44,11 +46,11 @@ function HealthScore({ model }) {
         <span style={{ color:T.dim, fontSize:10 }}>{model.meta.lastUpdate}</span>
       </div>
       <div style={{ display:"flex", alignItems:"center", gap:16 }}>
-        <div style={{ width:72, height:72, borderRadius:"50%", background:`conic-gradient(${T.grn} ${score * 3.6}deg, ${T.brd} 0deg)`, display:"grid", placeItems:"center", flexShrink:0 }}>
-          <div style={{ width:54, height:54, borderRadius:"50%", background:T.card, display:"grid", placeItems:"center", border:`1px solid ${T.brd}` }}>
+        <div style={{ width:72, height:72, borderRadius:"50%", background:`conic-gradient(${scoreColor} ${score * 3.6}deg, ${T.brd} 0deg)`, display:"grid", placeItems:"center", flexShrink:0 }}>
+          <div style={{ width:54, height:54, borderRadius:"50%", background:T.card, display:"grid", placeItems:"center", border:`1px solid ${scoreColor}` }}>
             <div style={{ textAlign:"center" }}>
-              <div style={{ color:T.txt, fontSize:20, fontWeight:900, fontFamily:MONO, lineHeight:1 }}>{score}</div>
-              <div style={{ color:T.dim, fontSize:9, textTransform:"uppercase", fontWeight:800 }}>score</div>
+              <div style={{ color:scoreColor, fontSize:20, fontWeight:900, fontFamily:MONO, lineHeight:1 }}>{score}</div>
+              <div style={{ color:scoreColor, fontSize:9, textTransform:"uppercase", fontWeight:800 }}>{scoreLabel}</div>
             </div>
           </div>
         </div>
