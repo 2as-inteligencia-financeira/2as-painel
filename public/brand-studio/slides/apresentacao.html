@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Luniq — Apresentação Comercial 2026</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/brand-studio/assets/theme.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
   <style>
     html, body { height: 100%; overflow: hidden; }
     body { background: var(--bg); font-family: var(--sans); color: var(--text); }
     .deck { width: 100vw; height: 100vh; position: relative; }
     .slide { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity .45s ease; overflow: hidden; display: flex; }
     .slide.on { opacity: 1; pointer-events: all; }
-    .dg::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(30,30,30,.7) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; }
+    .dg::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(15,15,10,.09) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; }
     .sn { font-family: var(--mono); font-size: 9px; letter-spacing: .2em; color: var(--amber); text-transform: uppercase; }
 
     /* nav */
-    .nav { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; z-index: 999; background: rgba(17,17,17,.95); border: 1px solid var(--border); border-radius: 100px; padding: 9px 22px; backdrop-filter: blur(12px); }
+    .nav { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; z-index: 999; background: rgba(255,255,255,.92); border: 1px solid var(--border); border-radius: 100px; padding: 9px 22px; backdrop-filter: blur(12px); }
     .nb { background: none; border: none; color: #666; cursor: pointer; font-size: 18px; padding: 3px 8px; transition: color .2s; font-family: var(--sans); }
     .nb:hover { color: var(--amber); }
     .dots { display: flex; gap: 5px; align-items: center; }
@@ -30,7 +30,7 @@
 
     /* S1 COVER */
     #s1 { flex-direction: column; align-items: flex-start; justify-content: center; padding: 80px 96px;
-      background: radial-gradient(ellipse 45% 60% at 78% 45%, rgba(245,158,11,.08) 0%, transparent 65%), #050505; position: relative; }
+      background: radial-gradient(ellipse 45% 60% at 78% 45%, rgba(245,158,11,.08) 0%, transparent 65%), var(--bg); position: relative; }
     #s1 .over { position: relative; z-index: 1; font-family: var(--mono); font-size: 9px; letter-spacing: .22em; color: var(--dim); text-transform: uppercase; margin-bottom: 40px; }
     #s1 .logo { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 8px; margin-bottom: 48px; }
     #s1 .logo .d2 { height: .75px; background: var(--border); width: 240px; }
@@ -83,7 +83,7 @@
     #s5 h2 { font-size: clamp(24px,3.5vw,38px); font-weight: 800; letter-spacing: -.035em; margin-bottom: 44px; color: var(--text); }
     .pilars { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; }
     .pil { background: var(--surface); padding: 32px 26px; position: relative; overflow: hidden; }
-    .pil::after { content: attr(data-n); position: absolute; top: 18px; right: 22px; font-family: var(--mono); font-size: 36px; font-weight: 500; color: var(--surface-2); line-height: 1; }
+    .pil::after { content: attr(data-n); position: absolute; top: 18px; right: 22px; font-family: var(--mono); font-size: 36px; font-weight: 500; color: var(--ghost); line-height: 1; }
     .pil-tag { font-family: var(--mono); font-size: 9px; letter-spacing: .2em; color: var(--amber); text-transform: uppercase; margin-bottom: 10px; }
     .pil-name { font-size: 16px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 10px; color: var(--text); }
     .pil-desc { font-size: 12px; font-weight: 300; color: var(--muted); line-height: 1.6; }
@@ -108,7 +108,7 @@
       background: radial-gradient(ellipse 55% 50% at 50% 50%, rgba(245,158,11,.04) 0%, transparent 65%), var(--bg); }
     .s7i { max-width: 940px; width: 100%; }
     #s7 h2 { font-size: clamp(24px,3.5vw,38px); font-weight: 800; letter-spacing: -.035em; margin-bottom: 10px; color: var(--text); }
-    .s7-sub { font-size: 14px; font-weight: 300; color: #aaa; margin-bottom: 36px; }
+    .s7-sub { font-size: 14px; font-weight: 300; color: var(--muted); margin-bottom: 36px; }
     .kpis { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin-bottom: 1px; }
     .kpi { background: var(--surface); padding: 26px 22px; }
     .kpi-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; color: #666; text-transform: uppercase; margin-bottom: 9px; }
@@ -123,7 +123,7 @@
 
     /* S8 CTA */
     #s8 { flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px;
-      background: radial-gradient(ellipse 55% 60% at 50% 50%, rgba(245,158,11,.09) 0%, transparent 65%), #050505; position: relative; }
+      background: radial-gradient(ellipse 55% 60% at 50% 50%, rgba(245,158,11,.09) 0%, transparent 65%), var(--bg); position: relative; }
     #s8 h2 { position: relative; z-index: 1; font-size: clamp(36px,5.5vw,64px); font-weight: 800; letter-spacing: -.04em; line-height: 1; margin-bottom: 20px; color: var(--text); }
     #s8 h2 em { font-style: normal; color: var(--amber); }
     #s8 .cta-desc { position: relative; z-index: 1; font-size: 16px; font-weight: 300; color: var(--muted); max-width: 480px; margin: 0 auto 44px; line-height: 1.72; }
@@ -145,7 +145,7 @@
   <div class="logo">
     <div style="display:flex;align-items:baseline;line-height:1">
       <span style="font-size:52px;font-weight:800;color:var(--amber);letter-spacing:-.04em">L</span>
-      <span style="font-size:52px;font-weight:800;color:#fff;letter-spacing:-.04em">UNIQ</span>
+      <span style="font-size:52px;font-weight:800;color:var(--text);letter-spacing:-.04em">UNIQ</span>
     </div>
     <div class="d2"></div>
     <span style="font-family:var(--mono);font-size:8px;letter-spacing:.22em;color:var(--border);text-transform:uppercase">INTELIGENCIA FINANCEIRA</span>

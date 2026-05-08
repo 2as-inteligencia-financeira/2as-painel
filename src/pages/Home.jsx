@@ -60,7 +60,7 @@ function HealthScore({ model }) {
         </div>
       </div>
       <button onClick={() => go("sistema-luniq")} style={{ border:`1px solid ${T.brd2}`, background:T.surf, color:T.blue2, borderRadius:6, padding:"8px 10px", fontSize:11, fontWeight:800 }}>
-        Abrir Metodologia Luniq
+        Abrir Metodologia 2AS
       </button>
     </Card>
   );

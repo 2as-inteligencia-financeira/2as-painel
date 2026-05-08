@@ -1,24 +1,24 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:    #050505;
-  --surf:  #0f0f0f;
-  --card:  #161616;
-  --brd:   #1e1e1e;
-  --brd2:  #2a2a2a;
-  --txt:   #ffffff;
-  --sub:   #aaaaaa;
-  --muted: #666666;
-  --dim:   #444444;
-  --blue:  #f59e0b;
-  --blue2: #fbbf24;
-  --grn:   #22c55e;
-  --red:   #ef4444;
+  --bg:    #f0f0ea;
+  --surf:  #fafaf7;
+  --card:  #ffffff;
+  --brd:   #e2e2dc;
+  --brd2:  #d0d0ca;
+  --txt:   #0a0a0a;
+  --sub:   #333333;
+  --muted: #606060;
+  --dim:   #999999;
+  --blue:  #d97706;
+  --blue2: #d97706;
+  --grn:   #16803c;
+  --red:   #dc2626;
   --amb:   #f59e0b;
-  --purp:  #2fb7c6;
-  --chart-grid: #1e1e1e;
-  --chart-tick: #555555;
-  --chart-zero: #2a2a2a;
+  --purp:  #087f8f;
+  --chart-grid: #e4e4e0;
+  --chart-tick: #666666;
+  --chart-zero: #999999;
 }
 
 html { font-size: 13px; -webkit-font-smoothing: antialiased; }

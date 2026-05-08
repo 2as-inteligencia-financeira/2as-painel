@@ -57,8 +57,8 @@ export const THEMES = { dark: DARK, light: LIGHT };
 
 // Design tokens - match index.css :root vars
 export const T = {
-  ...DARK,
-  mode: "dark",
+  ...LIGHT,
+  mode: "light",
   // helpers
   corV: v => v >= 0 ? T.grn : T.red,
   corDesp: p => p <= 100 ? T.grn : T.red, // desp: bom abaixo do orc
@@ -88,8 +88,9 @@ export function applyThemeMode(mode) {
 }
 
 export function getInitialThemeMode() {
-  if (typeof window === "undefined") return "dark";
-  return window.localStorage.getItem("painel-theme") === "light" ? "light" : "dark";
+  if (typeof window === "undefined") return "light";
+  const saved = window.localStorage.getItem("painel-theme");
+  return saved === "dark" ? "dark" : "light"; // light como padrão
 }
 
 // Shared font — DM Mono for data labels and numeric values

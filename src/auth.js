@@ -15,7 +15,8 @@ const AUTH_EVENT = 'painel:auth-changed'
 // Origens autorizadas a enviar o token para este painel
 // BAIXO-04: localhost apenas em dev (import.meta.env.DEV = false em produção Vite)
 const TRUSTED_HUB_ORIGINS = [
-  'https://hub.luniqfinancas.com',
+  'https://hub.2asfinancas.com',
+  'https://app.2asfinancas.com',
   ...(import.meta.env.DEV ? [
     'http://localhost:5173',
     'http://localhost:5174',

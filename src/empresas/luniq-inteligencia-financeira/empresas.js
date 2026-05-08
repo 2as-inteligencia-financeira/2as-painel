@@ -1,6 +1,6 @@
 export const GRUPO_PRINCIPAL = {
   id: "luniq-inteligencia-financeira",
-  nome: "Luniq Inteligência Financeira",
+  nome: "2AS Inteligência Financeira",
   subtitulo: "Inteligência financeira para decisões de caixa, resultado e crescimento",
 };
 

@@ -69,7 +69,7 @@ const toDemoNumber = value => Number(String(value || "0").replace(/\./g, "").rep
 function demoContasPayload(kind, companyId) {
   const key = kind === "pagas" ? "despesas_historico" : kind === "vencidas" ? "contas_vencidas" : "contas_pagar";
   const profile = getDemoProfile(companyId);
-  const contaLabel = profile?.label ? `Demo · ${profile.label}` : "Luniq Demo";
+  const contaLabel = profile?.label ? `Demo · ${profile.label}` : "2AS Demo";
   const rows = parseDemoContasCsv(getDemoSheetCsv(key, companyId)).map((row, index) => ({
     ...row,
     VALOR_BRUTO: toDemoNumber(row.VALOR_BRUTO),
@@ -97,7 +97,7 @@ function demoContasPayload(kind, companyId) {
     : total;
   return {
     source: "demo_api",
-    profile: profile?.label ? `LUNIQ_DEMO_${profile.label.toUpperCase()}` : "LUNIQ_DEMO",
+    profile: profile?.label ? `2AS_DEMO_${profile.label.toUpperCase()}` : "2AS_DEMO",
     updatedAt: toBRDate(new Date()),
     interval: { inicio: rows[0]?.DATA_VENCIMENTO || rows[0]?.DATA_PAGAMENTO || "", fim: rows.at(-1)?.DATA_VENCIMENTO || rows.at(-1)?.DATA_PAGAMENTO || "" },
     meta: [
@@ -150,7 +150,7 @@ function granatumUrl(route, params = {}) {
 
 async function fetchGranatum(route, params = {}) {
   const response = await fetch(granatumUrl(route, params), {
-    headers: { "User-Agent": "Luniq-Painel/1.0" },
+    headers: { "User-Agent": "2AS-Painel/1.0" },
   });
   const text = await response.text();
   let json = null;
@@ -714,7 +714,7 @@ export async function fetchGranatumFluxoProjetadoLabs(companyId = "") {
       ?? saldos.reduce((sum, row) => sum + row.SALDO, 0);
     return {
       source: "demo_api",
-      profile: profile?.label ? `LUNIQ_DEMO_${profile.label.toUpperCase()}` : "LUNIQ_DEMO",
+      profile: profile?.label ? `2AS_DEMO_${profile.label.toUpperCase()}` : "2AS_DEMO",
       updatedAt: toBRDate(new Date()),
       interval: contasPagar.interval,
       meta: [

@@ -5,261 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Luniq — Manual da Marca 2026</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/brand-studio/assets/theme.css" />
-  <style>
-    /* ─── Reset & base ─── */
-    html { scroll-behavior: smooth; }
-    body { overflow-x: hidden; }
-
-    /* ─── Layout ─── */
-    .wrap  { max-width: 1100px; margin: 0 auto; padding: 88px 56px; }
-    .full  { background: var(--surface); }
-    .dark  { background: #050505; }
-
-    /* ─── Typography helpers ─── */
-    /*
-      Hierarchy on dark:
-        --text   #fff       → headings, KPI values, strong emphasis
-        #ccc               → body copy, main readable text
-        #888               → supporting info (readable but secondary)
-        #555               → monospace labels, metadata (legível mas discreto)
-        #333               → purely decorative ghost text (não é para ler)
-    */
-    .section-tag {
-      font-family: var(--mono); font-size: 9px;
-      color: var(--amber); letter-spacing: .22em;
-      text-transform: uppercase; margin-bottom: 14px;
-    }
-    .section-h {
-      font-size: clamp(28px,4vw,48px); font-weight: 800;
-      letter-spacing: -.035em; margin-bottom: 16px;
-      line-height: 1.05; color: var(--text);
-    }
-    .section-lead {
-      font-size: 15px; font-weight: 300; color: #aaa;
-      max-width: 580px; line-height: 1.82; margin-bottom: 56px;
-    }
-
-    /* ─── Nav topo ─── */
-    .top-nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 56px; background: #050505;
-      border-bottom: 1px solid var(--border);
-    }
-    .top-nav img { height: 28px; }
-    .top-nav a {
-      font-family: var(--mono); font-size: 9px;
-      letter-spacing: .14em; color: #666;
-      text-transform: uppercase; text-decoration: none; transition: color .2s;
-    }
-    .top-nav a:hover { color: var(--amber); }
-
-    /* ─── Hero ─── */
-    .hero {
-      min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center; padding: 80px 40px;
-      position: relative; overflow: hidden;
-      background:
-        radial-gradient(ellipse 50% 50% at 30% 40%, rgba(245,158,11,.07) 0%, transparent 65%),
-        #050505;
-    }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(40,40,40,.6) 1px, transparent 1px);
-      background-size: 28px 28px; pointer-events: none;
-    }
-    .hero > * { position: relative; z-index: 1; }
-    .hero-logo { margin-bottom: 64px; display: flex; flex-direction: column; align-items: center; gap: 9px; }
-    .hero-logo-wm { display: flex; align-items: baseline; line-height: 1; }
-    .hero-logo-wm .l { font-family: var(--sans); font-size: 56px; font-weight: 800; color: var(--amber); letter-spacing: -.04em; }
-    .hero-logo-wm .u { font-family: var(--sans); font-size: 56px; font-weight: 800; color: var(--text); letter-spacing: -.04em; }
-    .hero-logo-div { height: .75px; width: 320px; background: #2a2a2a; }
-    .hero-logo-desc { font-family: var(--mono); font-size: 8px; letter-spacing: .22em; color: #333; text-transform: uppercase; }
-    .hero-sub { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; color: #333; text-transform: uppercase; margin-bottom: 20px; }
-    .hero-tagline { font-size: clamp(40px,7vw,88px); font-weight: 800; letter-spacing: -.045em; line-height: 1; color: var(--text); }
-    .hero-tagline em { font-style: normal; color: var(--amber); }
-    .hero-doc { margin-top: 24px; font-family: var(--mono); font-size: 9px; letter-spacing: .18em; color: #222; text-transform: uppercase; }
-
-    /* ─── Story ─── */
-    .story { font-size: clamp(15px,1.7vw,17px); font-weight: 300; color: #bbb; line-height: 1.9; max-width: 760px; }
-    .story p+p { margin-top: 1.4em; }
-    .story strong { color: var(--text); font-weight: 700; }
-    .story em { font-style: italic; color: #999; }
-
-    /* ─── Timeline ─── */
-    .tl { display: flex; flex-direction: column; gap: 1px; margin: 56px 0; }
-    .tli { display: grid; grid-template-columns: 80px 1fr; background: var(--surface); }
-    .tli.p { background: rgba(245,158,11,.05); }
-    .tly {
-      padding: 22px 18px; font-family: var(--mono); font-size: 11px;
-      color: #555; border-right: 1px solid var(--border);
-      display: flex; align-items: flex-start; justify-content: flex-end;
-    }
-    .tli.p .tly { color: var(--amber); border-color: rgba(245,158,11,.35); }
-    .tlc { padding: 22px 28px; }
-    .tlt { font-size: 13px; font-weight: 700; margin-bottom: 5px; color: var(--text); }
-    .tli.p .tlt { color: var(--amber); }
-    .tld { font-size: 12px; font-weight: 300; color: #888; line-height: 1.6; }
-
-    /* ─── Nome ─── */
-    .nome { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin-top: 56px; }
-    .nb { background: var(--surface); padding: 32px 28px; }
-    .nb-l { font-size: 60px; font-weight: 800; letter-spacing: -.05em; color: var(--amber); line-height: 1; margin-bottom: 12px; }
-    .nb-n { font-family: var(--mono); font-size: 9px; letter-spacing: .2em; color: #666; text-transform: uppercase; margin-bottom: 10px; }
-    .nb-d { font-size: 13px; font-weight: 300; color: #999; line-height: 1.65; }
-    .nb-d strong { color: var(--text); font-weight: 700; }
-
-    /* ─── Quote ─── */
-    .qt {
-      background: var(--surface-2); border-left: 2px solid var(--amber);
-      padding: 28px 32px; font-size: 15px; font-style: italic;
-      font-weight: 300; color: #aaa; line-height: 1.8; margin-top: 56px;
-    }
-    .qt strong { font-style: normal; color: var(--text); font-weight: 700; }
-    .qt-src { font-style: normal; font-family: var(--mono); font-size: 9px; color: #555; margin-top: 12px; letter-spacing: .12em; text-transform: uppercase; }
-
-    /* ─── VMV ─── */
-    .vmv { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-bottom: 1px; }
-    .vmv-box { background: var(--surface); padding: 40px 36px; }
-    .vmv-box.alt { background: var(--surface-2); }
-    .vmv-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: .2em; color: var(--amber); text-transform: uppercase; margin-bottom: 14px; }
-    .vmv-txt { font-size: clamp(14px,1.6vw,18px); font-weight: 300; color: #aaa; line-height: 1.78; }
-    .vmv-txt strong { color: var(--text); font-weight: 700; }
-    .vals { display: grid; grid-template-columns: repeat(5,1fr); gap: 1px; margin-top: 1px; }
-    .val { background: var(--surface-2); padding: 28px 20px; border-top: 2px solid var(--amber); }
-    .val-n { font-family: var(--mono); font-size: 9px; color: #444; margin-bottom: 10px; }
-    .val-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-    .val-desc { font-size: 12px; font-weight: 300; color: #888; line-height: 1.55; }
-    .tagline-row {
-      background: var(--bg); border: 1px solid var(--border);
-      padding: 36px 44px; margin-top: 1px;
-      display: flex; align-items: center; justify-content: space-between; gap: 32px;
-    }
-    .tl-big { font-size: clamp(18px,2.5vw,28px); font-weight: 800; letter-spacing: -.03em; color: var(--text); }
-    .tl-big em { font-style: normal; color: var(--amber); }
-    .tl-note { font-family: var(--mono); font-size: 10px; color: #555; max-width: 240px; line-height: 1.6; }
-
-    /* ─── Logo section ─── */
-    .logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-bottom: 1px; }
-    .lb { padding: 56px 48px; display: flex; flex-direction: column; gap: 18px; }
-    .lb-dark { background: #050505; }
-    .lb-light { background: #fafaf7; }
-    .lb-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; }
-    .lb-dark .lb-lbl { color: #555; }
-    .lb-light .lb-lbl { color: #aaa; }
-    .logo-wm { display: flex; align-items: baseline; line-height: 1; }
-    .logo-div { height: .75px; }
-    .logo-desc-txt { font-family: var(--mono); font-size: 8px; letter-spacing: .22em; text-transform: uppercase; }
-    .anat { background: #050505; padding: 36px 48px; margin-bottom: 1px; }
-    .anat-title { font-family: var(--mono); font-size: 9px; letter-spacing: .18em; color: #555; text-transform: uppercase; margin-bottom: 28px; }
-    .anat-notes { display: flex; flex-direction: column; gap: 14px; max-width: 680px; }
-    .anat-note { display: flex; gap: 14px; align-items: flex-start; }
-    .anat-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
-    .anat-txt { font-size: 13px; font-weight: 300; color: #999; line-height: 1.6; }
-    .anat-txt strong { color: var(--text); font-weight: 700; }
-    .logo-sizes { display: flex; gap: 1px; margin-top: 1px; }
-    .logo-size-box { background: var(--surface); padding: 22px 26px; flex: 1; }
-    .logo-size-role { font-family: var(--mono); font-size: 9px; letter-spacing: .1em; color: #666; text-transform: uppercase; margin-bottom: 6px; }
-    .logo-size-val { font-size: 18px; font-weight: 700; color: var(--amber); }
-    .logo-size-note { font-size: 11px; font-weight: 300; color: #888; margin-top: 3px; }
-
-    /* ─── Paleta ─── */
-    .swatches { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr; gap: 1px; }
-    .sw { height: 160px; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px 14px; }
-    .sw-name { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 3px; }
-    .sw-hex { font-family: var(--mono); font-size: 10px; opacity: .65; }
-    .sw-use { font-size: 9px; opacity: .5; margin-top: 6px; line-height: 1.4; }
-    .sem { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin-top: 1px; }
-    .sem-box { background: var(--surface-2); padding: 22px 18px; }
-    .sem-lbl { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 7px; }
-    .sem-desc { font-size: 13px; font-weight: 300; color: #999; }
-
-    /* ─── Tipografia ─── */
-    .type-table { border-top: 1px solid var(--border); margin-bottom: 56px; }
-    .t-row { display: grid; grid-template-columns: 130px 1fr 120px 100px; align-items: center; border-bottom: 1px solid var(--border); }
-    .t-row > * { padding: 18px 0; }
-    .t-role { font-family: var(--mono); font-size: 9px; letter-spacing: .1em; color: #666; text-transform: uppercase; }
-    .t-spec { font-family: var(--mono); font-size: 10px; color: #666; }
-
-    /* ─── Tom de voz ─── */
-    .voice { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; }
-    .vc { background: var(--surface); padding: 32px 28px; }
-    .vc-attr { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: .2em; color: var(--amber); text-transform: uppercase; margin-bottom: 20px; }
-    .vc-ex { margin-bottom: 14px; }
-    .vc-lbl { font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: .12em; margin-bottom: 7px; }
-    .vc-yes .vc-lbl { color: var(--green); }
-    .vc-no .vc-lbl { color: var(--red); }
-    .vc-txt { font-size: 13px; font-weight: 300; color: #aaa; line-height: 1.55; padding: 10px 14px; border-left: 2px solid; }
-    .vc-yes .vc-txt { border-color: var(--green); }
-    .vc-no .vc-txt { border-color: var(--red); text-decoration: line-through; opacity: .4; }
-
-    /* ─── Painel ─── */
-    .panel-kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; margin-bottom: 1px; }
-    .pkpi { background: var(--surface); padding: 28px 24px; border-top: 2px solid var(--amber); }
-    .pkpi.green { border-top-color: var(--green); }
-    .pkpi.cyan  { border-top-color: #2fb7c6; }
-    .pkpi-lbl { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; color: #666; text-transform: uppercase; margin-bottom: 10px; }
-    .pkpi-val { font-family: var(--mono); font-size: 28px; font-weight: 500; line-height: 1; margin-bottom: 6px; }
-    .pkpi-val.amb  { color: var(--amber); }
-    .pkpi-val.grn  { color: var(--green); }
-    .pkpi-val.cyn  { color: #2fb7c6; }
-    .pkpi-note { font-size: 11px; font-weight: 300; color: #777; }
-
-    .panel-modules { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin-top: 1px; }
-    .pmod { background: var(--surface-2); padding: 22px 20px; display: flex; gap: 14px; align-items: flex-start; }
-    .pmod-n { font-family: var(--mono); font-size: 9px; color: #444; flex-shrink: 0; margin-top: 3px; }
-    .pmod-body {}
-    .pmod-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-    .pmod-desc { font-size: 11px; font-weight: 300; color: #888; line-height: 1.5; }
-    .pmod-tag { display: inline-flex; margin-top: 6px; font-family: var(--mono); font-size: 8px; letter-spacing: .12em; color: var(--amber); text-transform: uppercase; background: rgba(245,158,11,.08); padding: 2px 8px; }
-
-    .panel-stack { background: #050505; border: 1px solid var(--border); padding: 24px 32px; margin-top: 1px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .stack-label { font-family: var(--mono); font-size: 9px; letter-spacing: .16em; color: #555; text-transform: uppercase; }
-    .stack-items { display: flex; gap: 1px; flex: 1; }
-    .stack-item { background: var(--surface); padding: 10px 16px; font-family: var(--mono); font-size: 11px; color: #888; }
-    .stack-item strong { color: var(--text); }
-    .stack-note { font-family: var(--mono); font-size: 9px; color: #444; max-width: 200px; line-height: 1.5; }
-
-    /* ─── Serviços ─── */
-    .modes { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin-bottom: 1px; }
-    .mode { background: var(--surface); padding: 28px 24px; }
-    .mode-tag { font-family: var(--mono); font-size: 9px; letter-spacing: .18em; color: var(--amber); text-transform: uppercase; margin-bottom: 10px; }
-    .mode-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-    .mode-desc { font-size: 12px; font-weight: 300; color: #999; line-height: 1.6; }
-    .catalog { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin-top: 1px; }
-    .cat-group { background: var(--surface-2); padding: 24px 20px; }
-    .cat-title { font-family: var(--mono); font-size: 9px; letter-spacing: .18em; color: var(--amber); text-transform: uppercase; margin-bottom: 14px; border-bottom: 1px solid var(--border); padding-bottom: 9px; }
-    .cat-items { display: flex; flex-direction: column; gap: 7px; }
-    .cat-item { font-size: 12px; font-weight: 300; color: #999; display: flex; gap: 8px; }
-    .cat-item::before { content: '--'; color: #333; flex-shrink: 0; font-family: var(--mono); }
-
-    /* ─── Proibições ─── */
-    .prohib { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; }
-    .pb { background: var(--surface); padding: 28px 22px; border-top: 2px solid var(--red); }
-    .pb-x { font-family: var(--mono); font-size: 18px; color: var(--red); margin-bottom: 10px; font-weight: 700; }
-    .pb-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-    .pb-desc { font-size: 12px; font-weight: 300; color: #999; line-height: 1.55; }
-
-    /* ─── Footer ─── */
-    .pg-footer {
-      background: #050505; padding: 32px 56px;
-      display: flex; justify-content: space-between; align-items: center;
-      border-top: 1px solid var(--border);
-    }
-    .pg-footer span { font-family: var(--mono); font-size: 9px; color: #444; letter-spacing: .14em; text-transform: uppercase; }
-  </style>
+  <link rel="stylesheet" href="/assets/theme.css" />
+  <link rel="stylesheet" href="/slides/manual-marca.page.css" />
 </head>
-<body>
+<body class="manual-doc">
 
 <!-- NAV TOPO -->
 <nav class="top-nav">
-  <img src="/brand-studio/assets/luniq-logo-transparente-escuro.svg" alt="Luniq" />
+  <img src="/assets/luniq-logo-transparente-claro.svg" alt="Luniq" />
   <a href="../index.html">← Voltar ao Hub</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-inner">
   <div class="hero-logo">
     <div class="hero-logo-wm"><span class="l">L</span><span class="u">UNIQ</span></div>
     <div class="hero-logo-div"></div>
@@ -268,6 +27,7 @@
   <p class="hero-sub">Anderson Almeida · Administrador de Empresas</p>
   <h1 class="hero-tagline">Inteligência que<br><em>transforma gestão.</em></h1>
   <p class="hero-doc">Manual da Marca · 2026</p>
+  </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════
@@ -367,7 +127,7 @@
 <div><div class="wrap">
   <div class="section-tag">03 · Logotipo</div>
   <h2 class="section-h">O L que carrega<br>duas histórias.</h2>
-  <p class="section-lead">O logotipo é um wordmark puro. O <strong>L</strong> em amber é o símbolo — a inicial de Liz e Lara, e o "lu" de luz. <strong>UNIQ</strong> em branco ancora a identidade. O descritor posiciona o negócio. Nenhum elemento é decorativo.</p>
+  <p class="section-lead">O logotipo é um wordmark puro. O <strong>L</strong> em amber é o símbolo — a inicial de Liz e Lara, e o "lu" de luz. <strong>UNIQ</strong> em graphite (#0a0a0a) sobre fundos claros, ou em branco sobre fundos escuros. O descritor posiciona o negócio. Nenhum elemento é decorativo.</p>
 
   <div class="logo-grid">
     <div class="lb lb-dark">
@@ -398,7 +158,7 @@
     <div class="anat-title">Anatomia do símbolo</div>
     <div class="anat-notes">
       <div class="anat-note"><div class="anat-dot" style="background:var(--amber)"></div><div class="anat-txt"><strong>L em amber (#f59e0b)</strong> — inicial de Liz (2021) e Lara (2026). O "lu" de luz. O elemento que diferencia a marca e ancora seu significado mais profundo. Nunca substituir por outra cor.</div></div>
-      <div class="anat-note"><div class="anat-dot" style="background:#fff"></div><div class="anat-txt"><strong>UNIQ em branco</strong> — limpo, direto, sem ruído. Completa o wordmark e ancora a identidade. O contraste proposital entre L âmbar e UNIQ branco cria hierarquia visual instantânea.</div></div>
+      <div class="anat-note"><div class="anat-dot" style="background:#0a0a0a"></div><div class="anat-txt"><strong>UNIQ em graphite ou branco</strong> — sobre fundo claro, use #0a0a0a. Sobre fundo escuro, inverta para branco. O contraste com o L âmbar mantém a hierarquia em qualquer contexto.</div></div>
       <div class="anat-note"><div class="anat-dot" style="background:#2a2a2a"></div><div class="anat-txt"><strong>Linha divisora + descritor</strong> — posiciona o negócio sem poluir o wordmark. "INTELIGENCIA FINANCEIRA" em DM Mono, lê como especialidade — não como slogan.</div></div>
       <div class="anat-note"><div class="anat-dot" style="background:var(--amber);opacity:.35"></div><div class="anat-txt"><strong>Versão mínima</strong> — em aplicações pequenas (favicon, avatar, rodapé), apenas "LUNIQ" sem o descritor. O L em amber já identifica a marca.</div></div>
     </div>
@@ -420,13 +180,13 @@
   <h2 class="section-h">Cor com significado.</h2>
 
   <div class="swatches">
-    <div class="sw" style="background:#f59e0b;color:#0a0a0a"><div class="sw-name">Amber</div><div class="sw-hex">#f59e0b</div><div class="sw-use">Brand · L da logo · Destaques · Amber obrigatório</div></div>
-    <div class="sw" style="background:#0a0a0a;color:rgba(255,255,255,.88)"><div class="sw-name">Black</div><div class="sw-hex">#0a0a0a</div><div class="sw-use">Base · Fundo principal</div></div>
-    <div class="sw" style="background:#111111;color:rgba(255,255,255,.88)"><div class="sw-name">Surface</div><div class="sw-hex">#111111</div><div class="sw-use">Cards · Seções alternadas</div></div>
-    <div class="sw" style="background:#161616;color:rgba(255,255,255,.88)"><div class="sw-name">Raised</div><div class="sw-hex">#161616</div><div class="sw-use">Elevado · Hover · Formulários</div></div>
-    <div class="sw" style="background:#1e1e1e;color:rgba(255,255,255,.88)"><div class="sw-name">Border</div><div class="sw-hex">#1e1e1e</div><div class="sw-use">Linhas · Dividers · Separadores</div></div>
-    <div class="sw" style="background:#22c55e;color:rgba(255,255,255,.88)"><div class="sw-name">Green</div><div class="sw-hex">#22c55e</div><div class="sw-use">Positivo · Crescimento · Realizado</div></div>
-    <div class="sw" style="background:#ef4444;color:rgba(255,255,255,.88)"><div class="sw-name">Red</div><div class="sw-hex">#ef4444</div><div class="sw-use">Alerta · Negativo · Desvio</div></div>
+    <div class="sw" style="background:#f59e0b;color:#0a0a0a"><div class="sw-name">Amber</div><div class="sw-hex">#f59e0b</div><div class="sw-use">Brand · L da logo · Destaques · Accent obrigatório</div></div>
+    <div class="sw" style="background:#0a0a0a;color:rgba(255,255,255,.9)"><div class="sw-name">Graphite</div><div class="sw-hex">#0a0a0a</div><div class="sw-use">Texto principal · UI escura · alto contraste</div></div>
+    <div class="sw" style="background:#f0f0ea;color:#0a0a0a;border-right:1px solid #e2e2dc"><div class="sw-name">Canvas</div><div class="sw-hex">#f0f0ea</div><div class="sw-use">Fundo de página · base do tema claro</div></div>
+    <div class="sw" style="background:#ffffff;color:#0a0a0a;border-right:1px solid #e2e2dc"><div class="sw-name">Surface</div><div class="sw-hex">#ffffff</div><div class="sw-use">Cards · modais · blocos principais</div></div>
+    <div class="sw" style="background:#fafaf7;color:#0a0a0a;border-right:1px solid #e2e2dc"><div class="sw-name">Raised</div><div class="sw-hex">#fafaf7</div><div class="sw-use">Inputs · faixas alternadas · elevação leve</div></div>
+    <div class="sw" style="background:#22c55e;color:rgba(255,255,255,.9)"><div class="sw-name">Green</div><div class="sw-hex">#22c55e</div><div class="sw-use">Positivo · crescimento · realizado</div></div>
+    <div class="sw" style="background:#ef4444;color:rgba(255,255,255,.9)"><div class="sw-name">Red</div><div class="sw-hex">#ef4444</div><div class="sw-use">Alerta · negativo · desvio</div></div>
   </div>
   <div class="sem">
     <div class="sem-box" style="border-top:2px solid var(--green)"><div class="sem-lbl" style="color:var(--green)">Positivo / Crescimento</div><div class="sem-desc">Verde em toda leitura de resultado acima da meta ou realizado positivo. Sempre. Sem exceções decorativas.</div></div>
@@ -444,6 +204,7 @@
   <div style="font-size:clamp(40px,7vw,80px);font-weight:800;letter-spacing:-.045em;line-height:1;margin-bottom:48px;color:var(--text)">
     Construído <em style="font-style:normal;color:var(--amber)">por dentro.</em>
   </div>
+  <div class="type-panel">
   <div class="type-table">
     <div class="t-row">
       <div class="t-role">Display</div>
@@ -465,13 +226,13 @@
     </div>
     <div class="t-row">
       <div class="t-role">Body</div>
-      <div style="font-size:14px;font-weight:300;color:#bbb">Resultados financeiros claros, sem ambiguidade.</div>
+      <div style="font-size:14px;font-weight:300;color:var(--muted)">Resultados financeiros claros, sem ambiguidade.</div>
       <div class="t-spec">Plus Jakarta Sans 300</div>
       <div class="t-spec">13–15px</div>
     </div>
     <div class="t-row">
       <div class="t-role">Label / UI</div>
-      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:#888;text-transform:uppercase">RECEITA BRUTA · YTD · REALIZADO</div>
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase">RECEITA BRUTA · YTD · REALIZADO</div>
       <div class="t-spec">DM Mono 400</div>
       <div class="t-spec">8–11px</div>
     </div>
@@ -481,6 +242,7 @@
       <div class="t-spec">DM Mono 500</div>
       <div class="t-spec">Todos os valores numéricos</div>
     </div>
+  </div>
   </div>
 </div></div>
 

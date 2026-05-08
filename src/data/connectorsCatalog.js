@@ -12,7 +12,7 @@ export const financialConnectors = [
     logoUrl: "https://www.google.com/s2/favicons?domain=granatum.com.br&sz=64",
     status: "connected",
     mode: "Fonte ativa",
-    description: "Base operacional ja funcional no painel Luniq.",
+    description: "Base operacional ja funcional no painel 2AS.",
     docsUrl: "https://www.granatum.com.br/",
     credentials: ["GRANATUM_TOKEN"],
     entities: [
@@ -70,11 +70,11 @@ export const financialConnectors = [
       "Relatorios executivos",
       "Base demo",
       "Diagnostico da estrutura",
-      "Planilha modelo Luniq",
+      "Planilha modelo 2AS",
     ],
     templateMap: [
       "Identificar abas disponiveis, gids, cabecalhos e ranges usados pelo painel.",
-      "Comparar a planilha do cliente com o layout minimo Luniq: saldos, DRE, orcamento, contas, fluxo e riscos.",
+      "Comparar a planilha do cliente com o layout mínimo 2AS: saldos, DRE, orcamento, contas, fluxo e riscos.",
       "Apontar colunas ausentes, colunas extras e campos com nomes fora do padrao.",
       "Gerar especificacao de planilha modelo para onboarding e migracao assistida.",
     ],
@@ -191,5 +191,5 @@ export const financialConnectors = [
 export const connectorReadiness = [
   { label: "Fontes ativas", value: "2", text: "Granatum e Google Sheets API alimentam as leituras atuais." },
   { label: "Pre-configurados", value: "3", text: "Conta Azul, Omie e Nibo estao mapeados para conexao futura." },
-  { label: "Contrato Luniq", value: "Unico", text: "Os dados entram por adapters e saem em entidades financeiras padronizadas." },
+  { label: "Contrato 2AS", value: "Unico", text: "Os dados entram por adapters e saem em entidades financeiras padronizadas." },
 ];

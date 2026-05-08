@@ -13,12 +13,12 @@ function LogoLuniq({ size = 40, minimal = false, onlyL = false }) {
   const light = T.mode === "light";
   const uniqColor = light ? "#0a0a0a" : "#ffffff";
   const wm = { fontFamily:"'Plus Jakarta Sans',system-ui,sans-serif", fontSize:size, fontWeight:800, letterSpacing:"-.04em", lineHeight:1 };
-  if (onlyL) return <span style={{ ...wm, color:"#f59e0b" }}>L</span>;
+  if (onlyL) return <span style={{ ...wm, color:"#f59e0b" }}>2</span>;
   return (
     <div style={{ display:"flex", flexDirection:"column", gap: size * 0.16 }}>
       <div style={{ display:"flex", alignItems:"baseline", lineHeight:1 }}>
-        <span style={{ ...wm, color:"#f59e0b" }}>L</span>
-        <span style={{ ...wm, color: uniqColor }}>UNIQ</span>
+        <span style={{ ...wm, color:"#f59e0b" }}>2</span>
+        <span style={{ ...wm, color: uniqColor }}>AS</span>
       </div>
       {!minimal && <div style={{ height:".75px", background: light ? "#d8d8d2" : "#1c1c1c", width:"100%" }} />}
       {!minimal && <span style={{ fontFamily:"'DM Mono',monospace", fontSize: size * 0.175, letterSpacing:".22em", color: light ? "#aaaaaa" : "#444444", textTransform:"uppercase" }}>INTELIGENCIA FINANCEIRA</span>}
@@ -62,10 +62,10 @@ const SECOES = [
   },
   {
     id:    "inteligencia-luniq",
-    label: "Inteligência Luniq",
+    label: "Inteligência 2AS",
     desc:  "Metodologia, explicadores e benchmark",
     rotas: [
-      { id:"sistema-luniq", label:"Metodologia Luniq",  icon:"◎", Component:SistemaLuniq },
+      { id:"sistema-luniq", label:"Metodologia 2AS",  icon:"◎", Component:SistemaLuniq },
     ],
   },
   {

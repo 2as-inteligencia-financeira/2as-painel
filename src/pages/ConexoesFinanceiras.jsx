@@ -127,14 +127,14 @@ export default function ConexoesFinanceiras() {
         title="Conexões financeiras plugáveis"
         right={
           <Card style={{ padding:15 }}>
-            <SectionHeader title="Contrato Luniq" badge="read-only" />
+            <SectionHeader title="Contrato 2AS" badge="read-only" />
             <div style={{ color:T.sub, fontSize:11, lineHeight:1.45 }}>
               Cada ERP entra por um adapter, mas todos alimentam a mesma camada de inteligência: caixa, DRE, governança, comportamento e benchmark.
             </div>
           </Card>
         }
       >
-        Escolha o sistema financeiro, veja quais dados a Luniq usará e quais análises serão liberadas. Nesta etapa, Granatum e Google Sheets API estão funcionais; Conta Azul, Omie e Nibo ficam mapeados para conexão futura.
+        Escolha o sistema financeiro, veja quais dados a 2AS usará e quais análises serão liberadas. Nesta etapa, Granatum e Google Sheets API estão funcionais; Conta Azul, Omie e Nibo ficam mapeados para conexão futura.
       </ProductHero>
 
       <div className="intel-grid-3">

@@ -358,7 +358,7 @@ async function fetchPublicCsv(sheetUrl) {
   url.searchParams.set("cb", Date.now().toString());
 
   const response = await fetch(url, {
-    headers: { "User-Agent": "Luniq-Painel/1.0" },
+    headers: { "User-Agent": "2AS-Painel/1.0" },
   });
   const text = await response.text();
 

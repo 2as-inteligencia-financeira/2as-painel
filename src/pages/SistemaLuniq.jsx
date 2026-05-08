@@ -28,7 +28,7 @@ function CriterioScore({ model }) {
       <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", gap:16, marginBottom:16 }}>
         <div>
           <div style={{ fontSize:9, color:T.blue2, fontWeight:800, textTransform:"uppercase", letterSpacing:"0.06em", marginBottom:4 }}>Critério do Score</div>
-          <h3 style={{ margin:0, color:T.txt, fontSize:13, fontWeight:900 }}>Como a Luniq mede a saúde financeira</h3>
+          <h3 style={{ margin:0, color:T.txt, fontSize:13, fontWeight:900 }}>Como a 2AS mede a saúde financeira</h3>
           <p style={{ margin:"5px 0 0", color:T.muted, fontSize:11, lineHeight:1.45, maxWidth:520 }}>
             Score calculado automaticamente a partir de cinco dimensões. Cada uma tem peso definido por relevância operacional — sem opinião, sem estimativa.
           </p>
@@ -131,7 +131,7 @@ function MethodologyGuide() {
     {
       label: "3",
       title: "Comparar",
-      text: "Compara a empresa com referências internas Luniq e destaca o que está acima, abaixo ou incompleto.",
+      text: "Compara a empresa com referências internas 2AS e destaca o que está acima, abaixo ou incompleto.",
       color: T.purp,
     },
     {
@@ -146,7 +146,7 @@ function MethodologyGuide() {
     <Card style={{ padding:16 }}>
       <SectionHeader title="Como ler esta página" badge="guia rápido" />
       <div style={{ color:T.sub, fontSize:12, lineHeight:1.5, marginBottom:14 }}>
-        Esta tela não é um relatório operacional. Ela mostra a metodologia que a Luniq aplica em cima do Painel Base para sair de dados soltos e chegar em leitura executiva.
+        Esta tela não é um relatório operacional. Ela mostra a metodologia que a 2AS aplica em cima do Painel Base para sair de dados soltos e chegar em leitura executiva.
       </div>
       <div className="intel-grid-4">
         {steps.map(step => (
@@ -200,7 +200,7 @@ function FinancialExplainer({ explainer }) {
 function BenchmarkTable({ rows }) {
   return (
     <Card style={{ padding:16 }}>
-      <SectionHeader title="Benchmark Interno Luniq" badge="simulado" />
+      <SectionHeader title="Benchmark Interno 2AS" badge="simulado" />
       <div style={{ display:"flex", flexDirection:"column" }}>
         {rows.map((row, index) => {
           const color = row.status === "Acima" || row.status === "Dentro" || row.status === "Favorável" ? T.grn : row.status === "Parcial" ? T.amb : T.red;
@@ -261,7 +261,7 @@ export default function SistemaLuniq() {
   return (
     <div style={{ display:"flex", flexDirection:"column", gap:20, paddingBottom:42 }}>
       <ProductHero
-        eyebrow="Inteligência Luniq"
+        eyebrow="Inteligência 2AS"
         title="Metodologia de análise financeira"
         right={
           <Card style={{ padding:16 }}>
@@ -272,12 +272,12 @@ export default function SistemaLuniq() {
               <DataBadge label="Benchmark" tone="cyan" />
             </div>
             <div style={{ color:T.muted, fontSize:10, lineHeight:1.4, marginTop:10 }}>
-              Mostra como a Luniq transforma dados do painel em leitura, diagnóstico e decisão.
+              Mostra como a 2AS transforma dados do painel em leitura, diagnóstico e decisão.
             </div>
           </Card>
         }
       >
-        Esta página explica a metodologia por trás do Painel Base Luniq: score, explicador financeiro, comportamento, benchmark e cruzamentos gerenciais. As páginas operacionais continuam separadas em liquidez, performance, ciclo, governança e riscos.
+        Esta página explica a metodologia por trás do Painel Base 2AS: score, explicador financeiro, comportamento, benchmark e cruzamentos gerenciais. As páginas operacionais continuam separadas em liquidez, performance, ciclo, governança e riscos.
       </ProductHero>
 
       <Card style={{ padding:"10px 12px" }}>

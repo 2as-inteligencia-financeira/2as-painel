@@ -22,7 +22,7 @@ export const demoMeta = {
   company:"Empresa Demo",
   period:"YTD Jan-Jun 2026",
   lastUpdate:"27/04/2026 18:52",
-  source:"Base demo Luniq",
+  source:"Base demo 2AS",
 };
 
 const DEMO_PROFILE_ALIASES = Object.freeze({
@@ -41,7 +41,7 @@ const PROFILE_TUNING = Object.freeze({
   saudavel: {
     label: "Saudável",
     healthText: "operação estável",
-    source: "Base demo Luniq · Saudável",
+    source: "Base demo 2AS · Saudável",
     receita: 1,
     deducoes: 1,
     custos: 1,
@@ -60,7 +60,7 @@ const PROFILE_TUNING = Object.freeze({
   atencao: {
     label: "Atenção",
     healthText: "ponto de atenção",
-    source: "Base demo Luniq · Atenção",
+    source: "Base demo 2AS · Atenção",
     receita: 0.78,
     deducoes: 0.86,
     custos: 0.92,
@@ -79,7 +79,7 @@ const PROFILE_TUNING = Object.freeze({
   crise: {
     label: "Crise",
     healthText: "risco crítico",
-    source: "Base demo Luniq · Crise",
+    source: "Base demo 2AS · Crise",
     receita: 0.56,
     deducoes: 0.66,
     custos: 0.78,
@@ -378,7 +378,7 @@ export function buildFinancialIntelligence(profileOrCompanyId = "saudavel") {
       { area:"Risco Operacional", nivel:"Monitorar", titulo:"Cancelamentos e chargebacks afetam receita líquida", texto:"O risco acumulado representa exposição relevante e deve entrar na rotina de governança.", rota:"op-cancelamentos" },
     ],
     planoAcao: [
-      { dono:"CFO Luniq", decisao:"Revisar calendário de pagamentos críticos", impacto:"Evita compressão de caixa", prazo:"Esta semana" },
+      { dono:"CFO 2AS", decisao:"Revisar calendário de pagamentos críticos", impacto:"Evita compressão de caixa", prazo:"Esta semana" },
       { dono:"Comercial", decisao:"Antecipar recebíveis com melhor margem", impacto:"Melhora runway sem dívida nova", prazo:"7 dias" },
       { dono:"Operação", decisao:"Reduzir causas de cancelamento e disputa", impacto:"Protege receita líquida", prazo:"15 dias" },
       { dono:"Diretoria", decisao:"Validar orçamento revisado do trimestre", impacto:"Alinha crescimento e margem", prazo:"Próxima reunião" },
