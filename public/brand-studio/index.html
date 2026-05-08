@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2AS Brand Studio</title>
+  <!-- Auth Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script>
+    (async function() {
+      const SUPA_URL = 'https://fxjrknvaqioabykebibi.supabase.co';
+      const SUPA_KEY = 'sb_publishable_YO_QOpuugvZMbTNMlbsqeA_Bfr9YvTk';
+      const client = supabase.createClient(SUPA_URL, SUPA_KEY);
+
+      // ALTO-02: origens autorizadas a enviar token (apenas hub em produção)
+      const TRUSTED_HUB_ORIGINS = [
+        'https://hub.2asfinancas.com',
+        'https://app.2asfinancas.com',
+        ...(location.hostname === 'localhost' ? ['http://localhost:5173', 'http://localhost:3000'] : []),
+      ];
+
+      // ALTO-02: recebe token via postMessage — nunca via URL
+      if (window.opener && !window.opener.closed) {
+        await new Promise(function(resolve) {
+          var timeout = setTimeout(resolve, 10000);
+          function handler(event) {
+            if (!TRUSTED_HUB_ORIGINS.includes(event.origin)) return;
+            if (!event.data || event.data.type !== 'painel:token') return;
+            clearTimeout(timeout);
+            window.removeEventListener('message', handler);
+            var access_token = event.data.access_token;
+            var refresh_token = event.data.refresh_token;
+            if (access_token && refresh_token) {
+              client.auth.setSession({ access_token: access_token, refresh_token: refresh_token }).then(resolve);
+            } else {
+              resolve();
+            }
+          }
+          window.addEventListener('message', handler);
+          try { window.opener.postMessage({ type: 'painel:ready' }, '*'); }
+          catch(e) { clearTimeout(timeout); window.removeEventListener('message', handler); resolve(); }
+        });
+      }
+
+      const { data: { session } } = await client.auth.getSession();
+      if (!session) {
+        window.location.href = 'https://app.2asfinancas.com';
+      }
+    })();
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/theme.css" />
+  <style>
+    html, body { min-height: 100%; }
+    body { background: var(--bg); font-family: var(--sans); color: var(--text); }
+
+    /* ── NAV ── */
+    .top-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 56px; border-bottom: 1px solid var(--border);
+      background: var(--surface); position: sticky; top: 0; z-index: 99;
+    }
+    .top-nav-logo { display: flex; align-items: baseline; gap: 0; line-height: 1; }
+    .top-nav-logo .l { font-size: 22px; font-weight: 800; color: var(--amber); letter-spacing: -.04em; }
+    .top-nav-logo .u { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -.04em; }
+    .top-nav-tag { font-family: var(--mono); font-size: 9px; letter-spacing: .2em; color: var(--dim); text-transform: uppercase; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 56vh; display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: flex-end;
+      padding: 80px 56px 64px;
+      background:
+        radial-gradient(ellipse 55% 65% at 80% 40%, rgba(245,158,11,.08) 0%, transparent 65%),
+        var(--bg);
+      position: relative; overflow: hidden; border-bottom: 1px solid var(--border);
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(15,15,10,.09) 1px, transparent 1px);
+      background-size: 28px 28px; pointer-events: none;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .hero-over { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; color: var(--dim); text-transform: uppercase; margin-bottom: 32px; }
+    .hero h1 { font-size: clamp(44px,7vw,88px); font-weight: 800; letter-spacing: -.045em; line-height: 1; margin-bottom: 20px; color: var(--text); }
+    .hero h1 em { font-style: normal; color: var(--amber); }
+    .hero-desc { font-size: 16px; font-weight: 300; color: var(--muted); max-width: 560px; line-height: 1.72; border-left: 2px solid var(--border); padding-left: 20px; }
+
+    /* ── GRID ── */
+    .section-wrap { padding: 64px 56px 80px; }
+    .section-label { font-family: var(--mono); font-size: 9px; letter-spacing: .22em; color: var(--amber); text-transform: uppercase; margin-bottom: 32px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; }
+    .card {
+      background: var(--surface); padding: 36px 32px 32px;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: background .2s; position: relative; overflow: hidden;
+      cursor: pointer;
+    }
+    .card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--amber); transform: scaleX(0);
+      transform-origin: left; transition: transform .3s;
+    }
+    .card:hover { background: var(--surface-2); }
+    .card:hover::after { transform: scaleX(1); }
+    .card-tag { font-family: var(--mono); font-size: 9px; letter-spacing: .2em; color: var(--amber); text-transform: uppercase; }
+    .card-title { font-size: 18px; font-weight: 800; letter-spacing: -.02em; color: var(--text); line-height: 1.2; }
+    .card-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.65; flex: 1; }
+    .card-arrow { font-family: var(--mono); font-size: 11px; color: var(--dim); transition: color .2s; margin-top: 8px; }
+    .card:hover .card-arrow { color: var(--amber); }
+    .card.deck .card-tag::before { content: '▷  '; }
+    .card.doc .card-tag::before { content: '◑  '; }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--border); padding: 24px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--surface);
+    }
+    .footer-left { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; color: var(--dim); text-transform: uppercase; }
+    .footer-right { font-family: var(--mono); font-size: 9px; letter-spacing: .14em; color: var(--dim); text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-logo"><span class="l"<>2</span><span style="color:#fff">AS</span></div>
+  <span class="top-nav-tag">Brand Studio · 2026</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-over">2AS Inteligência Financeira · Brand Studio</div>
+  <h1>Marca,<br>materiais e<br><em>método.</em></h1>
+  <p class="hero-desc">Manual de marca, apresentações comerciais, pitch e portfólio de soluções — com a linguagem visual e narrativa que define a 2AS.</p>
+</header>
+
+<div class="section-wrap">
+  <div class="section-label">Materiais disponíveis</div>
+  <div class="cards">
+
+    <a class="card doc" href="./slides/manual-marca.html">
+      <span class="card-tag">Documento</span>
+      <div class="card-title">Manual da Marca</div>
+      <p class="card-desc">Identidade completa: origem, VMV, logotipo, paleta, tipografia, tom de voz, arquitetura de serviços e proibições.</p>
+      <span class="card-arrow">Abrir manual →</span>
+    </a>
+
+    <a class="card deck" href="./slides/apresentacao.html">
+      <span class="card-tag">Deck · 8 slides</span>
+      <div class="card-title">Apresentação Comercial</div>
+      <p class="card-desc">Deck completo para prospect: quem é Anderson, o problema, a 2AS, serviços, método, prova de capacidade e CTA.</p>
+      <span class="card-arrow">Abrir deck →</span>
+    </a>
+
+    <a class="card deck" href="./slides/pitch.html">
+      <span class="card-tag">Deck · 6 slides</span>
+      <div class="card-title">Pitch Executivo</div>
+      <p class="card-desc">Versão compacta para diretores e investidores: problema, quem é, pilares, diferenciais e próximo passo.</p>
+      <span class="card-arrow">Abrir pitch →</span>
+    </a>
+
+    <a class="card doc" href="./slides/logo-showcase.html">
+      <span class="card-tag">Referência visual</span>
+      <div class="card-title">Logo Showcase</div>
+      <p class="card-desc">As 4 versões da marca (escuro, claro, transparentes), sistema de tamanhos e especificações técnicas.</p>
+      <span class="card-arrow">Ver logos →</span>
+    </a>
+
+    <a class="card doc" href="./slides/precificacao.html">
+      <span class="card-tag">Proposta comercial</span>
+      <div class="card-title">Precificação</div>
+      <p class="card-desc">Estrutura de investimento: setup, mensalidade por plano, projetos especiais e critérios de composição de proposta.</p>
+      <span class="card-arrow">Ver preços →</span>
+    </a>
+
+    <a class="card doc" href="./slides/solucoes.html">
+      <span class="card-tag">Portfólio</span>
+      <div class="card-title">SaaS · CFO · BPO</div>
+      <p class="card-desc">Os três formatos de entrega da 2AS, combinações de oferta por objetivo e critério de escolha por maturidade do cliente.</p>
+      <span class="card-arrow">Ver soluções →</span>
+    </a>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <span class="footer-left">2AS Inteligência Financeira · Anderson Almeida</span>
+  <span class="footer-right">Brand Studio · 2026</span>
+</footer>
+
+</body>
+</html>

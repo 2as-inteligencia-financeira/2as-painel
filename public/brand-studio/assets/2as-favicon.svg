@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <rect width="80" height="80" rx="18" fill="#0a0a0a"/>
+  <text font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif"
+    font-size="38" font-weight="800" letter-spacing="-1" y="54" x="8">
+    <tspan fill="#f59e0b">2</tspan><tspan fill="#ffffff">AS</tspan>
+  </text>
+</svg>
