@@ -28,7 +28,7 @@ function sheetsApiMiddleware() {
 
         if (!isAuthorized(req.headers)) {
           res.statusCode = 401
-          res.setHeader('WWW-Authenticate', 'Basic realm="Luniq Painel", charset="UTF-8"')
+          res.setHeader('WWW-Authenticate', 'Basic realm="2AS Painel", charset="UTF-8"')
           res.setHeader('Cache-Control', 'no-store')
           res.end('Authentication required')
           return
@@ -70,7 +70,7 @@ function granatumApiMiddleware() {
 
         if (!isAuthorized(req.headers)) {
           res.statusCode = 401
-          res.setHeader('WWW-Authenticate', 'Basic realm="Luniq Painel", charset="UTF-8"')
+          res.setHeader('WWW-Authenticate', 'Basic realm="2AS Painel", charset="UTF-8"')
           res.setHeader('Cache-Control', 'no-store')
           res.end('Authentication required')
           return

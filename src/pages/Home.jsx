@@ -59,7 +59,7 @@ function HealthScore({ model }) {
           <div style={{ color:T.sub, fontSize:11, lineHeight:1.4, marginTop:5 }}>Atenção principal em caixa semanal, ciclo financeiro e riscos de receita.</div>
         </div>
       </div>
-      <button onClick={() => go("sistema-luniq")} style={{ border:`1px solid ${T.brd2}`, background:T.surf, color:T.blue2, borderRadius:6, padding:"8px 10px", fontSize:11, fontWeight:800 }}>
+      <button onClick={() => go("sistema-2as")} style={{ border:`1px solid ${T.brd2}`, background:T.surf, color:T.blue2, borderRadius:6, padding:"8px 10px", fontSize:11, fontWeight:800 }}>
         Abrir Metodologia 2AS
       </button>
     </Card>

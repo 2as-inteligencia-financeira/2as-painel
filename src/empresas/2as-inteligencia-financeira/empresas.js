@@ -52,6 +52,8 @@ const EMPRESAS_INDEX = new Map(EMPRESAS.map(empresa => [empresa.id, empresa]));
 
 const LEGACY_ALIASES = Object.freeze({
   "luniq-demo": "demo-saudavel",
+  "luniq-inteligencia-financeira": "demo-saudavel",
+  "2as-demo": "demo-saudavel",
   "2as-inteligencia-financeira": "demo-saudavel",
   "cliente-growth": "demo-atencao",
 });

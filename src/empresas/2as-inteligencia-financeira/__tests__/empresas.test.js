@@ -24,6 +24,8 @@ describe("registro de empresas demo", () => {
 
   it("resolve IDs legados para os novos perfis", () => {
     expect(resolveEmpresaId("luniq-demo")).toBe("demo-saudavel");
+    expect(resolveEmpresaId("luniq-inteligencia-financeira")).toBe("demo-saudavel");
+    expect(resolveEmpresaId("2as-demo")).toBe("demo-saudavel");
     expect(resolveEmpresaId("2as-inteligencia-financeira")).toBe("demo-saudavel");
     expect(resolveEmpresaId("cliente-growth")).toBe("demo-atencao");
     expect(resolveEmpresaId("desconhecido")).toBe(DEFAULT_EMPRESA_ID);

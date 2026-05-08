@@ -1,4 +1,4 @@
-# Luniq Financas
+# 2AS Painel
 
 Painel financeiro executivo construído com React, Vite e funções serverless na Vercel.
 

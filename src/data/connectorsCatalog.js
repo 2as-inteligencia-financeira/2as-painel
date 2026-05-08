@@ -45,7 +45,7 @@ export const financialConnectors = [
     logoUrl: "https://www.google.com/s2/favicons?domain=sheets.google.com&sz=64",
     status: "connected",
     mode: "Fonte ativa",
-    description: "Fonte ja configurada para ler planilhas publicas, privadas e abas auxiliares, com mapeamento para gerar uma planilha modelo Luniq.",
+    description: "Fonte ja configurada para ler planilhas publicas, privadas e abas auxiliares, com mapeamento para gerar uma planilha modelo 2AS.",
     docsUrl: "https://developers.google.com/sheets/api",
     credentials: ["GOOGLE_SERVICE_ACCOUNT_EMAIL", "GOOGLE_PRIVATE_KEY", "SHEET_URL_*", "SHEET_ID_*"],
     entities: [

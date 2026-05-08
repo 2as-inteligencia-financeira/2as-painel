@@ -9,3 +9,8 @@ dist/
 Thumbs.db
 
 .vercel
+
+# Gerado por scripts/create-2as-pitch.mjs (deck + previews locais)
+docs/*.pptx
+docs/2as-pitch-preview/
+docs/luniq-pitch-preview/

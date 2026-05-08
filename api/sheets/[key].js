@@ -7,7 +7,7 @@ function send(res, status, body, headers = {}) {
 }
 
 function unauthorized(res) {
-  res.setHeader("WWW-Authenticate", 'Bearer realm="Luniq Painel"');
+  res.setHeader("WWW-Authenticate", 'Bearer realm="2AS Painel"');
   send(res, 401, "Authentication required", {
     "Cache-Control": "no-store",
   });

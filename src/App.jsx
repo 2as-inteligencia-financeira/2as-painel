@@ -9,7 +9,7 @@ import SidebarRouteItem from "./components/SidebarRouteItem.jsx";
 
 const SIDEBAR_W = 246;
 
-function LogoLuniq({ size = 40, minimal = false, onlyL = false }) {
+function Logo2AS({ size = 40, minimal = false, onlyL = false }) {
   const light = T.mode === "light";
   const uniqColor = light ? "#0a0a0a" : "#ffffff";
   const wm = { fontFamily:"'Plus Jakarta Sans',system-ui,sans-serif", fontSize:size, fontWeight:800, letterSpacing:"-.04em", lineHeight:1 };
@@ -33,7 +33,7 @@ const lazyWithPreload = (loader) => {
 };
 
 const Home                 = lazyWithPreload(() => import("./pages/Home"));
-const SistemaLuniq         = lazyWithPreload(() => import("./pages/Sistema2AS"));
+const Sistema2AS           = lazyWithPreload(() => import("./pages/Sistema2AS"));
 const ConexoesFinanceiras  = lazyWithPreload(() => import("./pages/ConexoesFinanceiras"));
 const CicloFinanceiro      = lazyWithPreload(() => import("./pages/CicloFinanceiro"));
 const FluxoHistorico       = lazyWithPreload(() => import("./pages/FluxoHistorico"));
@@ -49,7 +49,7 @@ const CancelamentosPage    = lazyWithPreload(() => import("./pages/operacional/C
 const ChargebacksPage      = lazyWithPreload(() => import("./pages/operacional/Chargebacks"));
 const Relatorio            = lazyWithPreload(() => import("./pages/Relatorio"));
 
-// ─── ESTRUTURA CONCEITUAL LUNIQ ────────────────────────────────────────────────
+// ─── ESTRUTURA CONCEITUAL 2AS ─────────────────────────────────────────────────
 // Seções representam a jornada de inteligência financeira do painel.
 const SECOES = [
   {
@@ -61,11 +61,11 @@ const SECOES = [
     ],
   },
   {
-    id:    "inteligencia-luniq",
+    id:    "inteligencia-2as",
     label: "Inteligência 2AS",
     desc:  "Metodologia, explicadores e benchmark",
     rotas: [
-      { id:"sistema-luniq", label:"Metodologia 2AS",  icon:"◎", Component:SistemaLuniq },
+      { id:"sistema-2as", label:"Metodologia 2AS",  icon:"◎", Component:Sistema2AS },
     ],
   },
   {
@@ -135,7 +135,18 @@ const SECOES = [
 
 // Lista plana derivada das seções
 const ROTAS = SECOES.flatMap(s => s.rotas);
-const DEFAULT_FAVORITES = ["home", "sistema-luniq", "conexoes-financeiras", "fluxo-projetado", "ciclo-financeiro", "relatorio"];
+const DEFAULT_FAVORITES = ["home", "sistema-2as", "conexoes-financeiras", "fluxo-projetado", "ciclo-financeiro", "relatorio"];
+
+// IDs de rota antigos (favoritos/bookmarks) -> novos
+const ROUTE_ID_ALIASES = Object.freeze({
+  "sistema-luniq": "sistema-2as",
+});
+
+function normalizeRouteId(routeId) {
+  if (!routeId) return routeId;
+  const id = String(routeId).trim();
+  return ROUTE_ID_ALIASES[id] || id;
+}
 
 const normalizeSearch = value => String(value || "")
   .normalize("NFD")
@@ -147,7 +158,9 @@ const readStoredList = (key, fallback = []) => {
   if (typeof window === "undefined") return fallback;
   try {
     const parsed = JSON.parse(window.localStorage.getItem(key) || "[]");
-    return Array.isArray(parsed) ? parsed.filter(id => ROTAS.some(r => r.id === id)) : fallback;
+    if (!Array.isArray(parsed)) return fallback;
+    const normalized = parsed.map(id => normalizeRouteId(id));
+    return normalized.filter(id => ROTAS.some(r => r.id === id));
   } catch {
     return fallback;
   }
@@ -169,12 +182,14 @@ const DEFAULT_ROUTE = "home";
 function getRouteFromUrl() {
   if (typeof window === "undefined") return DEFAULT_ROUTE;
   const url = new URL(window.location.href);
-  const route = (url.searchParams.get("view") || "").trim();
-  return route || DEFAULT_ROUTE;
+  const raw = (url.searchParams.get("view") || "").trim();
+  if (!raw) return DEFAULT_ROUTE;
+  return normalizeRouteId(raw);
 }
 
 function ensureKnownRoute(route) {
-  return ROTAS.some(r => r.id === route) ? route : DEFAULT_ROUTE;
+  const normalized = normalizeRouteId(route);
+  return ROTAS.some(r => r.id === normalized) ? normalized : DEFAULT_ROUTE;
 }
 
 function syncRouteInUrl(route) {
@@ -219,7 +234,7 @@ function Login({ onLogin }) {
       <form onSubmit={submit} style={{ width:"100%", maxWidth:360, background:T.surf, border:`1px solid ${T.brd}`, borderRadius:4, padding:24, boxShadow:"0 18px 50px rgba(0,0,0,0.22)" }}>
         <div style={{ marginBottom:22 }}>
           <div style={{ marginBottom:18 }}>
-            <LogoLuniq size={36} />
+            <Logo2AS size={36} />
           </div>
           <h1 style={{ fontSize:20, fontWeight:700, margin:"0 0 6px", color:T.txt }}>{GRUPO_PRINCIPAL.nome}</h1>
           <p style={{ fontSize:12, color:T.muted, margin:0, lineHeight:1.45 }}>Acesso restrito ao painel de inteligência financeira.</p>
@@ -245,7 +260,7 @@ function EmpresaSelector({ onSelect }) {
     <div style={{ minHeight:"100vh", background:T.bg, color:T.txt, fontFamily:"'Plus Jakarta Sans', system-ui, sans-serif", display:"flex", alignItems:"center", justifyContent:"center", padding:24 }}>
       <div style={{ width:"100%", maxWidth:760 }}>
         <div style={{ marginBottom:22 }}>
-          <div style={{ marginBottom:20 }}><LogoLuniq size={48} /></div>
+          <div style={{ marginBottom:20 }}><Logo2AS size={48} /></div>
           <div style={{ fontSize:10, color:T.blue2, fontWeight:700, textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:8 }}>{GRUPO_PRINCIPAL.subtitulo}</div>
           <h1 style={{ fontSize:24, fontWeight:700, margin:"0 0 6px", color:T.txt }}>{GRUPO_PRINCIPAL.nome}</h1>
           <p style={{ fontSize:13, color:T.muted, margin:0 }}>Selecione o ambiente de análise que deseja acessar.</p>
@@ -399,8 +414,8 @@ export default function App() {
       <div style={{ height:56, background:T.surf, borderBottom:`1px solid ${T.brd}`, display:"flex", alignItems:"center", padding:"0 20px", gap:16, position:"sticky", top:0, zIndex:200, flexShrink:0 }}>
         <div style={{ display:"flex", alignItems:"center", minWidth: sidebar ? SIDEBAR_W : 48, overflow:"hidden", transition:"min-width 0.2s ease", flexShrink:0 }}>
           {sidebar
-            ? <LogoLuniq size={22} minimal />
-            : <LogoLuniq size={20} onlyL />
+            ? <Logo2AS size={22} minimal />
+            : <Logo2AS size={20} onlyL />
           }
         </div>
 

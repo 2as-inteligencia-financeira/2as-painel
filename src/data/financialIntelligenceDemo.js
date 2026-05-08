@@ -30,6 +30,8 @@ const DEMO_PROFILE_ALIASES = Object.freeze({
   "demo-atencao": "atencao",
   "demo-crise": "crise",
   "luniq-demo": "saudavel",
+  "luniq-inteligencia-financeira": "saudavel",
+  "2as-demo": "saudavel",
   "2as-inteligencia-financeira": "saudavel",
   "cliente-growth": "atencao",
   saudavel: "saudavel",

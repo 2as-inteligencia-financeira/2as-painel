@@ -1,11 +1,11 @@
-import pptxgen from "/Users/andersonalmeida/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/pptxgenjs/dist/pptxgen.es.js";
-import { Canvas, loadImage } from "/Users/andersonalmeida/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@oai/artifact-tool/node_modules/skia-canvas/lib/index.mjs";
+import pptxgen from "pptxgenjs";
+import { Canvas, loadImage } from "skia-canvas";
 import { mkdir } from "node:fs/promises";
 
 const outDir = "docs";
-const previewDir = "docs/luniq-pitch-preview";
+const previewDir = "docs/2as-pitch-preview";
 await mkdir(previewDir, { recursive: true });
-const brandLogo = "public/brand/luniq-inteligencia-financeira.png";
+const brandLogo = "public/brand/2as-logo-escuro.svg";
 
 const W = 13.333;
 const H = 7.5;
@@ -31,14 +31,14 @@ const C = {
 
 const slides = [
   {
-    kicker: "LUNIQ INTELIGENCIA FINANCEIRA",
+    kicker: "2AS INTELIGENCIA FINANCEIRA",
     title: "Clareza financeira para decidir antes do caixa apertar.",
     subtitle: "Marca, painel e metodologia comercial para transformar dados financeiros em agenda executiva.",
     kind: "cover",
   },
   {
     kicker: "POSICIONAMENTO",
-    title: "A Luniq une consultoria financeira, dados e rotina de gestao.",
+    title: "A 2AS une consultoria financeira, dados e rotina de gestao.",
     subtitle: "O painel nao e apenas um dashboard: ele organiza o que precisa ser visto, explicado e decidido.",
     points: ["Caixa e runway", "DRE e margem", "Orcamento e desvios", "Operacao e riscos"],
   },
@@ -51,14 +51,14 @@ const slides = [
   {
     kicker: "SOLUCAO",
     title: "Um painel que converte dado em decisao.",
-    subtitle: "A Luniq estrutura uma rotina executiva com sinais, diagnosticos e plano de acao.",
+    subtitle: "A 2AS estrutura uma rotina executiva com sinais, diagnosticos e plano de acao.",
     flow: ["Capturar", "Consolidar", "Diagnosticar", "Decidir", "Acompanhar"],
   },
   {
     kicker: "PAINEL",
     title: "A pagina inicial vira a mesa de decisao financeira.",
     subtitle: "O executivo comeca pelas prioridades do dia e abre detalhes apenas quando precisa agir.",
-    points: ["Prioridades financeiras de hoje", "Inteligencia de caixa e liquidez", "Diagnostico executivo Luniq", "Plano de acao financeiro"],
+    points: ["Prioridades financeiras de hoje", "Inteligencia de caixa e liquidez", "Diagnostico executivo 2AS", "Plano de acao financeiro"],
   },
   {
     kicker: "METODOLOGIA",
@@ -81,7 +81,7 @@ const slides = [
   },
   {
     kicker: "PROXIMO PASSO",
-    title: "Implantar a Luniq como rotina de decisao.",
+    title: "Implantar a 2AS como rotina de decisao.",
     subtitle: "A marca passa a assinar uma entrega clara: menos improviso financeiro, mais previsibilidade e acao.",
     points: ["Identidade aplicada ao painel", "Material comercial pronto", "Metodologia documentada", "Base para vender e operar"],
     kind: "closing",
@@ -90,10 +90,10 @@ const slides = [
 
 const pptx = new pptxgen();
 pptx.layout = "LAYOUT_WIDE";
-pptx.author = "Luniq Inteligencia Financeira";
-pptx.company = "Luniq Inteligencia Financeira";
+pptx.author = "2AS Inteligencia Financeira";
+pptx.company = "2AS Inteligencia Financeira";
 pptx.subject = "Apresentacao da marca e pitch comercial";
-pptx.title = "Luniq Inteligencia Financeira";
+pptx.title = "2AS Inteligencia Financeira";
 pptx.lang = "pt-BR";
 pptx.theme = {
   headFontFace: "Lato",
@@ -120,7 +120,7 @@ function logo(slide, x, y, scale = 1) {
 }
 
 function addFooter(slide, idx) {
-  slide.addText("Luniq Inteligencia Financeira", { x: 0.6, y: 7.05, w: 4, h: 0.16, fontSize: 7, color: C.dim, margin: 0 });
+  slide.addText("2AS Inteligencia Financeira", { x: 0.6, y: 7.05, w: 4, h: 0.16, fontSize: 7, color: C.dim, margin: 0 });
   slide.addText(String(idx).padStart(2, "0"), { x: 12.28, y: 7.02, w: 0.45, h: 0.18, fontSize: 8, color: C.dim, align: "right", margin: 0 });
 }
 
@@ -185,7 +185,7 @@ function createSlide(spec, idx) {
       slide.addText(p, { x: x + 0.12, y: 3.93, w: 1.02, h: 0.17, fontSize: 9.5, bold: true, color: C.ink, align: "center", margin: 0 });
       if (i < spec.flow.length - 1) slide.addShape(pptx.ShapeType.chevron, { x: x + 1.35, y: 3.91, w: 0.28, h: 0.22, fill: { color: C.orange, transparency: 20 }, line: { transparency: 100 } });
     });
-    slide.addText("A entrega comercial da Luniq esta no ritual: toda semana o painel vira pauta, decisao e acompanhamento.", { x: 0.78, y: 4.9, w: 6.85, h: 0.46, fontSize: 13, color: C.sub, margin: 0, fit: "shrink" });
+    slide.addText("A entrega comercial da 2AS esta no ritual: toda semana o painel vira pauta, decisao e acompanhamento.", { x: 0.78, y: 4.9, w: 6.85, h: 0.46, fontSize: 13, color: C.sub, margin: 0, fit: "shrink" });
   }
 
   if (spec.matrix) {
@@ -202,7 +202,7 @@ function createSlide(spec, idx) {
 }
 
 slides.forEach((s, i) => createSlide(s, i + 1));
-await pptx.writeFile({ fileName: `${outDir}/luniq-inteligencia-financeira-pitch.pptx` });
+await pptx.writeFile({ fileName: `${outDir}/2as-inteligencia-financeira-pitch.pptx` });
 
 function px(v) {
   return v * S;
@@ -278,14 +278,14 @@ async function preview(spec, idx) {
   }
   ctx.fillStyle = "#5f5852";
   ctx.font = "400 16px Lato, Arial";
-  ctx.fillText("Luniq Inteligencia Financeira", px(0.6), px(7.1));
+  ctx.fillText("2AS Inteligencia Financeira", px(0.6), px(7.1));
   ctx.fillText(String(idx).padStart(2, "0"), px(12.34), px(7.1));
-  await canvas.saveAs(`${previewDir}/slide-${String(idx).padStart(2, "0")}.png`);
+  await canvas.toFile(`${previewDir}/slide-${String(idx).padStart(2, "0")}.png`);
 }
 
 for (let i = 0; i < slides.length; i++) {
   await preview(slides[i], i + 1);
 }
 
-console.log(`Deck: ${outDir}/luniq-inteligencia-financeira-pitch.pptx`);
+console.log(`Deck: ${outDir}/2as-inteligencia-financeira-pitch.pptx`);
 console.log(`Previews: ${previewDir}/slide-01.png ... slide-${String(slides.length).padStart(2, "0")}.png`);

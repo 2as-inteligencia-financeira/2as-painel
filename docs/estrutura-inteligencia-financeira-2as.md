@@ -1,12 +1,12 @@
-# Luniq Inteligência Financeira
+# 2AS Inteligência Financeira
 
 ## Proposta de Trabalho
 
-A Luniq transforma dados financeiros e riscos operacionais em uma rotina executiva de decisão. O trabalho parte do painel como centro de gestão: caixa, fluxo projetado, contas a pagar, DRE, orçamento, ciclo financeiro e sinais de receita deixam de ser consultas isoladas e passam a formar uma agenda de inteligência financeira.
+A 2AS transforma dados financeiros e riscos operacionais em uma rotina executiva de decisão. O trabalho parte do painel como centro de gestão: caixa, fluxo projetado, contas a pagar, DRE, orçamento, ciclo financeiro e sinais de receita deixam de ser consultas isoladas e passam a formar uma agenda de inteligência financeira.
 
 ## Frentes do Painel
 
-### Plataforma de Inteligência Luniq
+### Plataforma de Inteligência 2AS
 
 A camada principal do painel funciona como um sistema de inteligência de dados financeiros em tempo real. A tela consolida os três relatórios centrais da gestão financeira:
 
@@ -16,9 +16,9 @@ A camada principal do painel funciona como um sistema de inteligência de dados 
 
 Essa frente é o núcleo operacional e comercial do produto: em vez de apresentar apenas indicadores soltos, ela mostra como qualquer empresa gera lucro, consome caixa, sustenta crescimento e governa suas obrigações.
 
-## Inspiração Numbr Aplicada à Luniq
+## Inspiração Numbr Aplicada à 2AS
 
-A Luniq incorpora a lógica de transformar dados em respostas, com menos esforço manual e mais visibilidade para decisão rápida.
+A 2AS incorpora a lógica de transformar dados em respostas, com menos esforço manual e mais visibilidade para decisão rápida.
 
 - **Integração e automação:** conectar ERP, Sheets ou APIs para reduzir exportações manuais e retrabalho.
 - **Relatórios automáticos:** DRE, fluxo de caixa, runway, contas, inadimplência e governança calculados continuamente.
@@ -63,7 +63,7 @@ A Luniq incorpora a lógica de transformar dados em respostas, com menos esforç
 
 ## Entregáveis
 
-- Painel financeiro personalizado com identidade Luniq.
+- Painel financeiro personalizado com identidade 2AS.
 - Diagnóstico financeiro inicial.
 - Ritual de gestão financeira com agenda semanal e mensal.
 - Relatório executivo recorrente.
