@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { clearAuth, getAuthHeaders } from "../auth";
-import { getActiveEmpresaId, onActiveEmpresaChange } from "../empresas/luniq-inteligencia-financeira/empresaAtiva";
+import { getActiveEmpresaId, onActiveEmpresaChange } from "../empresas/2as-inteligencia-financeira/empresaAtiva";
 import { URLS, DYNAMIC_HEADER_KEYS, DYNAMIC_HEADER_MARKER, WIDE_DRE_KEYS } from "../config/sheets";
 
 const REFRESH_MS = 60 * 1000;

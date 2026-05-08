@@ -1,6 +1,6 @@
 import { fmt } from "../hooks/useSheets";
-import { getEmpresaById } from "../empresas/luniq-inteligencia-financeira/empresas";
-import { getActiveEmpresaId } from "../empresas/luniq-inteligencia-financeira/empresaAtiva";
+import { getEmpresaById } from "../empresas/2as-inteligencia-financeira/empresas";
+import { getActiveEmpresaId } from "../empresas/2as-inteligencia-financeira/empresaAtiva";
 
 const esc = value => String(value ?? "")
   .replace(/&/g, "&amp;")

@@ -7,7 +7,7 @@ const COMPANY_PROFILE_MAP = Object.freeze({
   "demo-atencao": "atencao",
   "demo-crise": "crise",
   "luniq-demo": "saudavel",
-  "luniq-inteligencia-financeira": "saudavel",
+  "2as-inteligencia-financeira": "saudavel",
   "cliente-growth": "atencao",
 });
 

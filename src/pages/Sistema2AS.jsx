@@ -232,7 +232,7 @@ function MethodologySummary({ kpis }) {
     { label:"Saúde financeira", value:"Score e dimensões", text:"Resume se a operação está saudável, estável ou exigindo ação." },
     { label:"Narrativa", value:"Causa e impacto", text:"Explica a leitura para reunião sem exigir que o usuário monte a história." },
     { label:"Padrões", value:"Comportamento", text:"Procura movimentos que não aparecem olhando só uma tabela isolada." },
-    { label:"Referência", value:"Benchmark", text:"Compara com parâmetros internos Luniq e aponta distância da referência." },
+    { label:"Referência", value:"Benchmark", text:"Compara com parâmetros internos 2AS e aponta distância da referência." },
   ];
 
   return (
@@ -245,7 +245,7 @@ function MethodologySummary({ kpis }) {
   );
 }
 
-export default function SistemaLuniq() {
+export default function Sistema2AS() {
   const empresaId = useActiveEmpresaId();
   const model = useMemo(() => buildFinancialIntelligence(empresaId), [empresaId]);
   const { kpis, meses, dreRows, fluxo, financialExplainer, benchmarkInsights, behaviorInsights } = model;

@@ -1,8 +1,8 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { supabase } from "./lib/supabase";
 import { initSessionFromUrl, clearAuth, onAuthChange } from "./auth";
-import { DEFAULT_EMPRESA_ID, EMPRESAS, GRUPO_PRINCIPAL, getEmpresaById } from "./empresas/luniq-inteligencia-financeira/empresas";
-import { getActiveEmpresaId, hasSelectedEmpresa, onActiveEmpresaChange, setActiveEmpresaId } from "./empresas/luniq-inteligencia-financeira/empresaAtiva";
+import { DEFAULT_EMPRESA_ID, EMPRESAS, GRUPO_PRINCIPAL, getEmpresaById } from "./empresas/2as-inteligencia-financeira/empresas";
+import { getActiveEmpresaId, hasSelectedEmpresa, onActiveEmpresaChange, setActiveEmpresaId } from "./empresas/2as-inteligencia-financeira/empresaAtiva";
 import { prefetchSheets } from "./hooks/useSheets";
 import { applyThemeMode, getInitialThemeMode, T } from "./theme";
 import SidebarRouteItem from "./components/SidebarRouteItem.jsx";
@@ -33,7 +33,7 @@ const lazyWithPreload = (loader) => {
 };
 
 const Home                 = lazyWithPreload(() => import("./pages/Home"));
-const SistemaLuniq         = lazyWithPreload(() => import("./pages/SistemaLuniq"));
+const SistemaLuniq         = lazyWithPreload(() => import("./pages/Sistema2AS"));
 const ConexoesFinanceiras  = lazyWithPreload(() => import("./pages/ConexoesFinanceiras"));
 const CicloFinanceiro      = lazyWithPreload(() => import("./pages/CicloFinanceiro"));
 const FluxoHistorico       = lazyWithPreload(() => import("./pages/FluxoHistorico"));

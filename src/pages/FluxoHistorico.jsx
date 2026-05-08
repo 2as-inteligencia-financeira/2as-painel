@@ -8,7 +8,7 @@ import { useSheets, toNum, parseDate, fmt } from "../hooks/useSheets";
 import { resolveCategory } from "../utils/categoryResolver";
 import ViewModeToggle from "../components/ViewModeToggle";
 import ExecutiveAlerts from "../components/ExecutiveAlerts";
-import { isActiveEmpresaDemo } from "../empresas/luniq-inteligencia-financeira/empresaAtiva";
+import { isActiveEmpresaDemo } from "../empresas/2as-inteligencia-financeira/empresaAtiva";
 
 // --- DADOS HISTORICOS ---------------------------------------------------------
 const TODOS_MESES = [
