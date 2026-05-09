@@ -15,6 +15,7 @@ function SidebarRouteItem({
 }) {
   const label = r.label.includes("(Labs)") ? r.label.replace(" (Labs)", "") : r.label;
   const isLabs = r.label.includes("Labs") || (r.source === "Integração");
+  const badgeLabel = r.source === "Labs" ? "LABS" : "API";
   const glyphSize = sidebar ? (compact ? 15 : 16) : 17;
 
   const onEnter = useCallback((e) => {
@@ -101,7 +102,7 @@ function SidebarRouteItem({
                 borderRadius: 4,
                 padding: "2px 4px",
                 letterSpacing: "0.04em",
-              }}>API</span>
+              }}>{badgeLabel}</span>
             )}
           </>
         )}

@@ -44,6 +44,7 @@ const ContasPagarLabs      = lazyWithPreload(() => import("./pages/ContasPagarLa
 const ContasPagas          = lazyWithPreload(() => import("./pages/ContasPagas"));
 const ContasPagasLabs      = lazyWithPreload(() => import("./pages/ContasPagasLabs"));
 const Orcamento            = lazyWithPreload(() => import("./pages/Orcamento"));
+const PlanejamentoLabs     = lazyWithPreload(() => import("./pages/PlanejamentoLabs"));
 const DRE                  = lazyWithPreload(() => import("./pages/Dre"));
 const CancelamentosPage    = lazyWithPreload(() => import("./pages/operacional/Cancelamentos"));
 const ChargebacksPage      = lazyWithPreload(() => import("./pages/operacional/Chargebacks"));
@@ -92,6 +93,7 @@ const SECOES = [
     desc:  "Resultado, orçamento e margem",
     rotas: [
       { id:"orcamento", label:"Orçamento", icon:"◫", Component:Orcamento },
+      { id:"planejamento-labs", label:"Planejamento Labs", source:"Labs", icon:"▦", Component:PlanejamentoLabs },
       { id:"dre",       label:"DRE",       icon:"Σ", Component:DRE },
     ],
   },

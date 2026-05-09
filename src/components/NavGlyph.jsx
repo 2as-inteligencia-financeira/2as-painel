@@ -72,6 +72,14 @@ export default function NavGlyph({ routeId, size = 17 }) {
           <rect x="13" y="13" width="7" height="7" rx="1" />
         </svg>
       );
+    case "planejamento-labs":
+      return (
+        <svg {...s}>
+          <path d="M5 5h14v14H5z" />
+          <path d="M5 10h14M5 15h14M10 5v14M15 5v14" />
+          <path d="m7 8 1 1 2-2M7 13h2M7 18h2" />
+        </svg>
+      );
     case "dre":
       return (
         <svg {...s}>
