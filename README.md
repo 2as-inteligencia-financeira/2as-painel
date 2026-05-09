@@ -37,7 +37,7 @@ Branches de feature sem PR não disparam CI no push para economizar fila; ao abr
    - **Autenticação do proxy de planilhas**: `PANEL_BASIC_AUTH_USER` / `PANEL_BASIC_AUTH_PASSWORD` (serverless `/api/sheets`).
    - **Frontend (build)** — sempre que mudar algo no menu de orçamento externo ou integrações públicas:
 
-     `VITE_URL_MODULO_ORCAMENTO` (URL absoluta publicada do app de orçamento, se usar o link no menu),
+     `VITE_URL_MODULO_ORCAMENTO` (URL canônica do módulo, ex.: `https://orcamento.2asfinancas.com`; o `*.vercel.app` redireciona para ela),
 
      **`VITE_SUPABASE_URL`** e **`VITE_SUPABASE_ANON_KEY`** (sem elas o build até pode passar dependendo da checagem estática; em runtime o app falha ao importar `lib/supabase`).
 
