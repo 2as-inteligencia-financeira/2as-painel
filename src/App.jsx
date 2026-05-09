@@ -1,8 +1,8 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { supabase } from "./lib/supabase";
 import { initSessionFromUrl, clearAuth, onAuthChange } from "./auth";
-import { DEFAULT_EMPRESA_ID, EMPRESAS, GRUPO_PRINCIPAL, getEmpresaById } from "./empresas/2as-inteligencia-financeira/empresas";
-import { getActiveEmpresaId, hasSelectedEmpresa, onActiveEmpresaChange, setActiveEmpresaId } from "./empresas/2as-inteligencia-financeira/empresaAtiva";
+import { DEFAULT_EMPRESA_ID, EMPRESAS, GRUPO_PRINCIPAL, getEmpresaById } from "./empresas/2AS-inteligencia-financeira/empresas";
+import { getActiveEmpresaId, hasSelectedEmpresa, onActiveEmpresaChange, setActiveEmpresaId } from "./empresas/2AS-inteligencia-financeira/empresaAtiva";
 import { prefetchSheets } from "./hooks/useSheets";
 import { applyThemeMode, getInitialThemeMode, T } from "./theme";
 import SidebarRouteItem from "./components/SidebarRouteItem.jsx";
@@ -32,6 +32,38 @@ const lazyWithPreload = (loader) => {
   return Component;
 };
 
+/** Definido no build (.env): URL do app de autorização/acompanhamento de orçamento. */
+const MODULO_ORCAMENTO_HREF = (import.meta.env.VITE_URL_MODULO_ORCAMENTO || "").trim();
+
+function ModuloOrcamentoExterno() {
+  const href = MODULO_ORCAMENTO_HREF;
+  return (
+    <div style={{ maxWidth: 560, fontSize: 13, lineHeight: 1.55, color: T.txt }}>
+      <p style={{ color: T.muted, marginTop: 0 }}>
+        Esta tela apenas aponta para o módulo de orçamento. Indicadores e DRE continuam aqui no painel de inteligência; o fluxo operacional de orçamento fica no app dedicado.
+      </p>
+      {href
+        ? (
+          <p style={{ marginBottom: 0 }}>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: T.blue2, fontWeight: 700, textDecoration: "underline", textUnderlineOffset: 3 }}
+            >
+              Abrir módulo de orçamento em nova aba →
+            </a>
+          </p>
+          )
+        : (
+          <p style={{ color: T.red, marginBottom: 0 }}>
+            Configure <code style={{ fontSize: 11, color: T.sub }}>VITE_URL_MODULO_ORCAMENTO</code> no ambiente de build para habilitar o link.
+          </p>
+          )}
+    </div>
+  );
+}
+
 const Home                 = lazyWithPreload(() => import("./pages/Home"));
 const Sistema2AS           = lazyWithPreload(() => import("./pages/Sistema2AS"));
 const ConexoesFinanceiras  = lazyWithPreload(() => import("./pages/ConexoesFinanceiras"));
@@ -44,7 +76,6 @@ const ContasPagarLabs      = lazyWithPreload(() => import("./pages/ContasPagarLa
 const ContasPagas          = lazyWithPreload(() => import("./pages/ContasPagas"));
 const ContasPagasLabs      = lazyWithPreload(() => import("./pages/ContasPagasLabs"));
 const Orcamento            = lazyWithPreload(() => import("./pages/Orcamento"));
-const PlanejamentoLabs     = lazyWithPreload(() => import("./pages/PlanejamentoLabs"));
 const DRE                  = lazyWithPreload(() => import("./pages/Dre"));
 const CancelamentosPage    = lazyWithPreload(() => import("./pages/operacional/Cancelamentos"));
 const ChargebacksPage      = lazyWithPreload(() => import("./pages/operacional/Chargebacks"));
@@ -93,7 +124,9 @@ const SECOES = [
     desc:  "Resultado, orçamento e margem",
     rotas: [
       { id:"orcamento", label:"Orçamento", icon:"◫", Component:Orcamento },
-      { id:"planejamento-labs", label:"Planejamento Labs", source:"Labs", icon:"▦", Component:PlanejamentoLabs },
+      ...(MODULO_ORCAMENTO_HREF
+        ? [{ id:"modulo-orcamento", label:"Módulo Orçamento", icon:"↗", Component: ModuloOrcamentoExterno }]
+        : []),
       { id:"dre",       label:"DRE",       icon:"Σ", Component:DRE },
     ],
   },
@@ -141,7 +174,8 @@ const DEFAULT_FAVORITES = ["home", "sistema-2as", "conexoes-financeiras", "fluxo
 
 // IDs de rota antigos (favoritos/bookmarks) -> novos
 const ROUTE_ID_ALIASES = Object.freeze({
-  "sistema-luniq": "sistema-2as",
+  "sistema-2AS": "sistema-2as",
+  "planejamento-labs": "orcamento",
 });
 
 function normalizeRouteId(routeId) {
