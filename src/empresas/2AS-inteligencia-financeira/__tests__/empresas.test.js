@@ -23,8 +23,8 @@ describe("registro de empresas demo", () => {
   });
 
   it("resolve IDs legados para os novos perfis", () => {
-    expect(resolveEmpresaId("luniq-demo")).toBe("demo-saudavel");
-    expect(resolveEmpresaId("luniq-inteligencia-financeira")).toBe("demo-saudavel");
+    expect(resolveEmpresaId("2AS-demo")).toBe("demo-saudavel");
+    expect(resolveEmpresaId("2AS-inteligencia-financeira")).toBe("demo-saudavel");
     expect(resolveEmpresaId("2as-demo")).toBe("demo-saudavel");
     expect(resolveEmpresaId("2as-inteligencia-financeira")).toBe("demo-saudavel");
     expect(resolveEmpresaId("cliente-growth")).toBe("demo-atencao");
@@ -33,7 +33,7 @@ describe("registro de empresas demo", () => {
   });
 
   it("getEmpresaById retorna o objeto resolvido", () => {
-    expect(getEmpresaById("luniq-demo").id).toBe("demo-saudavel");
+    expect(getEmpresaById("2AS-demo").id).toBe("demo-saudavel");
     expect(getEmpresaById("demo-crise").nome).toContain("Crise");
   });
 
@@ -41,6 +41,6 @@ describe("registro de empresas demo", () => {
     expect(isEmpresaDemo("demo-saudavel")).toBe(true);
     expect(isEmpresaDemo("demo-crise")).toBe(true);
     expect(getPerfilDemo("demo-atencao")).toBe("atencao");
-    expect(getPerfilDemo("luniq-demo")).toBe("saudavel");
+    expect(getPerfilDemo("2AS-demo")).toBe("saudavel");
   });
 });

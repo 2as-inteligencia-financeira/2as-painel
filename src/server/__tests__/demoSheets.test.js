@@ -13,8 +13,8 @@ const PROFILE_IDS = [
 ];
 
 const LEGACY_IDS = [
-  { id: "luniq-demo", profile: "saudavel" },
-  { id: "luniq-inteligencia-financeira", profile: "saudavel" },
+  { id: "2AS-demo", profile: "saudavel" },
+  { id: "2AS-inteligencia-financeira", profile: "saudavel" },
   { id: "2as-demo", profile: "saudavel" },
   { id: "2as-inteligencia-financeira", profile: "saudavel" },
   { id: "cliente-growth", profile: "atencao" },

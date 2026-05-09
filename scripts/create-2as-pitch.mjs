@@ -3,9 +3,9 @@ import { Canvas, loadImage } from "skia-canvas";
 import { mkdir } from "node:fs/promises";
 
 const outDir = "docs";
-const previewDir = "docs/2as-pitch-preview";
+const previewDir = "docs/2AS-pitch-preview";
 await mkdir(previewDir, { recursive: true });
-const brandLogo = "public/brand/2as-logo-escuro.svg";
+const brandLogo = "public/brand/2AS-logo-escuro.svg";
 
 const W = 13.333;
 const H = 7.5;
@@ -202,7 +202,7 @@ function createSlide(spec, idx) {
 }
 
 slides.forEach((s, i) => createSlide(s, i + 1));
-await pptx.writeFile({ fileName: `${outDir}/2as-inteligencia-financeira-pitch.pptx` });
+await pptx.writeFile({ fileName: `${outDir}/2AS-inteligencia-financeira-pitch.pptx` });
 
 function px(v) {
   return v * S;
@@ -287,5 +287,5 @@ for (let i = 0; i < slides.length; i++) {
   await preview(slides[i], i + 1);
 }
 
-console.log(`Deck: ${outDir}/2as-inteligencia-financeira-pitch.pptx`);
+console.log(`Deck: ${outDir}/2AS-inteligencia-financeira-pitch.pptx`);
 console.log(`Previews: ${previewDir}/slide-01.png ... slide-${String(slides.length).padStart(2, "0")}.png`);

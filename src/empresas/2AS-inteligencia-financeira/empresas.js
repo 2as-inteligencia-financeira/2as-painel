@@ -1,5 +1,5 @@
 export const GRUPO_PRINCIPAL = {
-  id: "2as-inteligencia-financeira",
+  id: "2AS-inteligencia-financeira",
   nome: "2AS Inteligência Financeira",
   subtitulo: "Inteligência financeira para decisões de caixa, resultado e crescimento",
 };
@@ -51,8 +51,8 @@ export const DEFAULT_EMPRESA_ID = EMPRESAS[0].id;
 const EMPRESAS_INDEX = new Map(EMPRESAS.map(empresa => [empresa.id, empresa]));
 
 const LEGACY_ALIASES = Object.freeze({
-  "luniq-demo": "demo-saudavel",
-  "luniq-inteligencia-financeira": "demo-saudavel",
+  "2AS-demo": "demo-saudavel",
+  "2AS-inteligencia-financeira": "demo-saudavel",
   "2as-demo": "demo-saudavel",
   "2as-inteligencia-financeira": "demo-saudavel",
   "cliente-growth": "demo-atencao",
