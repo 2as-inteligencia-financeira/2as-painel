@@ -39,7 +39,7 @@ Branches de feature sem PR não disparam CI no push para economizar fila; ao abr
 
      `VITE_URL_MODULO_ORCAMENTO` (URL absoluta publicada do app de orçamento, se usar o link no menu),
 
-     Supabase público conforme já configurado (`VITE_*` esperados pelo Vite/`import.meta.env`).
+     **`VITE_SUPABASE_URL`** e **`VITE_SUPABASE_ANON_KEY`** (sem elas o build até pode passar dependendo da checagem estática; em runtime o app falha ao importar `lib/supabase`).
 
 3. **`vercel.json`**: SPA rewrite para todas as rotas exceto `/api/*` e headers de segurança; não commitar `.vercel/` nem `.env*` com segredo.
 
